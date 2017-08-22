@@ -5,3 +5,35 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "cleaning..."
+
+# User.destroy_all
+Library.destroy_all
+Book.destroy_all
+Booking.destroy_all
+
+puts "creating 10 users..."
+(0..10).to_a.each do
+  user = User.new(email: Faker::Internet.email, password: Faker::Internet.password(8))
+  user.save!
+end
+
+puts "creating 20 libraries..."
+(0..20).to_a.each do
+  library = Library.new(name: Faker::Address.city, user: User.all.order('RANDOM()').first())
+  library.save!
+end
+
+puts "creating 30 books..."
+(0..30).to_a.each do
+  book = Book.new(title: Faker::Book.title, genre: Faker::Book.genre, author: Faker::Book.author, publisher: Faker::Book.publisher, library: Library.all.order('RANDOM()').first())
+  book.save!
+end
+
+
+puts "creating 40 bookings..."
+(0..40).to_a.each do
+  booking = Booking.new(pick_up_date: Faker::Date.backward(14), return_date: Faker::Date.forward(23), user: User.all.order('RANDOM()').first(), book: Book.all.order('RANDOM()').first())
+  booking.save!
+end

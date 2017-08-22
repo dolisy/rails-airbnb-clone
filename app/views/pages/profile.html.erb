@@ -1,0 +1,22 @@
+<h1>Profile page</h1>
+
+<h3>My bookings:</h3>
+
+<% @user.bookings.each do |booking| %>
+  <p><%= link_to booking.book.title, book_booking_path(booking.book, booking) %></p>
+  <p><%= booking.pick_up_date %></p>
+  <p><%= booking.return_date %></p>
+<% end %>
+
+<h3>My libraries:</h3>
+
+<% @user.libraries.each do |library| %>
+  <h4><%= link_to library.name, library_path(library) %></h4>
+  <% library.books.each do |book| %>
+    <p><%= link_to book.title, book_path(book) %></p>
+  <% end %>
+  <p><%= link_to "Add a new book to the library:", new_book_path %></p>
+<% end %>
+
+<h3><%= link_to "Create a new library", new_library_path %></h3>
+

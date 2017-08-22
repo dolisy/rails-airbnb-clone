@@ -1,0 +1,8 @@
+<p>show library</p>
+
+<h3><%= @library.name %></h3>
+<% @library.books.each do |book| %>
+  <p><%= link_to book.title, book_path(book) %></p>
+<% end %>
+
+<p><%= link_to "Add a Book to the library", new_book_path(library: @library)  %></p>

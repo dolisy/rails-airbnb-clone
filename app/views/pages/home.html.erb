@@ -1,2 +1,22 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+
+<h3>Search Box -- link to index books</h3>
+<%= link_to "index books", books_path %>
+
+<h3>Books:</h3>
+
+<% Book.all.each do |book| %>
+  <p><%= link_to book.title, book_path(book) %></p>
+  <p><%= book.author %></p>
+  <p><%= book.genre %></p>
+  <p><%= book.publisher %></p>
+<% end %>
+
+<h3>Libraries:</h3>
+
+<% Library.all.each do |library| %>
+  <p><%= link_to library.name, library_path(library) %></p>
+  <p><%= library.user.email %></p>
+<% end %>

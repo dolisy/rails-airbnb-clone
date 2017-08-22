@@ -1,0 +1,14 @@
+<p> show book </p>
+
+<p><%= @book.title %></p>
+<p><%= @book.author %></p>
+<p><%= @book.genre %></p>
+<p><%= @book.publisher %></p>
+
+
+
+
+<p><%= link_to "New Booking", new_book_booking_path(@book) %></p>
+
+
+<p><%= link_to "Back to index books", books_path %></p>

@@ -1,0 +1,11 @@
+<p> new booking </p>
+
+<%= simple_form_for [@book, @booking] do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :pick_up_date %>
+  <%= f.input :return_date %>
+
+  <%= f.button :submit %>
+
+<% end %>

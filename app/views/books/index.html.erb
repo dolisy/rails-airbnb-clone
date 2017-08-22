@@ -1,0 +1,11 @@
+<p> index books -- Search Results Page </p>
+
+<% @books.each do |book| %>
+  <p><%= link_to book.title, book_path(book) %></p>
+  <p><%= book.author %></p>
+  <p><%= book.genre %></p>
+  <p><%= book.publisher %></p>
+
+<% end %>
+
+
