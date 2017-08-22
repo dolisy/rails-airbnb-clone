@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :bookings
   has_many :libraries
+  has_many :reviews
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice(:provider, :uid)
