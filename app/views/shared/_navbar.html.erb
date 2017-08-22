@@ -6,8 +6,8 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, method: :get) do %>
-    <%= text_field_tag :term, params[:term] %>
-    <%= submit_tag 'Search', name: nil %>
+    <%= text_field_tag :term, params[:term], class: "field", placeholder: 'Search here..' %>
+    <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
   <% end %>
 
   <!-- Right Navigation -->
