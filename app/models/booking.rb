@@ -2,7 +2,9 @@ class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
-  validates :book, presence: true, uniqueness: { scope: [ :user, :pick_up_date, :return_date ] }
+  has_many :reviews
+
+  validates :book, presence: true
   validates :user, presence: true
 
 end

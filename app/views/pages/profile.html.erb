@@ -12,8 +12,9 @@
 
 <% @user.libraries.each do |library| %>
   <h4><%= link_to library.name, library_path(library) %></h4>
+  <%= link_to "Edit", edit_library_path(library) %>
   <% library.books.each do |book| %>
-    <p><%= link_to book.title, book_path(book) %></p>
+    <p><%= link_to book.title, book_path(book) %><%= link_to "Edit", edit_book_path(book) %></p>
   <% end %>
   <p><%= link_to "Add a new book to the library:", new_book_path %></p>
 <% end %>
