@@ -4,6 +4,9 @@
 <p><%= @book.author %></p>
 <p><%= @book.genre %></p>
 <p><%= @book.publisher %></p>
+<% if @book.photo? %>
+<%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
+<% end %>
 
 
 <p><%= link_to "Edit Book", edit_book_path(@book) %></p>

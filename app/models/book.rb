@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
   belongs_to :library
   has_many :bookings
+  has_attachment :photo
 
   def self.search(term)
     if term

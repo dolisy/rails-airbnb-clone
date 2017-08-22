@@ -28,5 +28,13 @@ end
 gem 'devise'
 gem 'faker'
 
+
+#image upload gems
+gem 'cloudinary', '1.1.7'
+gem 'attachinary', github: 'assembler/attachinary'
+gem 'jquery-fileupload-rails'
+gem 'coffee-rails'
+
 #Facebook authentication
 gem 'omniauth-facebook'
+
