@@ -1,13 +1,13 @@
 <div class="navbar-wagon">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "logo.png" %>
+    <%= image_tag "network.png" %>
   <% end %>
 
   <!-- search tool -->
   <%= form_tag(books_path, method: :get) do %>
-    <%= text_field_tag :term, params[:term], placeholder: 'title' %>
-    <%= submit_tag 'Search', name: nil %>
+    <%= text_field_tag :term, params[:term], class: "field", placeholder: 'Search here..' %>
+    <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -40,7 +40,7 @@
       </div>
     <% else %>
       <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to t(".sign_in", default: "Log In / Sign Up"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
 

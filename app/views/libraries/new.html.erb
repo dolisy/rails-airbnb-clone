@@ -1,10 +1,3 @@
 <p> new library </p>
 
-<%= simple_form_for(@library) do |f| %>
-  <%= f.error_notification %>
-
-  <%= f.input :name %>
-
-  <%= f.button :submit %>
-
-<% end %>
+<%= render 'form' %>
