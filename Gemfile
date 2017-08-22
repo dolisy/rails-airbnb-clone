@@ -27,3 +27,6 @@ end
 
 gem 'devise'
 gem 'faker'
+
+#image upload gem
+gem 'cloudinary'
