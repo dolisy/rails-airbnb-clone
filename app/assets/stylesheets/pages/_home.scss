@@ -1,1 +1,92 @@
+
 // Specific CSS for your home-page
+
+.navbar-wagon {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-right: 2em;
+  padding-left: 2em;
+}
+
+body {
+  font-family: "arial";
+  font-size: 24px;
+  background-color: white;
+}
+
+h2 {
+  font-family: 'Helvetica';
+}
+
+.navbar-wagon {
+  position: fixed;
+  width: 100vw;
+  background-color:black;
+}
+
+.navbar-wagon a {
+  font-size: 20px;
+  color: white;
+  font-weight: lighter;
+}
+
+.navbar-wagon-brand img {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.banner {
+  color: black;
+  text-align: center;
+  height: 100vh;
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+}
+
+.banner-tagline {
+  color: white;
+  font-size: 14px;
+  font-weight: 100;
+  margin-right: 0em;
+}
+
+.banner h1 {
+  font-size: 50px;
+  font-family: "arial";
+}
+
+.banner-tagline {
+  font-size: 14px;
+  padding-top: 5em;
+}
+
+.banner-copy {
+  margin: 0 auto;
+  color: white;
+  font-size: 70px;
+}
+
+.banner-content {
+  margin-top: 3em;
+  margin-left: 1em;
+}
+
+.banner-copy-yellow {
+  color: yellow;
+  margin: 0 auto;
+  font-size: 70px;
+}
+
+.row {
+  margin-top: 2em;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.container {
+}
+
+.fit {
+  padding: 10px;
+}
