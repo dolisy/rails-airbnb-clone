@@ -13,6 +13,14 @@
       <% for book in @books %>
         <div class='book'>
             <strong> <%= link_to book.title, book_path(book) %> </strong>
+            <p>Number of bookings: <%= book.bookings.count %></p>
+            <p>
+            Number of reviews: <% sum = 0 %>
+              <% book.bookings.each do |booking| %>
+                <% sum += booking.reviews.count %>
+              <% end %>
+              <%= sum %>
+            </p>
         </div>
       <% end %>
      </tr>
