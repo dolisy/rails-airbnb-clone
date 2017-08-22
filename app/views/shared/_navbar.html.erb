@@ -6,7 +6,7 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, method: :get) do %>
-    <%= text_field_tag :term, params[:term] %>
+    <%= text_field_tag :term, params[:term], placeholder: 'title' %>
     <%= submit_tag 'Search', name: nil %>
   <% end %>
 
