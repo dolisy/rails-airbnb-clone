@@ -9,12 +9,16 @@
 puts "cleaning..."
 
 # User.destroy_all
-Library.destroy_all
-Book.destroy_all
+Review.destroy_all
 Booking.destroy_all
+Book.destroy_all
+Library.destroy_all
 
-puts "creating 10 users..."
-(0..10).to_a.each do
+
+
+
+puts "creating 5 users..."
+(0..5).to_a.each do
   user = User.new(email: Faker::Internet.email, password: Faker::Internet.password(8))
   user.save!
 end
@@ -32,8 +36,14 @@ puts "creating 30 books..."
 end
 
 
-puts "creating 40 bookings..."
+puts "creating 50 bookings..."
 (0..40).to_a.each do
   booking = Booking.new(pick_up_date: Faker::Date.backward(14), return_date: Faker::Date.forward(23), user: User.all.order('RANDOM()').first(), book: Book.all.order('RANDOM()').first())
   booking.save!
+end
+
+puts "creating 80 reviews..."
+(0..40).to_a.each do
+  review = Review.new(content: Faker::Lorem.paragraph, stars: Random.rand(5), user: User.all.order('RANDOM()').first(), booking: Booking.all.order('RANDOM()').first())
+  review.save!
 end
