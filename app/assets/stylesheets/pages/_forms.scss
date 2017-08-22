@@ -1,6 +1,7 @@
-* {
-  border: thin solid red;
-}
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400');
+// * {
+//   border: thin solid red;
+// }
 
 .form-button {
   background-color: black;
@@ -8,13 +9,27 @@
 }
 
 .wrapper.upload {
-  padding: 80px 50px;
+  padding: 110px 70px;
+  background-color: rgba(12, 12, 12, 0.85);
+
 }
 
 .container.upload {
-  margin: 0px;
+  display: flex;
+  background-color: white;
+  padding: 70px;
+  .row-right {
+    margin: 0px;
+    background-color: rgb(252,252,250);
+  }
+  .row-left {
+    margin: 0px;
+  }
 }
 
-.form-details {
-  font-weight: 100;
+.row.upload {
+  font-family: 'Quicksand', sans-serif;
+  margin: 0px;
+  border-radius: 10px;
+  box-shadow: 2px 3px #757575;
 }
