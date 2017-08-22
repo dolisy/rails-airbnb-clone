@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :index, :show ]
+
   def index
-    @books = Book.all
+    @books = Book.search(params[:term])
   end
 
   def show
@@ -18,7 +20,18 @@ class BooksController < ApplicationController
     redirect_to book_path(@book)
   end
 
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update
+
+    redirect_to book_path(@book)
+  end
+
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id, :term)
   end
 end
