@@ -28,5 +28,6 @@ end
 gem 'devise'
 gem 'faker'
 
-#image upload gem
+#image upload gems
 gem 'cloudinary'
+gem 'carrierwave', '~> 0.11.2'
