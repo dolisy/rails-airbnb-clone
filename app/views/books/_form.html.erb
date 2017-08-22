@@ -1,12 +1,12 @@
 <%= simple_form_for(@book) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :title %>
+  <%= f.input :title%>
   <%= f.input :genre %>
   <%= f.input :author %>
   <%= f.input :publisher %>
   <%= f.association :library, collection: Library.where(user: current_user) %>
   <%= f.input :photo, as: :attachinary %>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, class: "form-button" %>
 <% end %>

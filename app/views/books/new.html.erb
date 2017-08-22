@@ -1,3 +1,28 @@
-<p> new book </p>
+<div class="wrapper upload">
+  <div class="container upload">
+    <div class="row upload">
+      <div class="col-xs-12 col-md-6">
+        <h3>Picture and shit goes here</h3>
+        <p>then some other shit goes here</p>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <h3>form goes here</h3>
+        <%= simple_form_for(@book) do |f| %>
+        <%= f.error_notification %>
 
-<%= render 'form' %>
+        <%= f.input :title, disabled: true, class: "form-details"%>
+        <%= f.input :genre, disabled: true, class: "form-details" %>
+        <%= f.input :author, disabled: true, class: "form-details" %>
+        <%= f.input :publisher, disabled: true, class: "form-details" %>
+        <%= f.association :library, collection: Library.where(user: current_user) %>
+        <%= f.input :photo, as: :attachinary %>
+
+        <%= f.button :submit, class: "form-button" %>
+        <% end %>
+        <p>some pretty shit goes here</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
