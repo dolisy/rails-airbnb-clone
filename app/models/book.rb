@@ -3,6 +3,9 @@ class Book < ApplicationRecord
   has_many :bookings
   has_attachment :photo
 
+  validates :title, presence: true
+  validates :library, presence: true
+
   def self.search(term)
     if term
       where('lower(title) LIKE ?', "%#{term}%").order('id DESC')
