@@ -4,8 +4,13 @@ class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @books = Book.search(params[:term])
-    @search = params[:term]
+    @books = Book.all
+
+    #for search
+    @books = Book.where(nil).order(params[:sort_by])
+    filtering_params(params).each do |key, value|
+      @books = @books.public_send(key, value) if value.present?
+    end
   end
 
   def show
@@ -47,7 +52,15 @@ class BooksController < ApplicationController
     redirect_to book_path(@book)
   end
 
+  private
+
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id, :term, :photo)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :isbn, :description, :library_id, :term, :photo)
   end
+
+  # list of the param names that can be used for filtering the list
+  def filtering_params(params)
+    params.slice(:status, :title, :author, :publisher, :genre, :isbn, :description, :term, :location)
+  end
+
 end
