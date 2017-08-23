@@ -1,17 +1,54 @@
 <p> show book </p>
-
 <h3><%= @book.title %></h3>
-<p>Author:<%= @book.author %></p>
-<p>Genre:<%= @book.genre %></p>
-<p>Publisher:<%= @book.publisher %></p>
+<p>Author: <%= @book.author %></p>
+<p>Genre: <%= @book.genre %></p>
+<p>Publisher: <%= @book.publisher %></p>
+<p> ----- </p>
+<p> Description:
+<%= @book.description %></p>
+<p> ----- </p>
 <% if @book.photo? %>
-<%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
+  <p> Picture: </p>
+  <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
 <% end %>
 <p><%= link_to "New Booking", new_book_booking_path(@book) %></p>
 
 <p><%= link_to "Back to index books", books_path %></p>
 
-<button class="edit-button" data-target="#editModal" data-toggle="modal">    <i class="medium material-icons">edit</i></button>
+<% if @book.library.user == current_user %>
+  <button class="edit-button" data-target="#editModal" data-toggle="modal">    <i class="medium material-icons">edit</i></button>
+<% end %>
+
+<!-- Book Reviews -->
+
+<% if @book.reviews.count == 1 %>
+  <h3>Review:</h3>
+<% elsif @book.reviews.count > 1 %>
+  <h3>Reviews:</h3>
+<% end %>
+
+<% @book.reviews.each do |review| %>
+  <p><%= review.user.email %></p>
+  <p><%= review.stars %></p>
+  <p><%= review.content %></p>
+<% end %>
+
+<!-- New Booking Form -->
+
+<% if @book.library.user != current_user %>
+  <h3> New booking form </h3>
+
+  <%= simple_form_for [@book, @booking] do |f| %>
+    <%= f.error_notification %>
+
+    <%= f.input :pick_up_date %>
+    <%= f.input :return_date %>
+
+    <%= f.button :submit %>
+  <% end %>
+<% end %>
+<!-- Modal goes below -->
+
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -37,57 +74,3 @@
     </div>
   </div>
 </div>
-
-<!-- Cyril s code conflicting below: -->
-
-
-<h3><%= @book.title %></h3>
-<p>Author: <%= @book.author %></p>
-<p>Genre: <%= @book.genre %></p>
-<p>Publisher: <%= @book.publisher %></p>
-<p> ----- </p>
-<p> Description:
-<%= @book.description %></p>
-<p> ----- </p>
-<% if @book.photo? %>
-  <p> Picture: </p>
-  <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
-<% end %>
-
-<!-- Book Reviews -->
-
-<% if @book.reviews.count == 1 %>
-  <h3>Review:</h3>
-<% elsif @book.reviews.count > 1 %>
-  <h3>Reviews:</h3>
-<% end %>
-
-<% @book.reviews.each do |review| %>
-  <p><%= review.user.email %></p>
-  <p><%= review.stars %></p>
-  <p><%= review.content %></p>
-<% end %>
-
-<!-- Edit Book -->
-
-<h3><% if @book.library.user == current_user %>
-  <%= link_to "Edit", edit_book_path(@book) %>
-<% end %></h3>
-
-<!-- New Booking Form -->
-
-<% if @book.library.user != current_user %>
-  <h3> New booking form </h3>
-
-  <%= simple_form_for [@book, @booking] do |f| %>
-    <%= f.error_notification %>
-
-    <%= f.input :pick_up_date %>
-    <%= f.input :return_date %>
-
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
-
-
-
