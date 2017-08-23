@@ -38,3 +38,5 @@ gem 'coffee-rails'
 #Facebook authentication
 gem 'omniauth-facebook'
 
+#Book Cover Images
+gem 'googlebooks'
