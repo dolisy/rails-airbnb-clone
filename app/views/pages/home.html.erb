@@ -22,9 +22,9 @@
 
   <div class="cards row clearfix">
       <article>
-      <% Book.first(6).each do |book| %>
+      <% Book.first(4).each do |book| %>
       <div class="card sm-col sm-col-6">
-        <%= link_to book_path(book), class: "link dt w-100 bt b--black-200 pt2 mt1 dim black" do %>
+        <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
           <div class="dtc w3">
             <img src="http://www.sternberg-press.com/files/book/540/Kiesler_cover_364.jpg" class="db w-100"/>
           </div>
@@ -55,11 +55,16 @@
   <div class="cards row clearfix">
     <% Library.first(6).each do |library| %>
       <div class="card sm-col sm-col-4">
-        <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
-        <p><%= link_to library.name, library_path(library) %></p>
-        <p>Curated by: <%= library.user.email %></p>
+        <article class="box left mw5 mw6-ns ba mv1">
+          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name, library_path(library) %></h2>
+          <div class="pa3 bt">
+            <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
+              <p class="f6 b f5-ns lh-copy measure mv0">Curated by:</p>
+              <p class="black-70"><%= library.user.email %></p>
+          </div>
+        </article>
       </div>
-    <% end %>
+    <%end%>
   </div>
 </div>
 

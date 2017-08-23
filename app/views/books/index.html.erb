@@ -12,8 +12,8 @@
       <tbody>
         <% for book in @books %>
           <tr>
-            <td class="lg-col-2">
-              <img class="fit" src="https://versobooks-prod.s3.amazonaws.com/images/000007/189/9781781689752-000a8e17aa381c54f60f1d4e76d18ad7.jpg"/>
+            <td class="table-border lg-col-2">
+              <img class="fit " src="https://versobooks-prod.s3.amazonaws.com/images/000007/189/9781781689752-000a8e17aa381c54f60f1d4e76d18ad7.jpg"/>
             </td>
             <td>
               <p class="title"><%= link_to book.title, book_path(book)%></p>
