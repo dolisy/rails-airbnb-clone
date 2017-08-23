@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400|Pontano+Sans');
+// * {
+//   border: thin solid red;
+// }
+
+.form-button {
+  background-color: black;
+  font-family: 'Pontano Sans', sans-serif;
+  color: white;
+}
+
+.form-details {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.wrapper.upload {
+  padding: 110px 70px;
+  background-color: rgba(12, 12, 12, 0.85);
+
+}
+
+.container.upload {
+  display: flex;
+  background-color: white;
+  padding: 36px 82px;
+  .row-right {
+    margin: 0px;
+    background-color: rgb(252,252,250);
+  }
+  .row-left {
+    margin: 0px;
+    h3 {
+      color: black;
+    }
+  }
+}
+
+.row.upload {
+  font-family: 'Quicksand', sans-serif;
+  margin: 0px;
+  border-radius: 10px;
+  box-shadow: 2px 3px #757575;
+}
+

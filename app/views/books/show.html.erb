@@ -7,11 +7,33 @@
 <% if @book.photo? %>
 <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
 <% end %>
-
-
-<p><%= link_to "Edit Book", edit_book_path(@book) %></p>
-
 <p><%= link_to "New Booking", new_book_booking_path(@book) %></p>
 
 <p><%= link_to "Back to index books", books_path %></p>
 
+<button class="btn btn-primary btn-sm" data-target="#editModal" data-toggle="modal">Edit Book</button>
+<div class="modal" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Book</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@book) do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.input :title, placeholder: 'Title', label:false %>
+        <%= f.input :genre, placeholder: 'Genre', label:false %>
+        <%= f.input :author, placeholder: 'Author', label:false %>
+        <%= f.input :publisher, placeholder: 'Publisher', label:false %>
+        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
+        <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
+      </div>
+      <div class="modal-footer">
+      <%= f.submit 'Confirm', class: "form-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
