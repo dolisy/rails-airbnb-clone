@@ -6,11 +6,14 @@ class BooksController < ApplicationController
   def index
     @books = Book.search(params[:term])
 
+
     @hash = Gmaps4rails.build_markers(@books) do |book, marker|
     marker.lat book.library.latitude
     marker.lng book.library.longitude
     marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
     end
+    @search = params[:term]
+
   end
 
   def show

@@ -1,0 +1,37 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  font-weight: var(--table-header-font-weight);
+}
+
+th,
+td {
+  padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
+  line-height: inherit;
+}
+
+th { vertical-align: bottom }
+td { vertical-align: top }
+
+.table-wrap {
+  margin-top: 1.5em;
+  padding: 2em;
+}
+
+td a {
+  padding-top: 10px;
+}
+
+.title {
+  padding-top: 3px;
+}
+
+table {
+  border-color: black;
+}
