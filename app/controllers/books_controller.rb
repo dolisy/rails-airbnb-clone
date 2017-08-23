@@ -9,6 +9,12 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+
+    # for New Booking Form
+    @user = current_user
+    @booking = Booking.new
+
+    # for Google Books Cover
     @book_cover = begin
       GoogleBooks.search("isbn:#{@book.isbn}").first.image_link
     rescue

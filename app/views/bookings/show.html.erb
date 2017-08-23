@@ -4,10 +4,6 @@
 <p><%= @booking.pick_up_date %></p>
 <p><%= @booking.return_date %></p>
 
-<p>Reviews:</p>
 
-<% @booking.reviews.each do |review| %>
-  <p><%= review.user.email %><%= review.stars %><%= review.content %></p>
-<% end %>
 
-<%= link_to "Add review", new_book_booking_review_path(@booking.book, @booking) %>
+

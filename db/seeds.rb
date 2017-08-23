@@ -31,7 +31,7 @@ end
 
 puts "creating 30 books..."
 (0..30).to_a.each do
-  book = Book.new(title: Faker::Book.title, genre: Faker::Book.genre, author: Faker::Book.author, publisher: Faker::Book.publisher, library: Library.all.order('RANDOM()').first())
+  book = Book.new(title: Faker::Book.title, genre: Faker::Book.genre, author: Faker::Book.author, publisher: Faker::Book.publisher, description: Faker::Lorem.paragraph, library: Library.all.order('RANDOM()').first())
   book.save!
 end
 
