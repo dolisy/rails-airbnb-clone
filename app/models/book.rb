@@ -1,8 +1,6 @@
 class Book < ApplicationRecord
   belongs_to :library
-
   has_many :bookings
-
   has_many :reviews, through: :bookings
 
   has_attachment :photo
@@ -10,15 +8,18 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :library, presence: true
 
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   # for search --> replaces self.search(term)
   scope :status, -> (status) { where status: status }
 
-  scope :title, -> (title) { where("title like ?", "%#{title}%") }
-  scope :author, -> (author) { where("author like ?", "%#{author}%") }
-  scope :publisher, -> (publisher) { where("publisher like ?", "%#{publisher}%") }
-  scope :genre, -> (genre) { where("genre like ?", "%#{genre}%") }
-  scope :isbn, -> (isbn) { where("isbn like ?", "%#{isbn}%") }
-  scope :description, -> (description) { where("description like ?", "%#{description}%") }
+  # scope :title, -> (title) { where("title like ?", "%#{title}%") }
+  # scope :author, -> (author) { where("author like ?", "%#{author}%") }
+  # scope :publisher, -> (publisher) { where("publisher like ?", "%#{publisher}%") }
+  # scope :genre, -> (genre) { where("genre like ?", "%#{genre}%") }
+  # scope :isbn, -> (isbn) { where("isbn like ?", "%#{isbn}%") }
+  # scope :description, -> (description) { where("description like ?", "%#{description}%") }
 
   scope :term, -> (term) { where("title ILIKE :search OR author ILIKE :search OR publisher ILIKE :search OR genre ILIKE :search OR isbn ILIKE :search OR description ILIKE :search", search: "%#{term}%") }
 
