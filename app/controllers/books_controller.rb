@@ -20,6 +20,7 @@ class BooksController < ApplicationController
     @hash = Gmaps4rails.build_markers(@book) do |book, marker|
     marker.lat book.library.latitude
     marker.lng book.library.longitude
+    end
 
 
     # for New Booking Form
