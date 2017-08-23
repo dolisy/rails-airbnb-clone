@@ -1,3 +1,5 @@
+require 'googlebooks'
+
 class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
@@ -13,14 +15,30 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+
+    #show map
     @hash = Gmaps4rails.build_markers(@book) do |book, marker|
     marker.lat book.library.latitude
     marker.lng book.library.longitude
+
+
+    # for New Booking Form
+    @user = current_user
+    @booking = Booking.new
+
+    # for Google Books Cover
+    @book_cover = begin
+      GoogleBooks.search("isbn:#{@book.isbn}").first.image_link
+    rescue
+
     end
   end
 
   def new
     @book = Book.new
+
+    @search = ''
+    @book_search = GoogleBooks.search('#{@search}')
   end
 
   def create

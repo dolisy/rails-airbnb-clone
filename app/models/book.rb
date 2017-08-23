@@ -1,6 +1,10 @@
 class Book < ApplicationRecord
   belongs_to :library
+
   has_many :bookings
+
+  has_many :reviews, through: :bookings
+
   has_attachment :photo
 
   validates :title, presence: true

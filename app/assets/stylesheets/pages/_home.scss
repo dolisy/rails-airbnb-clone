@@ -1,1 +1,151 @@
 // Specific CSS for your home-page
+
+// ----------- GLOBAL STYLING ------------//
+body {
+  font-family: "arial";
+  font-size: 24px;
+  background-color: white;
+  letter-spacing: 0.01em;
+}
+
+h2 {
+  font-family: 'Helvetica';
+  color: black;
+  font-size: 26px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+a {
+  color: black;
+  opacity: 1;
+}
+
+a:hover {
+  color: black;
+  opacity: .5;
+  text-decoration: none;
+}
+
+.wrapper {
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+  padding-left: 2.2em;
+  padding-right: 2.2em;
+}
+
+// ----------- NAV ------------//
+
+
+.navbar-wagon {
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  padding-right: 2.5em;
+  padding-left: 2.5em;
+}
+
+.navbar-wagon-link:hover {
+  border-bottom: solid 2px #FFF;
+  display: inline;
+  padding-bottom: 3px;
+}
+
+.navbar-wagon {
+  // position: fixed;
+  width: 100vw;
+  background-color: black;
+}
+
+.navbar-wagon a {
+  font-size: 20px;
+  color: white;
+  font-weight: lighter;
+}
+
+.navbar-wagon-brand img {
+  border: 1px solid  black;
+  border-radius: 50%;
+}
+
+
+// ----------- BANNER ------------//
+
+.banner {
+  color:  black;
+  text-align: center;
+  height: 83vh;
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+}
+
+.banner-tagline {
+  color: white;
+  font-size: 14px;
+  font-weight: 100;
+  margin-right: 0em;
+}
+
+.banner h1 {
+  font-size: 50px;
+  font-family: "arial";
+}
+
+.banner-tagline {
+  font-size: 14px;
+  padding-top: 5em;
+}
+
+.banner-copy {
+  margin: 0 auto;
+  color: white;
+  font-size: 70px;
+}
+
+.banner-content {
+  margin-top: 0em;
+  margin-left: 1em;
+}
+
+.banner-copy-yellow {
+  color: yellow;
+  margin: 0 auto;
+  font-size: 70px;
+}
+
+// ----------- CARDS ------------//
+
+.row {
+  margin-top: 2em;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.fit {
+  padding: 10px;
+}
+
+.form {
+  text-align: center;
+}
+
+.view-all {
+  float: right;
+}
+
+.cards {
+  padding-bottom: 2.2em;
+}
+
+.cards p {
+  font-size: 16px;
+  margin-left: 11px;
+}
+
+.card {
+  padding-bottom: 1.5em;
+  padding-right: .5em;
+  padding-left: .5em;
+}
