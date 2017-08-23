@@ -8,15 +8,16 @@ class BooksController < ApplicationController
 
     #for search
     @books = Book.where(nil).order(params[:sort_by])
+    @books = @books.near(params[:location], 2000) unless params[:location] == ''
     filtering_params(params).each do |key, value|
       @books = @books.public_send(key, value) if value.present?
     end
-    
+
     # for geolocate
     @hash = Gmaps4rails.build_markers(@books) do |book, marker|
-    marker.lat book.library.latitude
-    marker.lng book.library.longitude
-    marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
+      marker.lat book.library.latitude
+      marker.lng book.library.longitude
+      marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
     end
   end
 
@@ -25,8 +26,8 @@ class BooksController < ApplicationController
 
     #show map
     @hash = Gmaps4rails.build_markers(@book) do |book, marker|
-    marker.lat book.library.latitude
-    marker.lng book.library.longitude
+      marker.lat book.library.latitude
+      marker.lng book.library.longitude
     end
 
 
@@ -75,7 +76,7 @@ class BooksController < ApplicationController
 
   # list of the param names that can be used for filtering the list
   def filtering_params(params)
-    params.slice(:status, :title, :author, :publisher, :genre, :isbn, :description, :term, :location)
+    params.slice(:term)
   end
 
 end

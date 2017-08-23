@@ -3,8 +3,10 @@
     <h2>Search Results For: "<%= @search %>"</h2>
     <h2>
       <%= form_tag(books_path, class: "form", method: :get) do %>
+        <%= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
+        <%= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
         <%= text_field_tag :sort_by, params[:sort_by], placeholder: 'Sort by here..', class: "field" %>
-        <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
+
       <% end %>
     </h2>
   </div>
