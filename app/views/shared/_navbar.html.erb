@@ -5,8 +5,9 @@
   <% end %>
 
   <!-- search tool -->
-  <%= form_tag(books_path, method: :get) do %>
-    <%= text_field_tag :term, params[:term], class: "field", placeholder: 'Search here..' %>
+  <%= form_tag(books_path, class: "form", method: :get) do %>
+    <%= text_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
+    <%= text_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
     <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
   <% end %>
 
@@ -23,7 +24,7 @@
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= image_tag "http://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <%= image_tag "http://kitt.lewagon.com/placeholder/users/yoonpoon", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to profile_path do %>
