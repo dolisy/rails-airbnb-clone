@@ -6,6 +6,7 @@
   <title>TODO</title>
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.8.0/css/tachyons.min.css"/>
   <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -14,6 +15,7 @@
   <%= render 'shared/navbar' %>
   <%= render 'shared/flashes' %>
   <%= yield %>
+  <%= render 'shared/footer'%>
   <%= javascript_include_tag 'application' %>
   <%= cloudinary_js_config %>
 </body>
