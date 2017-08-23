@@ -1,30 +1,33 @@
-<p> index books -- Search Results Page </p>
-
-<h1>Search Results</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <% for book in @books %>
-        <div class='book'>
-            <strong> <%= link_to book.title, book_path(book) %> </strong>
-            <p>Number of bookings: <%= book.bookings.count %></p>
-            <p>
-            Number of reviews: <% sum = 0 %>
+<div class="wrapper">
+  <h2>Search Results For: "<%= @search %>"</h2>
+  <div class="table-wrap overflow-scroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th> <th></th> <th>Bookings</th> <th>Reviews</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for book in @books %>
+          <tr>
+            <td class="lg-col-2">
+              <img class="fit" src="https://versobooks-prod.s3.amazonaws.com/images/000007/189/9781781689752-000a8e17aa381c54f60f1d4e76d18ad7.jpg"/>
+            </td>
+            <td>
+              <p class="title"><%= link_to book.title, book_path(book)%></p>
+              <p class="f7 fw4 mb0 black-60"><%= book.author %></p>
+            </td>
+            <td> <p class="title"><%= book.bookings.count %></p></td>
+            <td> <p class="title"><% sum = 0 %>
               <% book.bookings.each do |booking| %>
                 <% sum += booking.reviews.count %>
               <% end %>
-              <%= sum %>
-            </p>
-        </div>
-      <% end %>
-     </tr>
-  </tbody>
-</table>
-
-
+                <%= sum %>
+                </p>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
