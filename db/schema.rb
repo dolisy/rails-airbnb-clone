@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20170823123933) do
     t.text     "description"
     t.string   "status"
     t.float    "rate"
-    t.string   "photo"
     t.index ["library_id"], name: "index_books_on_library_id", using: :btree
   end
 
