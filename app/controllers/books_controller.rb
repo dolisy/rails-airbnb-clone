@@ -4,16 +4,27 @@ class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @books = Book.search(params[:term])
+    @books = Book.all
 
-
-    @hash = Gmaps4rails.build_markers(@books) do |book, marker|
-    marker.lat book.library.latitude
-    marker.lng book.library.longitude
-    marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
+    #for search
+    @books = Book.where(nil).order(params[:sort_by])
+    @books = @books.near(params[:location], 2000) unless params[:location] == ''
+    filtering_params(params).each do |key, value|
+      @books = @books.public_send(key, value) if value.present?
     end
-    @search = params[:term]
 
+    # for geolocate
+    @books_location = []
+    @books.each do |book|
+      unless (book.library.latitude == nil || book.library.longitude == nil)
+        @books_location << book
+      end
+    end
+    @hash = Gmaps4rails.build_markers(@books) do |book, marker|
+      marker.lat book.library.latitude
+      marker.lng book.library.longitude
+      marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
+    end
   end
 
   def show
@@ -21,8 +32,8 @@ class BooksController < ApplicationController
 
     #show map
     @hash = Gmaps4rails.build_markers(@book) do |book, marker|
-    marker.lat book.library.latitude
-    marker.lng book.library.longitude
+      marker.lat book.library.latitude
+      marker.lng book.library.longitude
     end
 
 
@@ -63,7 +74,15 @@ class BooksController < ApplicationController
     redirect_to book_path(@book)
   end
 
+  private
+
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id, :term, :photo)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :isbn, :description, :library_id, :term, :photo)
   end
+
+  # list of the param names that can be used for filtering the list
+  def filtering_params(params)
+    params.slice(:term)
+  end
+
 end
