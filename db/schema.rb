@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170823123933) do
     t.text     "description"
     t.string   "status"
     t.float    "rate"
+    t.string   "photo"
     t.index ["library_id"], name: "index_books_on_library_id", using: :btree
   end
 
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20170823123933) do
     t.datetime "updated_at", null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "address"
     t.index ["user_id"], name: "index_libraries_on_user_id", using: :btree
   end
 
