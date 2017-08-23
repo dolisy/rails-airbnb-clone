@@ -4,7 +4,13 @@
   font-weight: lighter;
   border-radius: 0;
   color: white;
-  border: 1px solid white;
+  border: .5px solid white;
+  margin-bottom: 3px;
+  padding-top: 8px;
+  padding-bottom: 7px;
+  padding-right: 11px;
+  padding-left: 12px;
+  letter-spacing: 0.02em;
 }
 
 .btn-outline:hover {
@@ -17,7 +23,25 @@
   font-weight: lighter;
   border-radius: 0;
   color: white;
-  border: 1px solid white;
+  padding: 3px;
+  border: .5px solid white;
+  letter-spacing: 0.02em;
 }
 
+.form{
+margin-left: 6em;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
 

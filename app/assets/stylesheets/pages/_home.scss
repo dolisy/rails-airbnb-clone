@@ -38,7 +38,6 @@ a:hover {
 
 // ----------- NAV ------------//
 
-
 .navbar-wagon {
   padding-top: 2.5em;
   padding-bottom: 2.5em;
@@ -69,11 +68,21 @@ a:hover {
   border-radius: 50%;
 }
 
+// ----------- NAV—SIGNED IN ------------//
+a {
+  font-weight:100;
+}
+
+.navbar-wagon-link:hover {
+  border-bottom: 0px;
+  padding-bottom: 0px;
+  opacity: 0.7;
+}
 
 // ----------- BANNER ------------//
 
 .banner {
-  color:  black;
+  color: black;
   text-align: center;
   height: 83vh;
   background-size: cover !important;
@@ -95,7 +104,7 @@ a:hover {
 
 .banner-tagline {
   font-size: 14px;
-  padding-top: 5em;
+  padding-top: 3em;
 }
 
 .banner-copy {
@@ -105,8 +114,9 @@ a:hover {
 }
 
 .banner-content {
-  margin-top: 0em;
+  margin-top: -2em;
   margin-left: 1em;
+  margin-left: -2em;
 }
 
 .banner-copy-yellow {
@@ -118,7 +128,7 @@ a:hover {
 // ----------- CARDS ------------//
 
 .row {
-  margin-top: 2em;
+  margin-top: 3em;
   margin-right: 15px;
   margin-left: 15px;
 }
@@ -149,3 +159,11 @@ a:hover {
   padding-right: .5em;
   padding-left: .5em;
 }
+
+// ----------ARTICLE-------------//
+
+.align {
+  margin-top: 0.4em;
+}
+
+
