@@ -1,5 +1,4 @@
-
-<article class="cf ph2 ph4-ns pv5">
+<article class="cf ph2 ph5-ns pv5">
   <header class="fn fl-ns w-50-ns pr4-ns">
     <h1 class="book-title f3 black lh-title fw9 mt0 pt2 bt bw1">
       <%= @book.title %>
@@ -8,18 +7,20 @@
       <%= @book.author %>
     </h2>
       <% if @book.photo? %>
-      <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill, class: "fit", class:"right" %>
-    <% end %>
+        <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill, class: "fit" %>
+      <% end %>
     <time class="f10 ttu tracked gray"><%= @book.description %></time>
   </header>
   <div class="fn fl-ns w-50-ns">
-    <p class="lh-copy measure mt0-ns">
+    <p class="lh-copy measure mt0-ns black">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Consectetur adipiscing elit, sed do eiusmod.</p>
+
       <% if @book.library.user != current_user %>
-        <div class="center">
+        <div class="left pt3">
           <%= simple_form_for [@book, @booking] do |f| %>
             <%= f.error_notification %>
 
-            <%= f.input :pick_up_date %>
+            <%= f.input :pick_up_date%>
             <%= f.input :return_date %>
 
             <%= f.button :submit %>
@@ -30,24 +31,8 @@
   </div>
 </article>
 
-<h3><%= @book.title %></h3>
-<p>Author: <%= @book.author %></p>
-<p>Genre: <%= @book.genre %></p>
-<p>Publisher: <%= @book.publisher %></p>
-<p> ----- </p>
-<p> Description:
-<%= @book.description %></p>
-<p> ----- </p>
-<% if @book.photo? %>
-  <p> Picture: </p>
-  <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
-<% end %>
-<p><%= link_to "New Booking", new_book_booking_path(@book) %></p>
-
-<p><%= link_to "Back to index books", books_path %></p>
-
 <% if @book.library.user == current_user %>
-  <button class="edit-button" data-target="#editModal" data-toggle="modal">    <i class="medium material-icons">edit</i></button>
+  <button class="edit-button" data-target="#editModal" data-toggle="modal"> <i class="medium material-icons">edit</i></button>
 <% end %>
 
 <!-- Book Reviews -->
@@ -64,20 +49,10 @@
   <p><%= review.content %></p>
 <% end %>
 
-<!-- New Booking Form -->
+<article class="cf ph2 ph5-ns">
+  <div id="map" style="width: 100%; height: 350px;"></div>
+</article>
 
-<% if @book.library.user != current_user %>
-  <h3> New booking form </h3>
-
-  <%= simple_form_for [@book, @booking] do |f| %>
-    <%= f.error_notification %>
-
-    <%= f.input :pick_up_date %>
-    <%= f.input :return_date %>
-
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
 <!-- Modal goes below -->
 
 <div class="modal" id="editModal" tabindex="-1">
@@ -90,8 +65,6 @@
       <div class="modal-body">
         <%= simple_form_for(@book) do |f| %>
         <%= f.error_notification %>
-
-<div id="map" style="width: 100%; height: 600px;"></div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>

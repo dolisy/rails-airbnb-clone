@@ -1,4 +1,19 @@
 .btn-outline {
+  background-color: white;
+  font-family: 'arial';
+  font-weight: lighter;
+  border-radius: 0;
+  color: black;
+  border: .5px solid black;
+  margin-bottom: 3px;
+  padding-top: 8px;
+  padding-bottom: 7px;
+  padding-right: 11px;
+  padding-left: 12px;
+  letter-spacing: 0.02em;
+}
+
+.button-form {
   background-color: black;
   font-family: 'arial';
   font-weight: lighter;
@@ -17,31 +32,35 @@
   color: white;
 }
 
+.form-center {
+  width: 30%;
+}
+
 .field {
-  background-color: black;
+  background-color: white;
   font-family: 'arial';
   font-weight: lighter;
   border-radius: 0;
-  color: white;
+  color: black;
   padding: 3px;
-  border: .5px solid white;
+  border: .5px solid black;
   letter-spacing: 0.02em;
 }
 
-.form{
-margin-left: 6em;
+.form {
+  margin-left: 6em;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: white;
+  color: black;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-  color: white;
+  color: black;
 }
 :-ms-input-placeholder { /* IE 10+ */
-  color: white;
+  color: black;
 }
 :-moz-placeholder { /* Firefox 18- */
-  color: white;
+  color: black;
 }
 

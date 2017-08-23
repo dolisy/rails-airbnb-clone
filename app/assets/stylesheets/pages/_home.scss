@@ -39,10 +39,11 @@ a:hover {
 // ----------- NAV ------------//
 
 .navbar-wagon {
-  padding-top: 2.5em;
-  padding-bottom: 2.5em;
+  padding-top: 2em;
+  padding-bottom: 2em;
   padding-right: 2.5em;
   padding-left: 2.5em;
+  border-bottom: 1px solid black;
 }
 
 .navbar-wagon-link:hover {
@@ -54,17 +55,17 @@ a:hover {
 .navbar-wagon {
   // position: fixed;
   width: 100vw;
-  background-color: black;
+  background-color: white;
 }
 
 .navbar-wagon a {
   font-size: 20px;
-  color: white;
+  color: black;
   font-weight: lighter;
 }
 
 .navbar-wagon-brand img {
-  border: 1px solid  black;
+  border: 1px solid black;
   border-radius: 50%;
 }
 
@@ -84,14 +85,14 @@ a {
 .banner {
   color: black;
   text-align: center;
-  height: 83vh;
+  height: 87vh;
   background-size: cover !important;
   display: flex;
   align-items: center;
 }
 
 .banner-tagline {
-  color: white;
+  color: black;
   font-size: 14px;
   font-weight: 100;
   margin-right: 0em;
@@ -109,18 +110,18 @@ a {
 
 .banner-copy {
   margin: 0 auto;
-  color: white;
+  color: black;
   font-size: 70px;
 }
 
 .banner-content {
   margin-top: -2em;
-  margin-left: 1em;
-  margin-left: -2em;
+  margin-left: 2em;
+  margin-left: -3em;
 }
 
 .banner-copy-yellow {
-  color: yellow;
+  color: green;
   margin: 0 auto;
   font-size: 70px;
 }
