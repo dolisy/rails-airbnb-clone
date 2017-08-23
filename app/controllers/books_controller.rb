@@ -14,6 +14,12 @@ class BooksController < ApplicationController
     end
 
     # for geolocate
+    @books_location = []
+    @books.each do |book|
+      unless (book.library.latitude == nil || book.library.longitude == nil)
+        @books_location << book
+      end
+    end
     @hash = Gmaps4rails.build_markers(@books) do |book, marker|
       marker.lat book.library.latitude
       marker.lng book.library.longitude
