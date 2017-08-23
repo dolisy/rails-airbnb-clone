@@ -1,32 +1,33 @@
-<button class="btn btn-primary btn-sm" data-target="#editModal" data-toggle="modal">Edit Book</button>
-<div class="modal" id="editModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Book</h4>
-      </div>
-      <div class="modal-body">
-        <%= simple_form_for(@book) do |f| %>
-        <%= f.error_notification %>
+<article class="cf ph2 ph4-ns pv5">
+  <header class="fn fl-ns w-50-ns pr4-ns">
+    <h1 class="book-title f3 black lh-title fw9 mt0 pt2 bt bw1">
+      <%= @book.title %>
+    </h1>
+    <h2 class="author f10 mid-gray lh-title">
+      <%= @book.author %>
+    </h2>
+      <% if @book.photo? %>
+      <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill, class: "fit", class:"right" %>
+    <% end %>
+    <time class="f10 ttu tracked gray"><%= @book.description %></time>
+  </header>
+  <div class="fn fl-ns w-50-ns">
+    <p class="lh-copy measure mt0-ns">
+      <% if @book.library.user != current_user %>
+        <div class="center">
+          <%= simple_form_for [@book, @booking] do |f| %>
+            <%= f.error_notification %>
 
-        <%= f.input :title, placeholder: 'Title', label:false %>
-        <%= f.input :genre, placeholder: 'Genre', label:false %>
-        <%= f.input :author, placeholder: 'Author', label:false %>
-        <%= f.input :publisher, placeholder: 'Publisher', label:false %>
-        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
-        <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
-      </div>
-      <div class="modal-footer">
-      <%= f.submit 'Confirm', class: "form-button" %>
-        <% end %>
-      </div>
-    </div>
+            <%= f.input :pick_up_date %>
+            <%= f.input :return_date %>
+
+            <%= f.button :submit %>
+          <% end %>
+        </div>
+      <% end %>
+    </p>
   </div>
-</div>
-
-<!-- Cyril s code conflicting below: -->
-
+</article>
 
 <h3><%= @book.title %></h3>
 <p>Author: <%= @book.author %></p>
@@ -75,6 +76,33 @@
     <%= f.button :submit %>
   <% end %>
 <% end %>
+
+<button class="btn btn-primary btn-sm" data-target="#editModal" data-toggle="modal">Edit Book</button>
+<div class="modal" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Book</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@book) do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.input :title, placeholder: 'Title', label:false %>
+        <%= f.input :genre, placeholder: 'Genre', label:false %>
+        <%= f.input :author, placeholder: 'Author', label:false %>
+        <%= f.input :publisher, placeholder: 'Publisher', label:false %>
+        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
+        <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
+      </div>
+      <div class="modal-footer">
+      <%= f.submit 'Confirm', class: "form-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
