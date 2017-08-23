@@ -1,7 +1,7 @@
 class LibrariesController < ApplicationController
   def show
     @library = Library.find(params[:id])
-    # @lib_coordinates = { lat: @library.latitude, lng: @flat.longitude }
+    @lib_coordinates = { lat: @library.latitude, lng: @library.longitude }
   end
 
   def new

@@ -7,12 +7,16 @@ class BooksController < ApplicationController
     @hash = Gmaps4rails.build_markers(@books) do |book, marker|
     marker.lat book.library.latitude
     marker.lng book.library.longitude
-    # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
     end
   end
 
   def show
     @book = Book.find(params[:id])
+    @hash = Gmaps4rails.build_markers(@book) do |book, marker|
+    marker.lat book.library.latitude
+    marker.lng book.library.longitude
+    end
   end
 
   def new

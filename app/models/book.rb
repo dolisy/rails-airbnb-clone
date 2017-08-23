@@ -14,3 +14,5 @@ class Book < ApplicationRecord
     end
   end
 end
+
+#Book.near(@address, @distance)

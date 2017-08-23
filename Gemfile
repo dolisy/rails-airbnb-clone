@@ -38,7 +38,6 @@ gem 'coffee-rails'
 #Facebook authentication
 gem 'omniauth-facebook'
 
-<<<<<<< HEAD
 #Geocoding
 gem 'geocoder'
 gem 'coffee-rails'
@@ -47,5 +46,3 @@ gem 'gmaps4rails'
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
-=======
->>>>>>> master
