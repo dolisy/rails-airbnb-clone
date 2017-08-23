@@ -11,8 +11,10 @@ class Book < ApplicationRecord
   validates :library, presence: true
 
   def self.search(term)
-    if term
-      where('lower(title) LIKE ?', "%#{term}%").order('id DESC')
+    wildcard_term = "%#{term}%"
+
+    if wildcard_term
+      where("title ILIKE :search OR author ILIKE :search OR publisher ILIKE :search OR genre ILIKE :search OR isbn ILIKE :search OR description ILIKE :search", search: wildcard_term).order('id DESC')
     else
       order('id DESC')
     end
