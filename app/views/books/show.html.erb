@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <article class="cf ph2 ph4-ns pv5">
   <header class="fn fl-ns w-50-ns pr4-ns">
     <h1 class="book-title f3 black lh-title fw9 mt0 pt2 bt bw1">
@@ -29,6 +30,9 @@
   </div>
 </article>
 
+=======
+<p> show book </p>
+>>>>>>> master
 <h3><%= @book.title %></h3>
 <p>Author: <%= @book.author %></p>
 <p>Genre: <%= @book.genre %></p>
@@ -40,6 +44,13 @@
 <% if @book.photo? %>
   <p> Picture: </p>
   <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill %>
+<% end %>
+<p><%= link_to "New Booking", new_book_booking_path(@book) %></p>
+
+<p><%= link_to "Back to index books", books_path %></p>
+
+<% if @book.library.user == current_user %>
+  <button class="edit-button" data-target="#editModal" data-toggle="modal">    <i class="medium material-icons">edit</i></button>
 <% end %>
 
 <!-- Book Reviews -->
@@ -56,12 +67,6 @@
   <p><%= review.content %></p>
 <% end %>
 
-<!-- Edit Book -->
-
-<h3><% if @book.library.user == current_user %>
-  <%= link_to "Edit Book", edit_book_path(@book) %>
-<% end %></h3>
-
 <!-- New Booking Form -->
 
 <% if @book.library.user != current_user %>
@@ -76,8 +81,12 @@
     <%= f.button :submit %>
   <% end %>
 <% end %>
+<!-- Modal goes below -->
 
+<<<<<<< HEAD
 <button class="btn btn-primary btn-sm" data-target="#editModal" data-toggle="modal">Edit Book</button>
+=======
+>>>>>>> master
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -88,6 +97,7 @@
       <div class="modal-body">
         <%= simple_form_for(@book) do |f| %>
         <%= f.error_notification %>
+<<<<<<< HEAD
 
         <%= f.input :title, placeholder: 'Title', label:false %>
         <%= f.input :genre, placeholder: 'Genre', label:false %>
@@ -104,5 +114,20 @@
   </div>
 </div>
 
+=======
+>>>>>>> master
 
-
+        <%= f.input :title, placeholder: 'Title', label:false %>
+        <%= f.input :genre, placeholder: 'Genre', label:false %>
+        <%= f.input :author, placeholder: 'Author', label:false %>
+        <%= f.input :publisher, placeholder: 'Publisher', label:false %>
+        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
+        <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
+      </div>
+      <div class="modal-footer">
+      <%= f.submit 'Confirm', class: "form-button" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

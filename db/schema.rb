@@ -49,6 +49,10 @@ ActiveRecord::Schema.define(version: 20170823094718) do
     t.integer  "library_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+<<<<<<< HEAD
+=======
+    t.string   "photo"
+>>>>>>> master
     t.string   "isbn"
     t.text     "description"
     t.index ["library_id"], name: "index_books_on_library_id", using: :btree
