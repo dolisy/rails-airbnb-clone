@@ -1,6 +1,7 @@
 class LibrariesController < ApplicationController
   def show
     @library = Library.find(params[:id])
+    @lib_coordinates = { lat: @library.latitude, lng: @library.longitude }
   end
 
   def new
@@ -30,6 +31,6 @@ class LibrariesController < ApplicationController
   private
 
   def library_params
-    params.require(:library).permit(:name, :user_id)
+    params.require(:library).permit(:name, :address, :user_id)
   end
 end

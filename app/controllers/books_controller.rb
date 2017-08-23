@@ -5,11 +5,26 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.search(params[:term])
+
+
+    @hash = Gmaps4rails.build_markers(@books) do |book, marker|
+    marker.lat book.library.latitude
+    marker.lng book.library.longitude
+    marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
+    end
     @search = params[:term]
+
   end
 
   def show
     @book = Book.find(params[:id])
+
+    #show map
+    @hash = Gmaps4rails.build_markers(@book) do |book, marker|
+    marker.lat book.library.latitude
+    marker.lng book.library.longitude
+    end
+
 
     # for New Booking Form
     @user = current_user
@@ -19,6 +34,7 @@ class BooksController < ApplicationController
     @book_cover = begin
       GoogleBooks.search("isbn:#{@book.isbn}").first.image_link
     rescue
+
     end
   end
 
