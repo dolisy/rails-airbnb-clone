@@ -1,10 +1,18 @@
-<p>show library</p>
-
-<h3><%= @library.name %></h3>
-<% @library.books.each do |book| %>
-  <p><%= link_to book.title, book_path(book) %></p>
+<% if @library.user == current_user %>
+  <p><%= link_to "Edit Library", new_book_path(library: @library) %></p>
 <% end %>
 
-<p><%= link_to "Edit Library", edit_library_path(@library) %></p>
-
 <p><%= link_to "Add a Book to the library", new_book_path(library: @library)  %></p>
+
+<section class="cf w-100 pa2-ns">
+  <% @library.books.each do |book| %>
+    <article class="fl w-100 w-50-m  w-25-ns pa2-ns">
+      <div class="aspect-ratio aspect-ratio--3x4">
+        <% if book.photo? %>
+          <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :fill, class: "fit bg-center cover aspect-ratio--object" %>
+        <% end %>
+      </div>
+        <%= link_to book.title, book_path(book), class: "ph0-ns pb3 link db" %>
+    </article>
+  <%end%>
+</section>
