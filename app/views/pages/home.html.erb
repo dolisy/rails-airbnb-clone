@@ -34,7 +34,13 @@
             <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.genre %></h2>
             <dl class="mt2 f7">
               <dt class="clip">Rating</dt>
-              <dd class="ml0">4.5 Stars</dd>
+              <dd class="ml0">
+                <% if book.rating == 0 %>
+                  <%= 'No Reviews' %>
+                <% else %>
+                  <%= book.rating %> Stars
+                <% end %>
+              </dd>
             </dl>
           </div>
         <% end %>
