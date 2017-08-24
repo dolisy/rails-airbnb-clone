@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824055301) do
+ActiveRecord::Schema.define(version: 20170824123147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20170824055301) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.date     "pick_up_date"
-    t.date     "return_date"
+    t.string   "pick_up_date"
+    t.string   "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
     t.datetime "created_at",   null: false
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20170824055301) do
     t.integer  "library_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "photo"
     t.string   "isbn"
     t.text     "description"
     t.string   "status"
@@ -65,6 +64,8 @@ ActiveRecord::Schema.define(version: 20170824055301) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "address"
     t.index ["user_id"], name: "index_libraries_on_user_id", using: :btree
   end
