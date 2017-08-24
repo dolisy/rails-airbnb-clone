@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400');
+
+.book-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  .date {
+    font-family: 'Quicksand', 'sans-serif';
+    font-weight: bold;
+    font-size: 14px;
+  }
+}
