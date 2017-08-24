@@ -1,33 +1,47 @@
-  <div id="map"></div>
-  <div class="wrapper">
-
-  <h2>Search Results For: <span class="f6 ba bw ph3 pv1 black">"<%= @search %>"</span></h2>
+<div id="map"></div>
+<div class="wrapper">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <h2>Search Results For: "<%= @search %>"</h2>
+    <h2>
+      <%= form_tag(books_path, class: "form", method: :get) do %>
+        <%= text_field_tag :sort_by, params[:sort_by], placeholder: 'Sort by here..', class: "field" %>
+        <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
+      <% end %>
+    </h2>
+  </div>
   <div class="table-wrap overflow-scroll">
     <table class="table">
       <thead>
         <tr>
-          <th>Title</th> <th></th> <th>Reviews</th>
+          <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th>
         </tr>
       </thead>
       <tbody>
         <% for book in @books %>
           <tr>
-            <td class="table-border lg-col-2">
-              <img class="fit " src="https://versobooks-prod.s3.amazonaws.com/images/000007/189/9781781689752-000a8e17aa381c54f60f1d4e76d18ad7.jpg"/>
+            <td class="lg-col-2">
+              <img class="fit" src="https://versobooks-prod.s3.amazonaws.com/images/000007/189/9781781689752-000a8e17aa381c54f60f1d4e76d18ad7.jpg"/>
             </td>
             <td>
-              <p class="title"><%= link_to book.title, book_path(book)%></p>
-              <p class="f7 fw4 mb0 black-60"><%= book.author %></p>
+              <p class="title">
+                <%= link_to book.title, book_path(book)%>
+              </p>
+              <p class="f7 fw4 mb0 black-60">
+                <%= book.author %>
+              </p>
             </td>
-            <td> <p class="title"><% sum = 0 %>
-              <% book.bookings.each do |booking| %>
-                <% sum += booking.reviews.count %>
-              <% end %>
-              <%= sum %>
-            </p>
+            <td>
+              <p class="title">
+                <%= book.rating %>
+              </p>
             </td>
-        <% end %>
-        </tr>
+            <td>
+              <p class="title">
+                <%= book.reviews_count %>
+              </p>
+            </td>
+          </tr>
+        <%end%>
       </tbody>
     </table>
   </div>
