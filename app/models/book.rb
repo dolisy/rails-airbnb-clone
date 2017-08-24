@@ -50,7 +50,7 @@ class Book < ApplicationRecord
 
     self.bookings.each do |booking|
       booking.reviews.each do |review|
-        sum += review.stars
+        sum += review.stars || 0
       end
     end
     if reviews_count == 0
