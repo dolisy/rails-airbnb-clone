@@ -29,7 +29,8 @@
 }
 
 .btn-outline:hover {
-  color: white;
+  color: black;
+  opacity: .5;
 }
 
 .form-center {
@@ -51,16 +52,46 @@
   margin-left: 6em;
 }
 
+.placeholder-dim {
+  opacity: .5;
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: black;
+  opacity: .6;
+
 }
 ::-moz-placeholder { /* Firefox 19+ */
   color: black;
+  opacity: .6;
 }
 :-ms-input-placeholder { /* IE 10+ */
   color: black;
+  opacity: .6;
 }
 :-moz-placeholder { /* Firefox 18- */
   color: black;
+  opacity: .6;
 }
 
+
+//  ---------- SIMPLE FORM LOG IN ---------------//
+.form-inputs {
+  text-align: left;
+}
+
+.sign-in {
+  text-align: left;
+}
+
+.boolean .optional {
+  font-size: 14px;
+}
+
+.form-group .password {
+  margin-bottom: 5px;
+}
+
+input[type="password"], textarea {
+  background-color: #fff;
+}
