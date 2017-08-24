@@ -56,11 +56,11 @@
     <% Library.first(6).each do |library| %>
       <div class="card sm-col sm-col-4">
         <article class="box left mw5 mw6-ns ba mv1">
-          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name, library_path(library) %></h2>
+          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(15), library_path(library) %></h2>
           <div class="pa3 bt">
             <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
               <p class="f6 b f5-ns lh-copy measure mv0">Curated by:</p>
-              <p class="black-70"><%= library.user.email %></p>
+              <p class="black-70"><%= library.user.email.truncate(30) %></p>
           </div>
         </article>
       </div>
