@@ -85,18 +85,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for(@book) do |f| %>
-<<<<<<< HEAD
-          <%= f.error_notification %>
-          <%= f.input :title, placeholder: 'Title', label:false %>
-          <%= f.input :genre, placeholder: 'Genre', label:false %>
-          <%= f.input :author, placeholder: 'Author', label:false %>
-          <%= f.input :publisher, placeholder: 'Publisher', label:false %>
-          <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
-          <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
-      </div>
-      <div class="modal-footer">
-        <%= f.submit 'Confirm', class: "form-button" %>
-=======
+
         <%= f.error_notification %>
         <%= f.input :title, placeholder: 'Title', label:false %>
         <%= f.input :genre, placeholder: 'Genre', label:false %>
@@ -107,30 +96,9 @@
       </div>
       <div class="modal-footer">
       <%= f.submit 'Confirm', class: "form-button" %>
->>>>>>> master
         <% end %>
       </div>
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-  <% end %>
-<% end %>
->>>>>>> master

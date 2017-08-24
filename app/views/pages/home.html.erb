@@ -20,6 +20,7 @@
     </div>
   </div>
 
+
   <div class="cards row clearfix">
       <article>
       <% Book.first(4).each do |book| %>
@@ -52,9 +53,6 @@
   <div class="flex wrap">
     <div class="col-6">
       <h2>Featured Libraries</h2>
-    </div>
-    <div class="col-6">
-      <h2 class="view-all"><%= link_to "View all", libraries_path %></h2>
     </div>
   </div>
 

@@ -3,7 +3,6 @@
 // ----------- GLOBAL STYLING ------------//
 body {
   font-family: "arial";
-  font-size: 24px;
   background-color: white;
   letter-spacing: 0.01em;
 }
@@ -39,8 +38,8 @@ a:hover {
 // ----------- NAV ------------//
 
 .navbar-wagon {
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
   padding-right: 2.5em;
   padding-left: 2.5em;
   border-bottom: 1px solid black;
@@ -59,7 +58,7 @@ a:hover {
 }
 
 .navbar-wagon a {
-  font-size: 20px;
+  font-size: 18px;
   color: black;
   font-weight: lighter;
 }
