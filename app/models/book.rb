@@ -4,10 +4,7 @@ class Book < ApplicationRecord
   has_many :reviews, through: :bookings
 
   # after_create :add_address_to_book
-
   # after_save :add_address_to_book
-  # after_update :add_address_to_book
-  # after_create :add_address_to_book
 
   has_attachment :photo
 
@@ -31,8 +28,6 @@ class Book < ApplicationRecord
   scope :term, -> (term) { where("title ILIKE :search OR author ILIKE :search OR publisher ILIKE :search OR genre ILIKE :search OR isbn ILIKE :search OR description ILIKE :search", search: "%#{term}%") }
 
   scope :location, -> (location) { where("location like ?", "%#{location}%") }
-
-  scope :sort_by, -> (sort_by) { order sort_by: sort_by }
 
   # for analytics
   def reviews_count
@@ -63,7 +58,10 @@ class Book < ApplicationRecord
   # for search on book address
   # def add_address_to_book
   #   self.address = self.library.address
-  #   self.longitude = self.library.longitude
-  #   self.latitude = self.library.latitude
+  #   p "callback called, address assigned #{self.address}"
+  #   # self.longitude = self.library.longitude
+  #   # self.latitude = self.library.latitude
+  #   geocode if self.address_changed?
+
   # end
 end
