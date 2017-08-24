@@ -5,9 +5,9 @@ class Library < ApplicationRecord
   has_many :bookings, through: :books
   has_many :reviews, through: :bookings
 
-  # after_create :add_address_to_books
 
-  # after_save :add_address_to_books
+  # after_create :add_address_to_books
+  after_save :add_address_to_books
   # after_update :add_address_to_books
 
   # after_touch :add_address_to_books
@@ -22,14 +22,12 @@ class Library < ApplicationRecord
 
   private
 
-  # def add_address_to_books
-  #   unless self.books.empty?
-  #     self.books.each do |book|
-  #       book.address = self.address
-  #       book.longitude = self.longitude
-  #       book.latitude = self.latitude
-  #     end
-  #   end
-  # end
+  def add_address_to_books
+    unless self.books.empty?
+      self.books.each do |book|
+        book.update_attributes(address: address)
+      end
+    end
+  end
 
 end
