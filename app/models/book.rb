@@ -1,9 +1,13 @@
 class Book < ApplicationRecord
   belongs_to :library
-
   has_many :bookings
-
   has_many :reviews, through: :bookings
+
+  # after_create :add_address_to_book
+
+  # after_save :add_address_to_book
+  # after_update :add_address_to_book
+  # after_create :add_address_to_book
 
   has_attachment :photo
 
@@ -31,7 +35,6 @@ class Book < ApplicationRecord
   scope :sort_by, -> (sort_by) { order sort_by: sort_by }
 
   # for analytics
-
   def reviews_count
     count = 0
 
@@ -56,4 +59,11 @@ class Book < ApplicationRecord
       return average = sum.fdiv(reviews_count).round(1)
     end
   end
+
+  # for search on book address
+  # def add_address_to_book
+  #   self.address = self.library.address
+  #   self.longitude = self.library.longitude
+  #   self.latitude = self.library.latitude
+  # end
 end

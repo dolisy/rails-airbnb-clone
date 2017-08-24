@@ -7,7 +7,11 @@ class BooksController < ApplicationController
     @books = Book.all
 
     #for search
-    @books = Book.where(nil).order(params[:sort_by]).near(params[:location],2000)
+    if params[:location] == ''
+      @books = Book.where(nil).order(params[:sort_by])
+    else
+      @books = Book.where(nil).order(params[:sort_by]).near(params[:location],2000)
+    end
     filtering_params(params).each do |key, value|
       @books = @books.public_send(key, value) if value.present?
     end
@@ -51,6 +55,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
+
     @book.save
 
     redirect_to book_path(@book)
@@ -62,6 +67,7 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
+
     @book.update(book_params)
 
     redirect_to book_path(@book)
