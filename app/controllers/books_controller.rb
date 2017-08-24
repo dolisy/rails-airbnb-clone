@@ -7,13 +7,18 @@ class BooksController < ApplicationController
     @books = Book.all
 
     #for search
-    if params[:location] == ''
-      @books = Book.where(nil).order(params[:sort_by])
-    else
-      @books = Book.where(nil).order(params[:sort_by]).near(params[:location],2000)
+    unless params[:location] == ''
+      @books = Book.near(params[:location],200)
     end
+
     filtering_params(params).each do |key, value|
       @books = @books.public_send(key, value) if value.present?
+    end
+
+    if params[:sort_by] == 'rating'
+      @books = @books.sort_by { |b| -b.rating }
+    else
+      @books = @books.order(params[:sort_by])
     end
 
     # for google maps
@@ -32,7 +37,6 @@ class BooksController < ApplicationController
     marker.lat book.library.latitude
     marker.lng book.library.longitude
     end
-
 
     # for New Booking Form
     @user = current_user
@@ -55,7 +59,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-
+    @book.address = @book.library.address
     @book.save
 
     redirect_to book_path(@book)
