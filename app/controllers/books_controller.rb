@@ -4,16 +4,20 @@ class BooksController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show ]
 
   def index
-    @books = Book.search(params[:term])
+    @books = Book.all
 
-
-    @hash = Gmaps4rails.build_markers(@books) do |book, marker|
-    marker.lat book.library.latitude
-    marker.lng book.library.longitude
-    marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
+    #for search
+    @books = Book.where(nil).order(params[:sort_by]).near(params[:location],2000)
+    filtering_params(params).each do |key, value|
+      @books = @books.public_send(key, value) if value.present?
     end
-    @search = params[:term]
 
+    # for google maps
+    @hash = Gmaps4rails.build_markers(@books) do |book, marker|
+      marker.lat book.library.latitude
+      marker.lng book.library.longitude
+      marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
+    end
   end
 
   def show
