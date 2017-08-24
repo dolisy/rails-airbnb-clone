@@ -12,16 +12,19 @@
   .date {
     font-family: 'Quicksand', 'sans-serif';
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 
- .confirm-text{
-    padding: 10px;
-    border-bottom: 1px solid rgba(220,224,244,0.6);
-    width: 400px;
-    color: rgba(5,5,5,0.8)
-  }
+.text-container{
+  padding-left: 10px
+}
+
+.confirm-text{
+  padding: 10px;
+  border-bottom: 3px solid rgba(5,5,5,0.7);
+  width: 400px;
+}
 
 .checkout-image {
   margin: 5px;
