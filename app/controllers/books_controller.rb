@@ -17,6 +17,8 @@ class BooksController < ApplicationController
 
     if params[:sort_by] == 'rating'
       @books = @books.sort_by { |b| -b.rating }
+    elsif params[:sort_by] == 'library'
+      @books = @books.sort_by { |b| -b.library.name }
     else
       @books = @books.order(params[:sort_by])
     end
