@@ -3,8 +3,8 @@
   <div class="confirmation-content">
     <div class="book-container">
       <h4><%= @booking.book.title %></h4>
-      <p class="date">Pick up: <%= @booking.pick_up_date%></p>
-      <p class="date">Return: <%= @booking.return_date %></p>
+      <p class="date">Pick up: <%= @booking.checkin_date %></p>
+      <p class="date">Return: <%= @booking.checkout_date %></p>
       <% if @booking.book.photo? %>
         <%= cl_image_tag @booking.book.photo.path, width: 200, height: 300, crop: :fill %>
       <% else %>
