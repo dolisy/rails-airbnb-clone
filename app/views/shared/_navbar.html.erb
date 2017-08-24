@@ -6,7 +6,7 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, class: "form", method: :get) do %>
-    <%= text_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
+    <%= text_field_tag :term, params[:term], placeholder: 'Browse here..', class: "field"%>
     <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
   <% end %>
 
