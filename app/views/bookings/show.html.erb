@@ -1,21 +1,26 @@
 <div class="wrapper">
-  <h4>Confirm Your Booking:</h4>
+  <h4 class="confirm-text">Confirm Your Booking:</h4>
   <div class="confirmation-content">
+    <div class="text-container">
+        <h4><%= @booking.book.title %></h4>
+        <h5>by <%= @booking.book.author %></h5>
+        <p class="date">Pick up: <%= @booking.checkin_date %></p>
+        <p class="date">Return: <%= @booking.checkout_date %></p>
+    </div>
+    <div class="row left">
+      <%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
+      <a class="btn btn-outline" href="#">
+        Go to Payment
+      </a>
+    </div>
     <div class="book-container">
-      <h4><%= @booking.book.title %></h4>
-      <p class="date">Pick up: <%= @booking.checkin_date %></p>
-      <p class="date">Return: <%= @booking.checkout_date %></p>
       <% if @booking.book.photo? %>
         <%= cl_image_tag @booking.book.photo.path, width: 200, height: 300, crop: :fill %>
       <% else %>
-        <img src="https://unsplash.it/500/600?image=1083" alt="picture of book">
+        <img src="https://unsplash.it/400/500?image=1083" alt="picture of book" class="checkout-image">
       <% end %>
     </div>
-    <div class="row">
-      <a class="payment btn btn-primary" href="#">
-      Go to Payment
-      </a>
-    </div>
+
   </div>
 </div>
 

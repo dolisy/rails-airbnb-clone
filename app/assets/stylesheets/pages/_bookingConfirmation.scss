@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300,400');
 
+// * {
+//   border: thin solid  red;
+// }
+
 .book-container {
   display: flex;
   align-items: center;
@@ -8,6 +12,25 @@
   .date {
     font-family: 'Quicksand', 'sans-serif';
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
   }
+}
+
+.text-container{
+  padding-left: 10px
+}
+
+.confirm-text{
+  padding: 10px;
+  border-bottom: 3px solid rgba(5,5,5,0.7);
+  width: 400px;
+}
+
+.checkout-image {
+  margin: 5px;
+  margin: solid black;
+}
+
+.back {
+  color: white;
 }
