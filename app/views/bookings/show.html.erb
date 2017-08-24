@@ -1,9 +1,20 @@
-<p> show booking </p>
-
-<p><%= link_to @booking.book.title, book_path(@booking.book) %></p>
-<p><%= @booking.pick_up_date %></p>
-<p><%= @booking.return_date %></p>
-
-
-
+<div class="wrapper">
+  <h4>Confirm Your Booking:</h4>
+  <div class="confirmation-content">
+    <div class="book-container">
+      <h4><%= @booking.book.title %></h4>
+      <p class="date">Pick up: <%= @booking.pick_up_date %></p>
+      <p class="date">Return: <%= @booking.return_date %></p>
+      <% if @booking.book.photo? %>
+      <%= cl_image_tag @booking.book.photo.path, width: 200, height: 300, crop: :fill %>
+      <% else %>
+      <img src="https://unsplash.it/500/600?image=1083" alt="picture of book">
+      <% end %>
+    </div>
+    <div class="row">
+    <a class="payment btn btn-primary" href="#">Go to Payment</a>
+    </div>
+  </div>
+  <p>more to come..</p>
+</div>
 

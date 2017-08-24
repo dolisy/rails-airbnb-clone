@@ -51,3 +51,6 @@ end
 #Book Cover Images
 gem 'googlebooks'
 
+#Bootstrap Date Picker
+gem 'bootstrap-datepicker-rails'
+

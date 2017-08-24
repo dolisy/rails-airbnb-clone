@@ -6,7 +6,7 @@
       <%= form_tag(books_path, class: "form", method: :get) do %>
         <%= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
         <%= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
-        <%= select_tag :sort_by, options_for_select(["", "title", "author", "genre"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
+        <%= select_tag :sort_by, options_for_select(["", "title", "author", "genre", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
       <% end %>
     </h2>
   </div>
