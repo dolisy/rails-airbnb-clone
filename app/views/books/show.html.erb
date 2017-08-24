@@ -11,27 +11,12 @@
       <% end %>
   </header>
   <div class="fn fl-ns w-50-ns">
-    <p class="lh-copy measure mt0-ns black">
-      <%= @book.description %></p>
-      <% if @book.library.user != current_user %>
-        <div class="left pt3">
-          <%= simple_form_for [@book, @booking] do |f| %>
-            <%= f.error_notification %>
-
-            <%= f.input :pick_up_date%>
-            <%= f.input :return_date %>
-
-            <%= f.button :submit %>
-          <% end %>
-        </div>
-      <% end %>
-    </p>
     <% if @book.library.user != current_user %>
       <div class="left pt3">
         <%= simple_form_for [@book, @booking] do |f| %>
-          <%= f.input :pick_up_date, as: :string, input_html: { class: 'datepicker' } %>
-          <%= f.input :return_date, as: :string, input_html: { class: 'datepicker' } %>
-          <%= f.submit 'Borrow Book', class: 'form-button'%>
+          <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker' } %>
+          <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker' } %>
+          <%= f.button :submit, class: 'form-button'%>
         <% end %>
       </div>
     <% end %>
