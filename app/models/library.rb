@@ -15,6 +15,7 @@ class Library < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :user, message: "A Library with this name has already been created"}
   validates :user, presence: true
+  validates :address
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
