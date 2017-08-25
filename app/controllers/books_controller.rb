@@ -31,6 +31,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def book_new
+    @book = Book.new
+  end
+
   def show
     @book = Book.find(params[:id])
 
@@ -55,13 +59,21 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
 
-    @search = ''
-    @book_search = GoogleBooks.search('#{@search}')
+    if params[:library_id]
+      @library = Library.find(params[:library_id])
+    end
+    # @search = ''
+    # @book_search = GoogleBooks.search('#{@search}')
   end
 
   def create
     @book = Book.new(book_params)
     @book.address = @book.library.address
+
+    if params[:library_id]
+      @book.library = Library.find(params[:library_id])
+    end
+
     @book.save
 
     redirect_to book_path(@book)
