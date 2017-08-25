@@ -28,6 +28,14 @@ class LibrariesController < ApplicationController
     redirect_to library_path(@library)
   end
 
+  def destroy
+    @library = Library.find(params[:id])
+    @library.destroy
+
+    redirect_to home_path
+  end
+
+
   private
 
   def library_params

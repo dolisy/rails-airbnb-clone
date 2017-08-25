@@ -52,15 +52,26 @@
   <%= javascript_tag do %>
     $(document).ready(function() {
     console.log(<%= raw @hash.to_json %>);
-      var handler = Gmaps.build('Google');
+      var handler = Gmaps.build('Google', { markers: {
+      randomize: true, maxRandomDistance: 10, clusterer: {
+      maxZoom: 20, gridSize: 100 } }});
+
       handler.buildMap({ internal: { id: 'map' } }, function() {
         markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.getMap().setZoom(2);
         if (markers.length == 0) {
           handler.getMap().setZoom(2);
         } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
+          handler.getMap().setZoom(10)
+          handler.map.centerOn(markers[0]);
+
+        } else {
+
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(2)
+          handler.map.centerOn(markers[0]);
+          handler.bounds.extendWith(markers);
+
+
         }
       });
     });
