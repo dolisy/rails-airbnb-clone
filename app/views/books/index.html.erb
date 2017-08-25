@@ -3,10 +3,12 @@
   <div style="display: flex; align-items: center; justify-content: space-between;">
     <h2>Search Results For: "<%= @search %>"</h2>
     <h2>
-      <%= form_tag(books_path, class: "form", method: :get) do %>
+      <!-- order -->
+      <!-- sort_by -->
+      <%= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
         <%= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
         <%= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
-        <%= select_tag :sort_by, options_for_select(["", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
+        <%= select_tag :sort_by, options_for_select(["all", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
       <% end %>
     </h2>
   </div>
@@ -33,7 +35,11 @@
             </td>
             <td>
               <p class="title">
-                <%= book.rating %>
+                <% if book.rating == 0 %>
+                  <%= 'No Reviews' %>
+                <% else %>
+                  <%= book.rating %>
+                <% end %>
               </p>
             </td>
             <td>
@@ -52,18 +58,31 @@
   <%= javascript_tag do %>
     $(document).ready(function() {
     console.log(<%= raw @hash.to_json %>);
-      var handler = Gmaps.build('Google');
+      var handler = Gmaps.build('Google', { markers: {
+      randomize: true, maxRandomDistance: 10, clusterer: {
+      maxZoom: 20, gridSize: 100 } }});
+
       handler.buildMap({ internal: { id: 'map' } }, function() {
         markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.getMap().setZoom(2);
         if (markers.length == 0) {
           handler.getMap().setZoom(2);
         } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
+          handler.getMap().setZoom(10)
+          handler.map.centerOn(markers[0]);
+
+        } else {
+
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(2)
+          handler.map.centerOn(markers[0]);
+          handler.bounds.extendWith(markers);
+
+
         }
       });
     });
   <% end %>
 <% end %>
+
+
 

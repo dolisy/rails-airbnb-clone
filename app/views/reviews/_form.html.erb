@@ -1,9 +1,7 @@
+<%= simple_form_for([ book, booking, review ], remote: true) do |f| %>
+  <%= f.input :content, as: :text %>
+  <%= f.input :stars %>
 
-  <%= simple_form_for [@book, @booking, @review ] do |f| %>
-    <%= f.error_notification %>
+  <%= f.button :submit %>
+<% end %>
 
-    <%= f.input :content %>
-    <%= f.input :stars %>
-
-    <%= f.button :submit %>
-  <% end %>

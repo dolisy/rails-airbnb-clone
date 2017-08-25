@@ -4,8 +4,13 @@ class BookingsController < ApplicationController
   end
 
   def show
+    @book = Book.find(params[:book_id])
     @booking = Booking.find(params[:id])
     # @book = Book.find(params[:book_id])
+
+    # for reviews-ajax
+    @user = current_user
+    @review = Review.new(user: current_user)
   end
 
   def new
