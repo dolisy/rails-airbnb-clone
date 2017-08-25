@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   # get '/books/new', to: 'books#book_new'
   resources :books, only: [ :index, :show, :new, :create, :edit, :update ] do
     resources :bookings, only: [ :show, :new, :create ] do
-      resources :reviews, only: [ :new, :create, :edit, :update ]
+      # resources :reviews, only: [ :new, :create, :edit, :update ]
+      resources :reviews, only: :create
     end
   end
 
