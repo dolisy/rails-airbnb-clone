@@ -1,35 +1,75 @@
 <div class="wrapper">
-
   <div class="bookings clearfix">
     <h2>My Bookings:</h2>
-      <% @user.bookings.each do |booking| %>
-          <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
-            <div class="aspect-ratio aspect-ratio--3x4">
-              <img src="https://versobooks-prod.s3.amazonaws.com/images/000009/562/9781786631237-126047d90a1361a49ce71de9d6dba2ab.jpg" class="fit bg-center cover aspect-ratio--object" />
-            </div>
-            <div class="pa1 bt b--black-100">
-              <a class="author db link black hover-grey" href="#"><%= link_to booking.book.title.truncate(19), book_booking_path(booking.book, booking) %></a>
-              <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
-              <a class="add tc ph1 pv1 db bg-animate ba">Add Review</a>
-            </div>
-          </article>
-        <% end %>
-      </div>
+    <% @user.bookings.each do |booking| %>
+      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
+        <div class="aspect-ratio aspect-ratio--3x4">
+          <img src="https://versobooks-prod.s3.amazonaws.com/images/000009/562/9781786631237-126047d90a1361a49ce71de9d6dba2ab.jpg" class="fit bg-center cover aspect-ratio--object" />
+        </div>
+        <div class="pa1 bt b--black-100">
+          <a class="author db link black hover-grey" href="#">
+            <%= link_to booking.book.title.truncate(19), book_booking_path(booking.book, booking) %>
+          </a>
+          <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
+<!--           <a class="add tc ph1 pv1 db bg-animate ba"> -->
+            <!-- Button trigger modal -->
+            <button type="button" class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#exampleModal">
+              Add Review
+            </button>
 
-  <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
-
-    <h2>My Libraries:</h2>
-      <div class="cards row clearfix">
-        <% @user.libraries.each do |library| %>
-          <div class="card sm-col sm-col-4">
-            <article class="box left mw5 mw6-ns ba mv1">
-              <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
-              <div class="pa3 bt">
-                <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
-                <p class="f6 b f5-ns lh-copy measure mv0">Books in this library: <%=library.books.count.to_s%></p>
+            <!-- Modal -->
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel"><%= booking.book.title%></h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <%= simple_form_for [booking.book, booking, @review ] do |f| %>
+                    <div class="modal-body">
+                      <%= f.error_notification %>
+                      <%= f.input :content %>
+                      <%= f.input :stars %>
+                    </div>
+                    <div class="modal-footer">
+                      <%= f.button :submit, class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
               </div>
-            </article>
+            </div>
+            <%= content_for(:after_js) do %>
+              <script>
+                $('#review_stars').rating({'size':'xs'});
+              </script>
+            <% end %>
+            <!-- end modal -->
+<!--           </a> -->
+        </div>
+      </article>
+    <% end %>
+  </div>
+  <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
+  <h2>My Libraries:</h2>
+  <div class="cards row clearfix">
+    <% @user.libraries.each do |library| %>
+      <div class="card sm-col sm-col-4">
+        <article class="box left mw5 mw6-ns ba mv1">
+          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
+          <div class="pa3 bt">
+            <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
+            <p class="f6 b f5-ns lh-copy measure mv0">Books in this library: <%=library.books.count.to_s%></p>
           </div>
-        <%end%>
+        </article>
       </div>
+    <%end%>
+  </div>
 </div>
+
+<!-- ##################################################### -->
+
+
+

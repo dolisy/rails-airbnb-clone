@@ -6,5 +6,6 @@ class PagesController < ApplicationController
 
   def profile
     @user = current_user
+    @review = Review.new(user: current_user)
   end
 end

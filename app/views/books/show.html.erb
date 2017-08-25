@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody class="lh-copy">
-        <% @book.reviews.each do |review| %>
+        <% @book.reviews.order('created_at DESC').each do |review| %>
           <tr>
           <td class="pv3 pr3 bb b--black-20"><%= review.content %>
           </td>

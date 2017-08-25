@@ -3,10 +3,10 @@ class ReviewsController < ApplicationController
   #   @reviews = Review.all
   # end
 
-  # def show
-  #   @review = Review.find(params[:id])
-  #   # @book = Book.find(params[:book_id])
-  # end
+  def show
+    @review = Review.find(params[:id])
+    # @book = Book.find(params[:book_id])
+  end
 
   def new
     # @booking = Booking.find(params[:booking_id])
@@ -23,20 +23,11 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
 
     @review.booking = @booking
+    @review.user = current_user
 
-    if @review.save
-      # redirect_to book_booking_path(@book, @booking)
-      respond_to do |format|
-        format.html { redirect_to book_booking_path(@book, @booking) }
-        format.js # will render 'app/views/reviews/create.js'
-      end
-    else
-      # render 'bookings/show'
-      respond_to do |format|
-        format.html { render 'bookings/show' }
-        format.js # will render 'app/views/reviews/create.js'
-      end
-    end
+    @review.save
+
+    redirect_to book_path(@review.booking.book)
 
 
     # @review = Review.new(review_params)
@@ -67,6 +58,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:content, :stars, :user_id, :booking_id, :library_id)
+    params.require(:review).permit(:content, :stars, :user_id, :booking_id)
   end
 end
