@@ -23,7 +23,7 @@
 
   <div class="cards row clearfix">
       <article>
-      <% Book.first(4).each do |book| %>
+      <% Book.last(4).each do |book| %>
       <div class="card sm-col sm-col-6">
         <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
           <div class="dtc w3">
@@ -57,7 +57,7 @@
   </div>
 
   <div class="cards row clearfix">
-    <% Library.first(6).each do |library| %>
+    <% Library.last(6).each do |library| %>
       <div class="card sm-col sm-col-4">
         <article class="box left mw5 mw6-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(15), library_path(library) %></h2>
