@@ -96,7 +96,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id, :photo)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :description, :library_id, :photo)
   end
 
   # list of the param names that can be used for filtering the list

@@ -23,7 +23,9 @@
         <% for book in @books %>
           <tr>
             <td class="lg-col-2">
-              <img class="fit" src="https://versobooks-prod.s3.amazonaws.com/images/000007/189/9781781689752-000a8e17aa381c54f60f1d4e76d18ad7.jpg"/>
+              <% if book.photo? %>
+                <%= cl_image_tag book.photo.path, height: 200, crop: :scale%>
+              <% end %>
             </td>
             <td>
               <p class="title">
@@ -44,7 +46,11 @@
             </td>
             <td>
               <p class="title">
-                <%= book.reviews_count %>
+                <% if book.reviews_count == 0 %>
+                  <%= '' %>
+                <% else %>
+                  <%= book.reviews_count %>
+                <% end %>
               </p>
             </td>
           </tr>

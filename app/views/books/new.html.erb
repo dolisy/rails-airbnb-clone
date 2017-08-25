@@ -10,7 +10,13 @@
     <div class="row row-right">
 
       <div class="col-xs-12 col-md-12">
-        <h3>Add a Book to Your Library</h3>
+        <h3>
+          <% if @library.present? %>
+            <%= "Add a Book to #{@library.name}" %>
+          <% else %>
+            <%= 'Add a Book to Your Library' %>
+          <% end %>
+        </h3>
 
         <%= simple_form_for @book do |f| %>
           <%= f.error_notification %>

@@ -7,6 +7,7 @@
   <%= f.input :genre %>
   <%= f.input :author %>
   <%= f.input :publisher %>
+  <%= f.input :description %>
   <%= f.association :library, collection: Library.where(user: current_user) %>
   <%= f.input :photo, as: :attachinary %>
 

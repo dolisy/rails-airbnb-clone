@@ -2,35 +2,40 @@
   <header class="fn fl-ns w-50-ns pr4-ns">
     <h1 class="book-title f3 black lh-title fw9 mt0 pt2 bt bw1">
       <%= @book.title %>
+        <% if @book.library.user == current_user %>
+        <a class="edit-button" data-target="#editModal" data-toggle="modal">
+          (edit)
+        </a>
+      <% end %>
     </h1>
     <h2 class="author f10 mid-gray lh-title">
       <%= @book.author %>
     </h2>
       <% if @book.photo? %>
-        <%= cl_image_tag @book.photo.path, width: 200, height: 300, crop: :fill, class: "fit" %>
+        <%= cl_image_tag @book.photo.path, width: 250, height: 350, crop: :fill, class: "fit" %>
       <% end %>
   </header>
   <div class="fn fl-ns w-50-ns">
+    <p class="f6 lh-copy measure">
+      <%= @book.description %>
+    </p>
+    <p class="f6 lh-copy measure">
+      Rating: <%= @book.rating %>
+    </p>
     <% if @book.library.user != current_user %>
-      <div class="left pt3">
+      <div class="ba b--black-100 mt3 p1 fl pa2-ns md-col md-col-12">
+        <div class="calendar pt0">
         <%= simple_form_for [@book, @booking] do |f| %>
-          <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker' } %>
-          <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker' } %>
-          <%= f.button :submit, class: 'form-button'%>
+          <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker left mb1' } %>
+          <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker left mb2' } %>
+          <%= f.button :submit, class: 'yo btn-outline w-50 center tc'%>
         <% end %>
       </div>
     <% end %>
+    </div>
   </div>
 </article>
-
-<!-- If book belongs to user, they can edit -->
-<% if @book.library.user == current_user %>
-  <button class="edit-button" data-target="#editModal" data-toggle="modal">
-    <i class="medium material-icons">edit</i>
-  </button>
-<% end %>
-
-<article class="cf ph2 ph5-ns pv5">
+<article class="cf ph2 ph5-ns pv1">
   <div class="overflow-auto">
     <table class="f6 w-100 mw8 left" cellspacing="0">
       <thead>
@@ -41,7 +46,7 @@
         </tr>
       </thead>
       <tbody class="lh-copy">
-        <% @book.reviews.order('created_at DESC').each do |review| %>
+        <% @book.reviews.each do |review| %>
           <tr>
           <td class="pv3 pr3 bb b--black-20"><%= review.content %>
           </td>
@@ -56,7 +61,6 @@
 <!-- <article class="cf ph2 ph5-ns">
   <div id="map" style="width: 100%; height: 350px;"></div>
 </article> -->
-
 <!-- Google Map Goes here -->
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
@@ -75,7 +79,6 @@
     });
   <% end %>
 <% end %>
-
 <!-- Modal goes below -->
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
@@ -86,20 +89,19 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for(@book) do |f| %>
-
         <%= f.error_notification %>
         <%= f.input :title, placeholder: 'Title', label:false %>
         <%= f.input :genre, placeholder: 'Genre', label:false %>
         <%= f.input :author, placeholder: 'Author', label:false %>
         <%= f.input :publisher, placeholder: 'Publisher', label:false %>
-        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
-        <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
+        <%= f.input :description, placeholder: 'Description', label:false %>
+        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class:'' } %>
+        <%= f.input :photo, as: :attachinary, label_html: { class:'' }%>
       </div>
       <div class="modal-footer">
-      <%= f.submit 'Confirm', class: "form-button" %>
+      <%= f.submit 'Confirm', class: "btn-outline left" %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
