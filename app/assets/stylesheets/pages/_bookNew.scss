@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400|Pontano+Sans');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400|Pontano+Sans|Crimson+Text|Playfair+Display');
 // * {
 //   border: thin solid red;
 // }
@@ -12,9 +12,9 @@
   color: #ffffff;
   background-color: #406771;
   box-shadow: 1px 2px rgba(187, 181, 181, 0.8);
-    &:hover {
-      color: #bfb8b8;
-    }
+  &:hover {
+    color: #bfb8b8;
+  }
 }
 
 .edit-button {
@@ -39,20 +39,37 @@
 }
 
 .container.upload {
+  position: relative;
   display: flex;
   background-color: white;
   padding: 36px 82px;
   .row-right {
     margin: 0px;
     background-color: rgb(252,252,250);
+    width: 45%;
+    h3 {
+      font-family: 'Playfair Display', serif;
+    }
   }
   .row-left {
     margin: 0px;
-    h3 {
-      color: black;
+    width: 50%;
+    h2 {
+      color: rgba(255, 64, 64, 0.82);
+      font-family: 'Crimson Text', serif;
+      font-size: 33px;
+      padding-left: 19px;
     }
   }
 }
+.form-close {
+  position: absolute;
+  top: 13px;
+  right: 24px;
+  font-size: 23px;
+  color: rgba(2, 2, 2, 0.8);
+}
+
 
 .row.upload {
   font-family: 'Quicksand', sans-serif;
