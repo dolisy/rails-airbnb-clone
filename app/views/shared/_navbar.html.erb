@@ -6,9 +6,9 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, class: "form", method: :get) do %>
-    <%= text_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
-    <%= text_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
-    <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
+    <%= text_field_tag :term, params[:term], placeholder: 'Search here..', class: "" %>
+    <%= text_field_tag :location, params[:location], placeholder: 'Location here..', class: "" %>
+    <%= submit_tag 'Search', name: nil, class: "btn btn-outline " %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -18,19 +18,19 @@
 
       <!-- Links when logged in -->
       <%= link_to "New Library", new_library_path, class: "navbar-wagon-item navbar-wagon-link" %>
-       <%= link_to "New Book", new_book_path, class: "navbar-wagon-item navbar-wagon-link" %>
-      <%= link_to "Messages", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "New Book", new_book_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Profile", profile_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
           <%= image_tag "http://kitt.lewagon.com/placeholder/users/yoonpoon", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
+<!--             <li>
               <%= link_to profile_path do %>
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
-            </li>
+            </li> -->
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>

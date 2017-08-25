@@ -11,26 +11,22 @@
       <% end %>
   </header>
   <div class="fn fl-ns w-50-ns">
-    <p class="lh-copy measure mt0-ns black">
-      <%= @book.description %></p>
-      <% if @book.library.user != current_user %>
-        <div class="left pt3">
-          <%= simple_form_for [@book, @booking] do |f| %>
-            <%= f.error_notification %>
-
-            <%= f.input :pick_up_date%>
-            <%= f.input :return_date %>
-
-            <%= f.button :submit %>
-          <% end %>
-        </div>
-      <% end %>
-    </p>
+    <% if @book.library.user != current_user %>
+      <div class="left pt3">
+        <%= simple_form_for [@book, @booking] do |f| %>
+          <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker' } %>
+          <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker' } %>
+          <%= f.button :submit, class: 'form-button'%>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </article>
 
 <% if @book.library.user == current_user %>
-  <button class="edit-button" data-target="#editModal" data-toggle="modal"> <i class="medium material-icons">edit</i></button>
+  <button class="edit-button" data-target="#editModal" data-toggle="modal">
+    <i class="medium material-icons">edit</i>
+  </button>
 <% end %>
 
 <article class="cf ph2 ph5-ns pv5">
@@ -60,8 +56,26 @@
   <div id="map" style="width: 100%; height: 350px;"></div>
 </article> -->
 
-<!-- Modal goes below -->
+<!-- Google Map Goes here -->
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    if (markers.length == 0) {
+    handler.getMap().setZoom(2);
+    } else if (markers.length == 1) {
+    handler.getMap().setZoom(14);
+    }
+    });
+    });
+  <% end %>
+<% end %>
 
+<!-- Modal goes below -->
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -71,6 +85,7 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for(@book) do |f| %>
+
         <%= f.error_notification %>
         <%= f.input :title, placeholder: 'Title', label:false %>
         <%= f.input :genre, placeholder: 'Genre', label:false %>
@@ -87,20 +102,3 @@
   </div>
 </div>
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-  <% end %>
-<% end %>

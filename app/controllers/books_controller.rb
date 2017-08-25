@@ -17,6 +17,8 @@ class BooksController < ApplicationController
 
     if params[:sort_by] == 'rating'
       @books = @books.sort_by { |b| -b.rating }
+    elsif params[:sort_by] == 'library'
+      @books = @books.sort_by { |b| -b.library.name }
     else
       @books = @books.order(params[:sort_by])
     end
@@ -27,6 +29,10 @@ class BooksController < ApplicationController
       marker.lng book.library.longitude
       marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
     end
+  end
+
+  def book_new
+    @book = Book.new
   end
 
   def show
@@ -53,13 +59,21 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
 
-    @search = ''
-    @book_search = GoogleBooks.search('#{@search}')
+    if params[:library_id]
+      @library = Library.find(params[:library_id])
+    end
+    # @search = ''
+    # @book_search = GoogleBooks.search('#{@search}')
   end
 
   def create
     @book = Book.new(book_params)
     @book.address = @book.library.address
+
+    if params[:library_id]
+      @book.library = Library.find(params[:library_id])
+    end
+
     @book.save
 
     redirect_to book_path(@book)
