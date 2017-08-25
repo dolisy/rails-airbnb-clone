@@ -1,23 +1,35 @@
-<h1>Profile page: <%= current_user.email %></h1>
+<div class="wrapper">
 
-<h3>My bookings:</h3>
+  <div class="bookings clearfix">
+    <h2>My Bookings:</h2>
+      <% @user.bookings.each do |booking| %>
+          <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
+            <div class="aspect-ratio aspect-ratio--3x4">
+              <img src="https://versobooks-prod.s3.amazonaws.com/images/000009/562/9781786631237-126047d90a1361a49ce71de9d6dba2ab.jpg" class="fit bg-center cover aspect-ratio--object" />
+            </div>
+            <div class="pa1 bt b--black-100">
+              <a class="author db link black hover-grey" href="#"><%= link_to booking.book.title.truncate(19), book_booking_path(booking.book, booking) %></a>
+              <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
+              <a class="add tc ph1 pv1 db bg-animate ba">Add Review</a>
+            </div>
+          </article>
+        <% end %>
+      </div>
 
-<% @user.bookings.each do |booking| %>
-  <h2><%= link_to booking.book.title, book_booking_path(booking.book, booking) %></h2>
-  <p><%= booking.pick_up_date %></p>
-  <p><%= booking.return_date %></p>
-  <p> ----- </p>
-  <p><%= link_to "Add review", new_book_booking_review_path(booking.book, booking) %></p>
-  <p> ----- </p>
-<% end %>
+  <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
 
-<h3>My libraries:</h3>
-
-<% @user.libraries.each do |library| %>
-  <h2><%= link_to library.name, library_path(library) %></h2>
-  <p><%= link_to "Edit", edit_library_path(library) %></p>
-  <% library.books.each do |book| %>
-    <p><%= link_to book.title, book_path(book) %><%= link_to "Edit", edit_book_path(book) %></p>
-  <% end %>
-<% end %>
-
+    <h2>My Libraries:</h2>
+      <div class="cards row clearfix">
+        <% @user.libraries.each do |library| %>
+          <div class="card sm-col sm-col-4">
+            <article class="box left mw5 mw6-ns ba mv1">
+              <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
+              <div class="pa3 bt">
+                <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
+                <p class="f6 b f5-ns lh-copy measure mv0">Books in this library: <%=library.books.count.to_s%></p>
+              </div>
+            </article>
+          </div>
+        <%end%>
+      </div>
+</div>
