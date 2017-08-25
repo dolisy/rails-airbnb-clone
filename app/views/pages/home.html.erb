@@ -20,10 +20,9 @@
     </div>
   </div>
 
-
   <div class="cards row clearfix">
       <article>
-      <% Book.first(4).each do |book| %>
+      <% Book.last(4).each do |book| %>
       <div class="card sm-col sm-col-6">
         <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
           <div class="dtc w3">

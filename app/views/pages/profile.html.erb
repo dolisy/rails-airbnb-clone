@@ -8,8 +8,8 @@
               <img src="https://versobooks-prod.s3.amazonaws.com/images/000009/562/9781786631237-126047d90a1361a49ce71de9d6dba2ab.jpg" class="fit bg-center cover aspect-ratio--object" />
             </div>
             <div class="pa1 bt b--black-100">
-              <a class="author db link black hover-grey" href="#"><%= link_to booking.book.title.truncate(19), book_booking_path(booking.book, booking) %></a>
-              <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
+              <a class="booking-author db link black hover-grey" href="#"><%= link_to booking.book.title.truncate(19), book_booking_path(booking.book, booking) %></a>
+              <p class="booking-date red mv1">Return by <%= booking.pick_up_date %></p>
               <a class="add tc ph1 pv1 db bg-animate ba">Add Review</a>
             </div>
           </article>

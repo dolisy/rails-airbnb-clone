@@ -18,14 +18,8 @@
 }
 
 .edit-button {
-  padding: 2px 11px;
-  box-shadow: 2px 3px rgba(216, 215, 215, 0.8);
-  background-color: #4d7e8a;
-  color: white;
-  border-style: none;
-  &:hover {
-    box-shadow: none;
-  }
+  color: black;
+  cursor: pointer;
 }
 
 .form-details {
@@ -35,7 +29,6 @@
 .wrapper.upload {
   padding: 110px 70px;
   background-color: rgba(12, 12, 12, 0.85);
-
 }
 
 .container.upload {
