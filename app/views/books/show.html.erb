@@ -23,6 +23,7 @@
   </div>
 </article>
 
+<!-- If book belongs to user, they can edit -->
 <% if @book.library.user == current_user %>
   <button class="edit-button" data-target="#editModal" data-toggle="modal">
     <i class="medium material-icons">edit</i>
