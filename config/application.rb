@@ -20,6 +20,9 @@ Bundler.require(*Rails.groups)
 
 module RailsAirbnbClone
   class Application < Rails::Application
+    # for review-ajax
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.generators do |generate|
       generate.assets false
       generate.helper false
