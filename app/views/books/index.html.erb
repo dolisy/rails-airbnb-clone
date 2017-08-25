@@ -3,10 +3,12 @@
   <div style="display: flex; align-items: center; justify-content: space-between;">
     <h2>Search Results For: "<%= @search %>"</h2>
     <h2>
+      <!-- order -->
+      <!-- sort_by -->
       <%= form_tag(books_path, class: "form", method: :get) do %>
         <%= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
         <%= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
-        <%= select_tag :sort_by, options_for_select(["", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
+        <%= select_tag :sort_by, options_for_select(["all", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
       <% end %>
     </h2>
   </div>
@@ -33,7 +35,11 @@
             </td>
             <td>
               <p class="title">
-                <%= book.rating %>
+                <% if book.rating == 0 %>
+                  <%= 'No Reviews' %>
+                <% else %>
+                  <%= book.rating %>
+                <% end %>
               </p>
             </td>
             <td>

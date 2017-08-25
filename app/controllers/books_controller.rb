@@ -15,7 +15,9 @@ class BooksController < ApplicationController
       @books = @books.public_send(key, value) if value.present?
     end
 
-    if params[:sort_by] == 'rating'
+    if params[:sort_by] == 'all'
+      @books = @books.order('')
+    elsif params[:sort_by] == 'rating'
       @books = @books.sort_by { |b| -b.rating }
     elsif params[:sort_by] == 'library'
       @books = @books.sort_by { |b| -b.library.name }
@@ -94,7 +96,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id, :term, :photo)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :library_id, :photo)
   end
 
   # list of the param names that can be used for filtering the list
