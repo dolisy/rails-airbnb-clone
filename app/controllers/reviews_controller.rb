@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
     @review.user = current_user
     @review.save
 
-    redirect_to book_booking_path(@review.booking.book, @review.booking)
+    redirect_to book_path(@review.booking.book)
     # redirect_to library_review_path(@review.library, @review)
   end
 

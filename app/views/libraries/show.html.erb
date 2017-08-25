@@ -4,7 +4,7 @@
       <%= @library.name %> (<%= link_to "edit", edit_library_path(@library)%>)
     </div>
     <div class="right">
-      <%= link_to "Add Book +", new_book_path(library: @library)  %>
+      <%= link_to "Add Book +", new_library_book_path(@library) %>
     </div>
   </article>
 
