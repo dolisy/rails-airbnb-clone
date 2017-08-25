@@ -4,26 +4,28 @@
     <% @user.bookings.each do |booking| %>
       <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
         <div class="aspect-ratio aspect-ratio--3x4">
-          <img src="https://versobooks-prod.s3.amazonaws.com/images/000009/562/9781786631237-126047d90a1361a49ce71de9d6dba2ab.jpg" class="fit bg-center cover aspect-ratio--object" />
+         <% if booking.book.photo? %>
+            <%= cl_image_tag booking.book.photo.path, crop: :fill, class: "fit" %>
+          <% end %>
         </div>
-        <div class="pa1 bt b--black-100">
+        <div class="pa1 mt2 bt b--black-100">
           <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(19), book_booking_path(booking.book, booking) %>
+            <%= link_to booking.book.title.truncate(16), book_booking_path(booking.book, booking) %>
           </a>
           <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
 <!--           <a class="add tc ph1 pv1 db bg-animate ba"> -->
             <!-- Button trigger modal -->
-            <button type="button" class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#exampleModal">
+            <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#exampleModal">
               Add Review
-            </button>
+            </a>
 
             <!-- Modal -->
             <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title" id="exampleModalLabel"><%= booking.book.title%></h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title%></h1>
+                    <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -34,10 +36,9 @@
                       <%= f.input :stars %>
                     </div>
                     <div class="modal-footer">
-                      <%= f.button :submit, class: "btn btn-primary" %>
+                      <%= f.button :submit, class: "left btn-outline" %>
                     </div>
                   <% end %>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>

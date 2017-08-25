@@ -13,12 +13,14 @@
         Go to Payment
       </a>
     </div>
-    <div class="book-container">
+    <div class="book-container right fn fl-ns w-50-ns">
       <% if @booking.book.photo? %>
-        <%= cl_image_tag @booking.book.photo.path, width: 200, height: 300, crop: :fill %>
+        <%= cl_image_tag @booking.book.photo.path, width: 300, height: 450, crop: :fill, class: "fit" %>
       <% else %>
-        <img src="https://unsplash.it/400/500?image=1083" alt="picture of book" class="checkout-image">
+        <img src="https://unsplash.it/400/500?image=1083" alt="picture of book" class="fit">
       <% end %>
     </div>
   </div>
 </div>
+
+
