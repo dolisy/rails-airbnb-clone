@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   mount Attachinary::Engine => "/attachinary"
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
