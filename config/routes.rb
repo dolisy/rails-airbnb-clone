@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
   mount Attachinary::Engine => "/attachinary"
   devise_for :users,
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
@@ -14,11 +15,13 @@ Rails.application.routes.draw do
 
   # get '/books/new', to: 'books#book_new'
   resources :books, only: [ :index, :show, :new, :create, :edit, :update ] do
-    resources :bookings, only: [ :show, :new, :create ] do
+    resources :bookings, only: [ :show, :new, :create ]
       # resources :reviews, only: [ :new, :create, :edit, :update ]
-      resources :reviews, only: :create
-    end
   end
+
+  resources :reviews, only: :create
+
+  # resources :bookings, only:
 
   get '/profile', to: 'pages#profile'
 end

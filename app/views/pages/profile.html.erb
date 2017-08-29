@@ -13,42 +13,40 @@
             <%= link_to booking.book.title.truncate(16), book_booking_path(booking.book, booking) %>
           </a>
           <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
-<!--           <a class="add tc ph1 pv1 db bg-animate ba"> -->
             <!-- Button trigger modal -->
-            <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#exampleModal">
-              Add Review
-            </a>
+          <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
+            Add Review
+          </a>
 
-            <!-- Modal -->
-            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title%></h1>
-                    <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <%= simple_form_for [booking.book, booking, @review ] do |f| %>
-                    <div class="modal-body">
-                      <%= f.error_notification %>
-                      <%= f.input :content %>
-                      <%= f.input :stars %>
-                    </div>
-                    <div class="modal-footer">
-                      <%= f.button :submit, class: "left btn-outline" %>
-                    </div>
-                  <% end %>
+          <!-- Modal -->
+          <div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
+                  <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
+                <%= simple_form_for @review do |f| %>
+                  <div class="modal-body">
+                    <%= f.error_notification %>
+                    <%= f.hidden_field :booking_id, value: booking.id %>
+                    <%= f.input :content %>
+                    <%= f.input :stars %>
+                  </div>
+                  <div class="modal-footer">
+                    <%= f.button :submit, class: "left btn-outline" %>
+                  </div>
+                <% end %>
+                <%= content_for(:after_js) do %>
+                  <script>
+                    $('#review_stars').rating({'size':'xs'});
+                  </script>
+                <% end %>
               </div>
             </div>
-            <%= content_for(:after_js) do %>
-              <script>
-                $('#review_stars').rating({'size':'xs'});
-              </script>
-            <% end %>
-            <!-- end modal -->
-<!--           </a> -->
+          </div>
         </div>
       </article>
     <% end %>

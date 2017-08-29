@@ -54,3 +54,7 @@ gem 'googlebooks'
 #Bootstrap Date Picker
 gem 'bootstrap-datepicker-rails'
 
+#ActiveAdmin
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
