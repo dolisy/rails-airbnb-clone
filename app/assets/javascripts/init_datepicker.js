@@ -3,5 +3,6 @@ $('.datepicker').datepicker({
   maxViewMode: 2,
   todayBtn: "linked",
   orientation: "bottom auto",
-  autoclose: true
+  autoclose: true,
+  format: "dd/mm/yyyy"
  });
