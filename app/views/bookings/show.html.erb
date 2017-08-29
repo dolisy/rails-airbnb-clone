@@ -4,8 +4,8 @@
     <div class="text-container">
         <h4><%= @booking.book.title %></h4>
         <h5>by <%= @booking.book.author %></h5>
-        <p class="date">Pick up: <%= @booking.checkin_date %></p>
-        <p class="date">Return: <%= @booking.checkout_date %></p>
+        <p class="date">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
+        <p class="date">Return: <%= l(@booking.checkout_date, format: :custom) %></p>
     </div>
     <div class="row left">
       <%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
