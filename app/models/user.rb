@@ -5,12 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
+  has_attachment :avatar, accept: [:jpg, :png, :gif]
+  validates :avatar, presence: true
+
+
   has_many :bookings
   has_many :libraries
   has_many :reviews
 
   def self.find_for_google_oauth(auth)
-
     user_params = auth.slice(:provider, :uid)
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
     user_params[:google_picture_url] = auth.info.image
