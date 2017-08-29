@@ -44,7 +44,7 @@ gem 'omniauth-google-oauth2'
 
 #Geocoding
 gem 'geocoder'
-gem 'coffee-rails'
+# gem 'coffee-rails' already there
 gem 'gmaps4rails'
 
 source 'https://rails-assets.org' do
@@ -60,4 +60,25 @@ gem 'bootstrap-datepicker-rails'
 #ActiveAdmin
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
+# geocomplete
+# gem 'bootstrap-sass'
+# gem 'font-awesome-sass'
+# gem 'simple_form'
+# gem 'autoprefixer-rails'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

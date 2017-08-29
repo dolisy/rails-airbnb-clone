@@ -20,32 +20,34 @@
     </div>
   </div>
 
-
   <div class="cards row clearfix">
       <article>
       <% Book.last(4).each do |book| %>
-      <div class="card sm-col sm-col-6">
-        <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
-          <div class="dtc w3">
-            <img src="http://www.sternberg-press.com/files/book/540/Kiesler_cover_364.jpg" class="db w-100"/>
-          </div>
-          <div class="dtc v-top pl2">
-            <h1 class="f6 f5-ns fw6 lh-title black mv0"><%= book.title %></h1>
-            <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.author %></h2>
-            <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.genre %></h2>
-            <dl class="mt2 f7">
-              <dt class="clip">Rating</dt>
-              <dd class="ml0">
-                <% if book.rating == 0 %>
-                  <%= 'No Reviews' %>
-                <% else %>
-                  <%= book.rating %> Stars
-                <% end %>
-              </dd>
-            </dl>
-          </div>
-        <% end %>
-      </div>
+        <div class="card sm-col sm-col-6">
+          <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
+            <div class="featured-card dtc w3">
+              <% if book.photo? %>
+                <%= cl_image_tag book.photo.path, crop: :fit%>
+              <% end %>
+            </div>
+            <div class="dtc v-top pl3">
+              <h1 class="f6 f5-ns fw6 lh-title black mv0"><%= book.title %></h1>
+              <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.author %></h2>
+              <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.publisher %></h2>
+              <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.genre %></h2>
+              <dl class="mt2 f7">
+                <dt class="clip">Rating</dt>
+                <dd class="ml0">
+                  <% if book.rating == 0 %>
+                    <%= 'No Reviews' %>
+                  <% else %>
+                    <%= book.rating %> Stars
+                  <% end %>
+                </dd>
+              </dl>
+            </div>
+          <% end %>
+        </div>
       <% end %>
       </article>
   </div>

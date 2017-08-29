@@ -24,7 +24,7 @@
           <tr>
             <td class="lg-col-2">
               <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, height: 200, crop: :scale%>
+                <%= cl_image_tag book.photo.path, width: 600, crop: :scale%>
               <% end %>
             </td>
             <td>

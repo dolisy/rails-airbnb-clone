@@ -1,6 +1,6 @@
-<article class="cf ph2 ph5-ns pv5">
+<article class="cf ph2 ph5-ns pt3 mb2">
   <header class="fn fl-ns w-50-ns pr4-ns">
-    <h1 class="book-title f3 black lh-title fw9 mt0 pt2 bt bw1">
+    <h1 class="book-title f3 black lh-title fw9 mt0 pt1">
       <%= @book.title %>
         <% if @book.library.user == current_user %>
         <a class="edit-button" data-target="#editModal" data-toggle="modal">
@@ -9,33 +9,43 @@
       <% end %>
     </h1>
     <h2 class="author f10 mid-gray lh-title">
-      <%= @book.author %>
-    </h2>
+      <%= @book.author %> </h2>
       <% if @book.photo? %>
-        <%= cl_image_tag @book.photo.path, width: 250, height: 350, crop: :fill, class: "fit" %>
+        <%= cl_image_tag @book.photo.path, height: 350, crop: :fill, class: "fit" %>
       <% end %>
   </header>
-  <div class="fn fl-ns w-50-ns">
-    <p class="f6 lh-copy measure">
-      <%= @book.description %>
-    </p>
-    <p class="f6 lh-copy measure">
-      Rating: <%= @book.rating %>
-    </p>
-    <% if @book.library.user != current_user %>
-      <div class="ba b--black-100 mt3 p1 fl pa2-ns md-col md-col-12">
-        <div class="calendar pt0">
-        <%= simple_form_for [@book, @booking] do |f| %>
-          <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker left mb1' } %>
-          <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker left mb2' } %>
-          <%= f.button :submit, class: 'yo btn-outline w-50 center tc'%>
-        <% end %>
+
+  <div class="fl-ns w-50-ns">
+    <p class="mt2 f7 copy"> <%= @book.description %> </p>
+      <% if @book.library.user != current_user %>
+        <div class="left ba b--black-100 mt2 p1 fl pa2-ns md-col md-col-12">
+          <div class="w-100-ns left calendar pt0">
+          <%= simple_form_for [@book, @booking] do |f| %>
+            <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker left mb1' } %>
+            <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker left mb2' } %>
+            <%= f.button :submit, class: 'btn-outline w-100 center'%>
+          <% end %>
+        </div>
+      <% end %>
       </div>
-    <% end %>
+  </div>
+</article>
+
+<article class="cf ph1 ph5-ns pv1">
+  <div class="dt w-100 bt b--black-100 pt1 mt1 dt dt--fixed">
+    <div class="fw6 dtc tl">Added by:
+      <p class="f7 copy mid-gray"><%= link_to @book.library.user.email, profile_path(@profile), class:"f7 copy mid-gray"%></p>
+    </div>
+    <div class="fw6 dtc tl">Located in:
+      <p class="f7 copy mid-gray"><%=@book.library.address.capitalize%></p>
+    </div>
+    <div class="fw6 dtc tl">Curated in:
+      <p class=""><%=link_to @book.library.name, libraries_path(@library), class: "f7 copy mid-gray"%></p>
     </div>
   </div>
 </article>
-<article class="cf ph2 ph5-ns pv1">
+
+<article class="mt3 cf ph2 ph5-ns pv1">
   <div class="overflow-auto">
     <table class="f6 w-100 mw8 left" cellspacing="0">
       <thead>
@@ -45,13 +55,12 @@
           <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">User</th>
         </tr>
       </thead>
-      <tbody class="lh-copy">
+      <tbody class="f7 copy">
         <% @book.reviews.each do |review| %>
           <tr>
-          <td class="pv3 pr3 bb b--black-20"><%= review.content %>
-          </td>
-          <td class="pv3 pr3 bb b--black-20"><%= review.stars %></td>
-          <td class="pv3 pr3 bb b--black-20"><%= review.user.email.truncate(20) %></td>
+          <td class="pv3 pr3 bb b--black-20"><%= review.content %></td>
+          <td class="pv3 pr3 bb b--black-20"><%= review.stars %>/5</td>
+          <td class="pv3 pr3 bb b--black-20"><%= review.user.email.truncate(20)%></td>
         </tr>
         <% end %>
       </tbody>
