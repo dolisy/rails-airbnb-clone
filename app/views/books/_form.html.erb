@@ -9,7 +9,7 @@
   <%= f.input :publisher %>
   <%= f.input :description %>
   <%= f.association :library, collection: Library.where(user: current_user) %>
-  <%= f.input :photo, as: :attachinary %>
+  <%= f.input :photo, as: :attachinary%>
 
   <%= f.button :submit, class: "form-button" %>
 <% end %>
