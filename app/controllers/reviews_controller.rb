@@ -18,11 +18,11 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @book = Book.find(params[:book_id])
-    @booking = Booking.find(params[:booking_id])
+    # @book = Book.find(params[:book_id])
+    # @booking = Booking.find(params[:booking_id])
     @review = Review.new(review_params)
 
-    @review.booking = @booking
+    # @review.booking = @booking
     @review.user = current_user
 
     @review.save
