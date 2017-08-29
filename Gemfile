@@ -38,6 +38,9 @@ gem 'coffee-rails'
 #Facebook authentication
 gem 'omniauth-facebook'
 
+#Google Authenticate
+gem 'omniauth-google-oauth2'
+
 
 #Geocoding
 gem 'geocoder'
