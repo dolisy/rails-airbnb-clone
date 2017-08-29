@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20170828203825) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.string   "pick_up_date"
-    t.string   "return_date"
+    t.date     "pick_up_date"
+    t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
     t.datetime "created_at",    null: false
