@@ -1,6 +1,6 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+  <%= link_to root_path, class: "navbar-wagon-brand absolute" do %>
     <%= image_tag "network.png" %>
   <% end %>
 
@@ -50,9 +50,9 @@
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+        <li><%= link_to "New Library", new_library_path %></li>
+        <li><%= link_to "New Book", new_book_path %></li>
+        <li><%= link_to "Profile", profile_path %></li>
       </ul>
     </div>
   </div>
