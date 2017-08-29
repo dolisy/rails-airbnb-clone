@@ -2,9 +2,7 @@
   <%= f.error_notification %>
 
   <%= f.input :name %>
-
-  <%= f.input :address %>
+  <%= f.input :address, :input_html => { :id => 'geo-address' }, placeholder: '' %>
 
   <%= f.button :submit %>
-
 <% end %>
