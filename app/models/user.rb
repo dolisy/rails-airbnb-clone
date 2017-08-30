@@ -5,10 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
-  has_attachment :avatar, accept: [:jpg, :png, :gif]
-  validates :avatar, presence: true
-
-
   has_many :bookings
   has_many :libraries
   has_many :reviews
