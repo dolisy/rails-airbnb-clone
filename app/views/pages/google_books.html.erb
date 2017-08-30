@@ -1,0 +1,33 @@
+<%= form_tag(google_books_path, class: "form", method: :get) do %>
+  <%= text_field_tag :country, params[:country], placeholder: 'Country here..', class: "" %>
+  <%= text_field_tag :title, params[:title], placeholder: 'Title here..', class: "" %>
+  <%= text_field_tag :author, params[:author], placeholder: 'Author here..', class: "" %>
+  <%= submit_tag 'Search', name: nil, class: "btn btn-outline " %>
+<% end %>
+
+<div class="table-wrap overflow-scroll">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for book in @books %>
+        <tr>
+          <td class="lg-col-2">
+            <%= cl_image_tag book.image_link, width: 600, crop: :scale%>
+          </td>
+          <td>
+            <p class="title">
+              <%= book.title %>
+            </p>
+            <p class="f7 fw4 mb0 black-60">
+              <%= book.authors %>
+            </p>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

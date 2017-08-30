@@ -28,6 +28,8 @@ end
 gem 'devise'
 gem 'faker'
 
+gem 'googlebooks'
+
 
 #image upload gems
 gem 'cloudinary', '1.1.7'

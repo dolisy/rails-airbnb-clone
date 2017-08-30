@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829151711) do
+ActiveRecord::Schema.define(version: 20170830085813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,14 +45,15 @@ ActiveRecord::Schema.define(version: 20170829151711) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.string   "pick_up_date"
-    t.string   "return_date"
+    t.date     "pick_up_date"
+    t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "checkin_date"
     t.date     "checkout_date"
+    t.integer  "number_of_pick_days"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
     t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
   end
@@ -72,7 +73,9 @@ ActiveRecord::Schema.define(version: 20170829151711) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
+    t.integer  "work_id"
     t.index ["library_id"], name: "index_books_on_library_id", using: :btree
+    t.index ["work_id"], name: "index_books_on_work_id", using: :btree
   end
 
   create_table "libraries", force: :cascade do |t|
@@ -120,17 +123,21 @@ ActiveRecord::Schema.define(version: 20170829151711) do
     t.string   "token"
     t.datetime "token_expiry"
     t.boolean  "admin",                  default: false, null: false
-    t.string   "name"
-    t.string   "oauth_token"
-    t.datetime "oauth_expires_at"
     t.string   "google_picture_url"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "works", force: :cascade do |t|
+    t.string   "isbn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "bookings", "books"
   add_foreign_key "bookings", "users"
   add_foreign_key "books", "libraries"
+  add_foreign_key "books", "works"
   add_foreign_key "libraries", "users"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "libraries"
