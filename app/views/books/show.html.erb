@@ -37,7 +37,9 @@
       <p class="f7 copy mid-gray"><%= link_to @book.library.user.email, profile_path(@profile), class:"f7 copy mid-gray"%></p>
     </div>
     <div class="fw6 dtc tl">Located in:
-      <p class="f7 copy mid-gray"><%=@book.library.address.capitalize%></p>
+      <p class="f7 copy mid-gray" data-target="#mapModal" data-toggle="modal">
+        <%=@book.library.address.titleize%>
+      </p>
     </div>
     <div class="fw6 dtc tl">Curated in:
       <p class="f8 copy mid-gray"><%=link_to @book.library.name, library_path(@book.library), class: "f7 copy mid-gray"%></p>
@@ -78,25 +80,20 @@
 <!-- <article class="cf ph2 ph5-ns">
   <div id="map" style="width: 100%; height: 350px;"></div>
 </article> -->
-<!-- Google Map Goes here -->
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-    var handler = Gmaps.build('Google');
-    handler.buildMap({ internal: { id: 'map' } }, function() {
-    markers = handler.addMarkers(<%= raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-    if (markers.length == 0) {
-    handler.getMap().setZoom(2);
-    } else if (markers.length == 1) {
-    handler.getMap().setZoom(14);
-    }
-    });
-    });
-  <% end %>
-<% end %>
+<div class="modal" id="mapModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%=@book.title%></h4>
+        <div class="modal-body">
+          <div id="map" style="width: 100%; height: 450px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal goes below -->
 <div class="modal" id="editModal" tabindex="-1">
@@ -124,3 +121,25 @@
     </div>
   </div>
 </div>
+
+<!-- Google Map Goes here -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+    markers = handler.addMarkers(<%= raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds(0);
+    google.maps.event.trigger(map, "resize");
+    if (markers.length == 0) {
+    handler.getMap().setZoom(2);
+    } else if (markers.length == 1) {
+    handler.map.centerOn(markers[0]);
+    handler.getMap().setZoom(15);
+    }
+    });
+    });
+  <% end %>
+<% end %>
