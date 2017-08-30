@@ -28,23 +28,24 @@ end
 gem 'devise'
 gem 'faker'
 
+# for searching a new book
 gem 'googlebooks'
+gem 'amazon-ecs'
 
-
-#image upload gems
+# image upload gems
 gem 'cloudinary', '1.1.7'
 gem 'attachinary', github: 'assembler/attachinary'
 gem 'jquery-fileupload-rails'
 gem 'coffee-rails'
 
-#Facebook authentication
+# Facebook authentication
 gem 'omniauth-facebook'
 
-#Google Authenticate
+# Google Authenticate
 gem 'omniauth-google-oauth2'
 
 
-#Geocoding
+# Geocoding
 gem 'geocoder'
 # gem 'coffee-rails' already there
 gem 'gmaps4rails'
@@ -53,13 +54,13 @@ source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
 
-#Book Cover Images
+# Book Cover Images
 gem 'googlebooks'
 
-#Bootstrap Date Picker
+# Bootstrap Date Picker
 gem 'bootstrap-datepicker-rails'
 
-#ActiveAdmin
+# ActiveAdmin
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 

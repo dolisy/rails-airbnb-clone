@@ -1,7 +1,8 @@
 <%= form_tag(google_books_path, class: "form", method: :get) do %>
-  <%= text_field_tag :country, params[:country], placeholder: 'Country here..', class: "" %>
+  <%= text_field_tag :isbn, params[:isbn], placeholder: 'ISBN here..', class: "" %>
   <%= text_field_tag :title, params[:title], placeholder: 'Title here..', class: "" %>
   <%= text_field_tag :author, params[:author], placeholder: 'Author here..', class: "" %>
+  <%= text_field_tag :country, params[:country], placeholder: 'Country here..', class: "", id: "geo-country" %>
   <%= submit_tag 'Search', name: nil, class: "btn btn-outline " %>
 <% end %>
 
@@ -9,25 +10,58 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th>
+        <!-- <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th> -->
       </tr>
     </thead>
     <tbody>
       <% for book in @books %>
         <tr>
           <td class="lg-col-2">
-            <%= cl_image_tag book.image_link, width: 600, crop: :scale%>
+            <%= cl_image_tag book.image_link, crop: :scale, class: "fit"%>
           </td>
           <td>
-            <p class="title">
-              <%= book.title %>
-            </p>
-            <p class="f7 fw4 mb0 black-60">
-              <%= book.authors %>
-            </p>
+            <p class="title"><%= book.title %></p>
+            <p class="f7 fw4 mb0 black-60">Titles_Array: <%= book.titles_array %></p>
+            <p class="f7 fw4 mb0 black-60">Authors: <%= book.authors %></p>
+            <p class="f7 fw4 mb0 black-60">Authors_Array: <%= book.authors_array %></p>
+            <p class="f7 fw4 mb0 black-60">Publisher: <%= book.publisher %></p>
+            <p class="f7 fw4 mb0 black-60">Published_Date: <%= book.published_date %></p>
+            <p class="f7 fw4 mb0 black-60">Description: <%= book.description %></p>
+            <p class="f7 fw4 mb0 black-60">Isbn: <%= book.isbn %></p>
+            <p class="f7 fw4 mb0 black-60">Isbn_10: <%= book.isbn_10 %></p>
+            <p class="f7 fw4 mb0 black-60">Isbn_13: <%= book.isbn_13 %></p>
+            <p class="f7 fw4 mb0 black-60">Page_Count: <%= book.page_count %></p>
+            <p class="f7 fw4 mb0 black-60">Print_Type: <%= book.print_type %></p>
+            <p class="f7 fw4 mb0 black-60">Categories: <%= book.categories %></p>
+            <p class="f7 fw4 mb0 black-60">Average_Rating: <%= book.average_rating %></p>
+            <p class="f7 fw4 mb0 black-60">Ratings_Count: <%= book.ratings_count %></p>
+            <p class="f7 fw4 mb0 black-60">Language: <%= book.language %></p>
           </td>
         </tr>
       <%end%>
     </tbody>
   </table>
 </div>
+
+
+
+
+<p><%= @res %></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
