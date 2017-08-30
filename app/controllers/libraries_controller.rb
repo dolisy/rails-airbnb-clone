@@ -1,4 +1,6 @@
 class LibrariesController < ApplicationController
+    skip_before_action :authenticate_user!, only: :show
+
   def show
     @library = Library.find(params[:id])
     @lib_coordinates = { lat: @library.latitude, lng: @library.longitude }

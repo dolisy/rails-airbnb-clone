@@ -40,37 +40,46 @@
       <p class="f7 copy mid-gray"><%=@book.library.address.capitalize%></p>
     </div>
     <div class="fw6 dtc tl">Curated in:
-      <p class=""><%=link_to @book.library.name, libraries_path(@library), class: "f7 copy mid-gray"%></p>
+      <p class="f8 copy mid-gray"><%=link_to @book.library.name, library_path(@book.library), class: "f7 copy mid-gray"%></p>
+    </div>
+    <div class="fw6 dtc tl">Product details:
+      <p class="f8 copy mid-gray">Paperback: 328 pages</p>
+      <p class="f8 copy mid-gray">Publisher: Signet Classic (January 1, 1961)</p>
+      <p class="f8 copy mid-gray">Language: English</p>
     </div>
   </div>
 </article>
 
-<article class="mt3 cf ph2 ph5-ns pv1">
-  <div class="overflow-auto">
-    <table class="f6 w-100 mw8 left" cellspacing="0">
-      <thead>
-        <tr>
-          <th class="fw6 bb b--black-20 tl pb1 bg-white">Reviews</th>
-          <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Rating</th>
-          <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">User</th>
-        </tr>
-      </thead>
-      <tbody class="f7 copy">
-        <% @book.reviews.each do |review| %>
+<% if @book.rating >= 1 %>
+  <article class="mt3 cf ph2 ph5-ns pv1">
+    <div class="overflow-auto">
+      <table class="f6 w-100 mw8 left" cellspacing="0">
+        <thead>
           <tr>
-          <td class="pv3 pr3 bb b--black-20"><%= review.content %></td>
-          <td class="pv3 pr3 bb b--black-20"><%= review.stars %>/5</td>
-          <td class="pv3 pr3 bb b--black-20"><%= review.user.email.truncate(20)%></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</article>
+            <th class="fw6 bb b--black-20 tl pb1 bg-white">Reviews</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Rating</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">User</th>
+          </tr>
+        </thead>
+        <tbody class="f7 copy">
+          <% @book.reviews.each do |review| %>
+            <tr>
+            <td class="pv3 pr3 bb b--black-20"><%= review.content %></td>
+            <td class="pv3 pr3 bb b--black-20"><%= review.stars %>/5</td>
+            <td class="pv3 pr3 bb b--black-20"><%= review.user.email.truncate(20)%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </article>
+<% end %>
+
 <!-- <article class="cf ph2 ph5-ns">
   <div id="map" style="width: 100%; height: 350px;"></div>
 </article> -->
 <!-- Google Map Goes here -->
+
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).ready(function() {
@@ -88,6 +97,7 @@
     });
   <% end %>
 <% end %>
+
 <!-- Modal goes below -->
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
