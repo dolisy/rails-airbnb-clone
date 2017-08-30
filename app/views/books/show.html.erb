@@ -40,7 +40,7 @@
       <p class="f7 copy mid-gray"><%=@book.library.address.capitalize%></p>
     </div>
     <div class="fw6 dtc tl">Curated in:
-      <p class=""><%=link_to @book.library.name, libraries_path(@library), class: "f7 copy mid-gray"%></p>
+      <p class=""><%=link_to @book.library.name, library_path(@book.library), class: "f7 copy mid-gray"%></p>
     </div>
   </div>
 </article>
