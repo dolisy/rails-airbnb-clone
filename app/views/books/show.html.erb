@@ -45,28 +45,30 @@
   </div>
 </article>
 
-<article class="mt3 cf ph2 ph5-ns pv1">
-  <div class="overflow-auto">
-    <table class="f6 w-100 mw8 left" cellspacing="0">
-      <thead>
-        <tr>
-          <th class="fw6 bb b--black-20 tl pb1 bg-white">Reviews</th>
-          <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Rating</th>
-          <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">User</th>
-        </tr>
-      </thead>
-      <tbody class="f7 copy">
-        <% @book.reviews.each do |review| %>
+<% if @book.rating >= 1 %>
+  <article class="mt3 cf ph2 ph5-ns pv1">
+    <div class="overflow-auto">
+      <table class="f6 w-100 mw8 left" cellspacing="0">
+        <thead>
           <tr>
-          <td class="pv3 pr3 bb b--black-20"><%= review.content %></td>
-          <td class="pv3 pr3 bb b--black-20"><%= review.stars %>/5</td>
-          <td class="pv3 pr3 bb b--black-20"><%= review.user.email.truncate(20)%></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</article>
+            <th class="fw6 bb b--black-20 tl pb1 bg-white">Reviews</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Rating</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">User</th>
+          </tr>
+        </thead>
+        <tbody class="f7 copy">
+          <% @book.reviews.each do |review| %>
+            <tr>
+            <td class="pv3 pr3 bb b--black-20"><%= review.content %></td>
+            <td class="pv3 pr3 bb b--black-20"><%= review.stars %>/5</td>
+            <td class="pv3 pr3 bb b--black-20"><%= review.user.email.truncate(20)%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </article>
+<% end %>
 <!-- <article class="cf ph2 ph5-ns">
   <div id="map" style="width: 100%; height: 350px;"></div>
 </article> -->
