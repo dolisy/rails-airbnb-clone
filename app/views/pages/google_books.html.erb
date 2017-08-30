@@ -1,0 +1,107 @@
+<%= form_tag(google_books_path, class: "form", method: :get) do %>
+  <%= text_field_tag :isbn, params[:isbn], placeholder: 'ISBN here..', class: "" %>
+  <%= text_field_tag :title, params[:title], placeholder: 'Title here..', class: "" %>
+  <%= text_field_tag :author, params[:author], placeholder: 'Author here..', class: "" %>
+  <%= text_field_tag :country, params[:country], placeholder: 'Country here..', class: "", id: "geo-country" %>
+  <%= submit_tag 'Search', name: nil, class: "btn btn-outline " %>
+<% end %>
+
+<div class="table-wrap overflow-scroll">
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <% for book in @books %>
+        <tr>
+          <td class="lg-col-2">
+            <%= cl_image_tag book.image_link, crop: :scale, class: "fit"%>
+          </td>
+          <td>
+            <p class="title"><%= book.title %></p>
+            <p class="f7 fw4 mb0 black-60">Titles_Array: <%= book.titles_array %></p>
+            <p class="f7 fw4 mb0 black-60">Authors: <%= book.authors %></p>
+            <p class="f7 fw4 mb0 black-60">Authors_Array: <%= book.authors_array %></p>
+            <p class="f7 fw4 mb0 black-60">Publisher: <%= book.publisher %></p>
+            <p class="f7 fw4 mb0 black-60">Published_Date: <%= book.published_date %></p>
+            <p class="f7 fw4 mb0 black-60">Description: <%= book.description %></p>
+            <p class="f7 fw4 mb0 black-60">Isbn: <%= book.isbn %></p>
+            <p class="f7 fw4 mb0 black-60">Isbn_10: <%= book.isbn_10 %></p>
+            <p class="f7 fw4 mb0 black-60">Isbn_13: <%= book.isbn_13 %></p>
+            <p class="f7 fw4 mb0 black-60">Page_Count: <%= book.page_count %></p>
+            <p class="f7 fw4 mb0 black-60">Print_Type: <%= book.print_type %></p>
+            <p class="f7 fw4 mb0 black-60">Categories: <%= book.categories %></p>
+            <p class="f7 fw4 mb0 black-60">Average_Rating: <%= book.average_rating %></p>
+            <p class="f7 fw4 mb0 black-60">Ratings_Count: <%= book.ratings_count %></p>
+            <p class="f7 fw4 mb0 black-60">Language: <%= book.language %></p>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+
+<% if @items %>
+  <% @items.each do |item| %>
+    <p>asin: <%= item.asin %></p>
+    <p>detail_page_url: <%= item.detail_page_url %></p>
+    <!-- <p>editorial_reviews: <%= item.editorial_reviews %></p> -->
+    <!-- <p>editorial_review: <%= item.editorial_reviews.editorial_review %></p> -->
+    <p>content: <%= item.editorial_reviews.editorial_review.content %></p>
+    <p>is_link_suppressed: <%= item.editorial_reviews.editorial_review.is_link_suppressed %></p>
+    <p>source: <%= item.editorial_reviews.editorial_review.source %></p>
+    <!-- <p>image_sets: <%= item.image_sets %></p> -->
+    <!-- <p>image_set: <%= item.image_sets.image_set %></p> -->
+      <% item.image_sets.image_set.each do |element| %>
+        <p><%= element %></p>
+      <% end %>
+    <!-- <p>item_links: <%= item.item_links %></p> -->
+    <p>item_link: <%= item.item_links.item_link %></p>
+
+
+    <h2>Item Attributes: </h2>
+      <p>Author: <%= item.item_attributes.author %>
+
+      </p>
+      <p>Binding: <%= item.item_attributes.binding %></p>
+      <p>Brand: <%= item.item_attributes.brand %></p>
+      <p>Catalog_Number_List: <%= item.item_attributes.catalog_number_list %></p>
+      <p>Catalog_Number_List_Element: <%= item.item_attributes.catalog_number_list_element %></p>
+      <p>Creator: <%= item.item_attributes.creator %></p>
+      <p>Ean: <%= item.item_attributes.ean %></p>
+      <p>Ean_List: <%= item.item_attributes.ean_list %></p>
+      <p>Ean_List_Element: <%= item.item_attributes.ean_list_element %></p>
+      <p>Edition: <%= item.item_attributes.edition %></p>
+      <p>Feature: <%= item.item_attributes.feature %></p>
+      <p>Isbn: <%= item.item_attributes.isbn %></p>
+      <p>Item_Dimensions: <%= item.item_attributes.item_dimensions %></p>
+      <p>Label: <%= item.item_attributes.label %></p>
+      <p>Languages: <%= item.item_attributes.languages %></p>
+      <p>Language: <%= item.item_attributes.language %></p>
+      <p>List_Price: <%= item.item_attributes.list_price %></p>
+      <p>Amount: <%= item.item_attributes.amount %></p>
+      <p>Currency_Code: <%= item.item_attributes.currency_code %></p>
+      <p>Formatted_Price: <%= item.item_attributes.formatted_price %></p>
+      <p>Manufacturer: <%= item.item_attributes.manufacturer %></p>
+      <p>Mpn: <%= item.item_attributes.mpn %></p>
+      <p>Number_Of_Items: <%= item.item_attributes.number_of_items %></p>
+      <p>Number_Of_Pages: <%= item.item_attributes.number_of_pages %></p>
+      <p>Package_Dimensions: <%= item.item_attributes.package_dimensions %></p>
+      <p>Height: <%= item.item_attributes.height %></p>
+      <p>Length: <%= item.item_attributes.length %></p>
+      <p>Weight: <%= item.item_attributes.weight %></p>
+      <p>Width: <%= item.item_attributes.width %></p>
+      <p>Package_Quantity: <%= item.item_attributes.package_quantity %></p>
+      <p>Part_Number: <%= item.item_attributes.part_number %></p>
+      <p>Product_Group: <%= item.item_attributes.product_group %></p>
+      <p>Product_Type_Name: <%= item.item_attributes.product_type_name %></p>
+      <p>Publication_Date: <%= item.item_attributes.publication_date %></p>
+      <p>Publisher: <%= item.item_attributes.publisher %></p>
+      <p>Release_Date: <%= item.item_attributes.release_date %></p>
+      <p>Sku: <%= item.item_attributes.sku %></p>
+      <p>Studio: <%= item.item_attributes.studio %></p>
+      <p>Title: <%= item.item_attributes.title %></p>
+  <% end %>
+<% end %>
