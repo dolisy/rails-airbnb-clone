@@ -28,10 +28,6 @@ end
 gem 'devise'
 gem 'faker'
 
-# for searching a new book
-gem 'googlebooks'
-gem 'amazon-ecs'
-
 # image upload gems
 gem 'cloudinary', '1.1.7'
 gem 'attachinary', github: 'assembler/attachinary'
@@ -70,11 +66,13 @@ gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 # gem 'simple_form'
 # gem 'autoprefixer-rails'
 
+# for searching a new book
+gem 'googlebooks'
+gem 'amazon-ecs'
+# gem 'aws-sdk', '~> 3'
 
-
-
-
-
+gem 'asin'
+gem 'curb' # optional, see HTTPI
 
 
 
