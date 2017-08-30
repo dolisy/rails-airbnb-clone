@@ -10,9 +10,9 @@
         </div>
         <div class="pa1 mt2 bt b--black-100">
           <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(16), book_booking_path(booking.book, booking) %>
+            <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
           </a>
-          <p class="date red mv1">Return by <%= booking.pick_up_date %></p>
+          <p class="date red mb1">Return: <%= booking.return_date %></p>
             <!-- Button trigger modal -->
           <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
             Add Review
