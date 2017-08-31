@@ -64,8 +64,15 @@ class BooksController < ApplicationController
     if params[:library_id]
       @library = Library.find(params[:library_id])
     end
-    # @search = ''
-    # @book_search = GoogleBooks.search('#{@search}')
+
+    if params[:title]
+      @search_books = GoogleBooks.search(params[:title])
+      @search_books_titles = []
+      @search_books.each do |book|
+        @search_books_titles < book.title
+      end
+    end
+
   end
 
   def create

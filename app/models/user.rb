@@ -5,13 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
-  has_attachment :avatar, accept: [:jpg, :png, :gif]
-  # validates :avatar, presence: true
-
-
   has_many :bookings
   has_many :libraries
   has_many :reviews
+
+  #For Active Admin
+    def  name
+      "#{id} - #{email}"
+    end
 
   def self.find_for_google_oauth(auth)
     user_params = auth.slice(:provider, :uid)
