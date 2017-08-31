@@ -60,9 +60,27 @@ class BooksController < ApplicationController
       title: params[:title],
       author: params[:author],
       publisher: params[:publisher],
-      description: params[:description]
-      # photo_url:  params[:image_link]
+      publication_date: params[:publication_date],
+      creator: params[:creator],
+      edition: params[:edition],
+      release_date: params[:release_date],
+      description: params[:description],
+      number_of_pages: params[:number_of_pages],
+      published_language: params[:published_language],
+      original_language: params[:original_language],
+      isbn: params[:isbn],
+      ean: params[:ean],
+      asin: params[:asin],
+      amazon_detail_page_url: params[:detail_page_url]
     )
+
+    if params[:image_link]
+      @book.photo_url = params[:image_link]
+    end
+
+    if params[:large_image]
+      @book.photo_url = params[:large_image]
+    end
 
     if params[:library_id]
       @library = Library.find(params[:library_id])
@@ -222,7 +240,12 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :description, :library_id, :photo)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :description, :publication_date, :creator, :edition, :release_date, :number_of_pages, :published_language, :original_language, :library_id, :photo)
+
+
+
+
+
   end
 
   # list of the param names that can be used for filtering the list
