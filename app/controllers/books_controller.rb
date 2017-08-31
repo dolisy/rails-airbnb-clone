@@ -119,21 +119,49 @@ class BooksController < ApplicationController
         @books.each do |book|
           result = Hash.new
 
-          result[:image_link] = book.image_link
-          result[:title] = book.title
+          begin
+            result[:image_link] = book.image_link
+          rescue
+          end
+          begin
+            result[:title] = book.title
+          rescue
+          end
+          begin
+            result[:author] = book.authors
+          rescue
+          end
+          begin
+            result[:publisher] = book.publisher
+          rescue
+          end
+          begin
+            result[:publication_date] = book.published_date
+          rescue
+          end
+          begin
+            result[:description] = book.description
+          rescue
+          end
+          begin
+            result[:isbn] = book.isbn
+          rescue
+          end
+          begin
+            result[:number_of_pages] = book.page_count
+          rescue
+          end
+          begin
+            result[:published_language] = book.language
+          rescue
+          end
           # result[:titles_array] = book.titles_array
-          result[:author] = book.authors
-          # result[:authors_array] = book.authors_array
-          result[:publisher] = book.publisher
-          result[:publication_date] = book.published_date
-          result[:description] = book.description
-          result[:isbn] = book.isbn
-          # result[:isbn_10] = book.isbn_10
-          # result[:isbn_13] = book.isbn_13
-          result[:number_of_pages] = book.page_count
           # result[:product_group] = book.print_type
           # result[:categories] = book.categories
-          result[:published_language] = book.language
+          # result[:isbn_10] = book.isbn_10
+          # result[:isbn_13] = book.isbn_13
+          # result[:authors_array] = book.authors_array
+
 
           @results[i] = result
           i += 1
@@ -144,20 +172,60 @@ class BooksController < ApplicationController
         @items.each do |item|
           result = Hash.new
 
-          result[:asin] = item.asin
-          result[:detail_page_url] = item.detail_page_url
-          result[:description] = item.editorial_reviews.editorial_review.content
+          begin
+            result[:asin] = item.asin
+          rescue
+          end
+          begin
+            result[:detail_page_url] = item.detail_page_url
+          rescue
+          end
+          begin
+            result[:description] = item.editorial_reviews.editorial_review.content
+          rescue
+          end
+          begin
+            result[:author] = item.item_attributes.author
+          rescue
+          end
+          begin
+            result[:creator] = item.item_attributes.creator
+          rescue
+          end
+          begin
+            result[:ean] = item.item_attributes.ean
+          rescue
+          end
+          begin
+            result[:edition] = item.item_attributes.edition
+          rescue
+          end
+          begin
+            result[:isbn] = item.item_attributes.isbn
+          rescue
+          end
+          begin
+            result[:publication_date] = item.item_attributes.publication_date
+          rescue
+          end
+          begin
+            result[:publisher] = item.item_attributes.publisher
+          rescue
+          end
+          begin
+            result[:release_date] = item.item_attributes.release_date
+          rescue
+          end
+          begin
+            result[:title] = item.item_attributes.title
+          rescue
+          end
           # result[:is_link_suppressed] = item.editorial_reviews.editorial_review.is_link_suppressed
           # result[:source] = item.editorial_reviews.editorial_review.source
-          result[:author] = item.item_attributes.author
           # result[:binding] = item.item_attributes.binding
           # result[:brand] = item.item_attributes.brand
-          result[:creator] = item.item_attributes.creator
-          result[:ean] = item.item_attributes.ean
           # result[:ean_list_element] = item.item_attributes.ean_list.ean_list_element
-          result[:edition] = item.item_attributes.edition
           # result[:feature] = item.item_attributes.feature
-          result[:isbn] = item.item_attributes.isbn
           # result[:item_dimensions_height] = item.item_attributes.item_dimensions.height
           # result[:item_dimensions_length] = item.item_attributes.item_dimensions.length
           # result[:item_dimensions_weight] = item.item_attributes.item_dimensions.weight
@@ -178,12 +246,8 @@ class BooksController < ApplicationController
           # result[:part_number] = item.item_attributes.part_number
           # result[:product_group] = item.item_attributes.product_group
           # result[:product_type_name] = item.item_attributes.product_type_name
-          result[:publication_date] = item.item_attributes.publication_date
-          result[:publisher] = item.item_attributes.publisher
-          result[:release_date] = item.item_attributes.release_date
           # result[:sku] = item.item_attributes.sku
           # result[:studio] = item.item_attributes.studio
-          result[:title] = item.item_attributes.title
 
           item.image_sets.image_set.each do |element|
             begin
@@ -241,11 +305,6 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :genre, :author, :publisher, :description, :publication_date, :creator, :edition, :release_date, :number_of_pages, :published_language, :original_language, :library_id, :photo)
-
-
-
-
-
   end
 
   # list of the param names that can be used for filtering the list

@@ -20,7 +20,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @results.each do |result| %>
+              <% @results.each_with_index do |result, result_index| %>
                 <tr>
                   <td class="lg-col-2">
                     <% image = if result[1][:image_link] %>
@@ -31,20 +31,20 @@
                     <%= cl_image_tag image, crop: :scale, class: "fit" %>
                   </td>
                   <td>
-                    <p class="title"><%= result[1][:title] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:author] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:publisher] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:publication_date] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:creator] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:edition] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:release_date] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:description] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:number_of_pages] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:published_language] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:original_language] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:isbn] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:ean] %></p>
-                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:asin] %></p>
+                    <p class="title"><div id="title<%= result_index %>"><%= result[1][:title] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="author<%= result_index %>"><%= result[1][:author] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="publisher<%= result_index %>"><%= result[1][:publisher] %></div></p>
+
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="creator<%= result_index %>"><%= result[1][:creator] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="edition<%= result_index %>"><%= result[1][:edition] %></div></p>
+
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="description<%= result_index %>"><%= result[1][:description] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="numberofpages<%= result_index %>"><%= result[1][:number_of_pages] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="publishedlanguage<%= result_index %>"><%= result[1][:published_language] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="originallanguage<%= result_index %>"><%= result[1][:original_language] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="isbn<%= result_index %>"><%= result[1][:isbn] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="ean<%= result_index %>"><%= result[1][:ean] %></div></p>
+                    <p class="f7 fw4 mb0 black-60">#####:<div id="asin<%= result_index %>"><%= result[1][:asin] %></div></p>
                     <p class="f7 fw4 mb0 black-60">
                       Generated from: <% if result[1][:detail_page_url] %>
                         <a href="<%= result[1][:detail_page_url] %>">Amazon</a>
@@ -54,9 +54,48 @@
                     </p>
                   </td>
                   <td class="lg-col-2">
-                    <p class="title"><%= link_to "Add(+)", new_book_path(title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: result[1][:description], number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %></p>
+                    <p class="title"><%= link_to "Add Book (+)", "#", id: "add_with_javascript#{result_index}" %></p>
                   </td>
                 </tr>
+
+                <% content_for(:after_js) do %>
+                  <script>
+                    $(document).ready(function() {
+                      $("#add_with_javascript<%= result_index %>").on('click', function(event){
+                        event.preventDefault();
+
+                        var <%= "title#{result_index}" %> = $("#title<%= result_index %>").text();
+                        $("#title").val(<%= "title#{result_index}" %>);
+
+                        var <%= "author#{result_index}" %> = $("#author<%= result_index %>").text();
+                        $("#author").val(<%= "author#{result_index}" %>);
+
+                        var <%= "publisher#{result_index}" %> = $("#publisher<%= result_index %>").text();
+                        $("#publisher").val(<%= "publisher#{result_index}" %>);
+
+                        var <%= "creator#{result_index}" %> = $("#creator<%= result_index %>").text();
+                        $("#creator").val(<%= "creator#{result_index}" %>);
+
+                        var <%= "edition#{result_index}" %> = $("#edition<%= result_index %>").text();
+                        $("#edition").val(<%= "edition#{result_index}" %>);
+
+                        var <%= "description#{result_index}" %> = $("#description<%= result_index %>").text();
+                        $("#description").val(<%= "description#{result_index}" %>);
+
+                        var <%= "numberofpages#{result_index}" %> = $("#numberofpages<%= result_index %>").text();
+                        $("#numberofpages").val(<%= "numberofpages#{result_index}" %>);
+
+                        var <%= "publishedlanguage#{result_index}" %> = $("#publishedlanguage<%= result_index %>").text();
+                        $("#publishedlanguage").val(<%= "publishedlanguage#{result_index}" %>);
+
+                        var <%= "originallanguage#{result_index}" %> = $("#originallanguage<%= result_index %>").text();
+                        $("#originallanguage").val(<%= "originallanguage#{result_index}" %>);
+
+                      });
+                    });
+                  </script>
+                <% end %>
+
               <%end%>
             </tbody>
           </table>
@@ -77,17 +116,17 @@
         <%= simple_form_for @book do |f| %>
           <%= f.error_notification %>
 
-          <%= f.input :title, placeholder: 'Title', label:false %>
-          <%= f.input :author, placeholder: 'Author', label:false %>
-          <%= f.input :publisher, placeholder: 'Publisher', label:false %>
-          <%= f.input :publication_date, placeholder: 'Publication Date', label:false %>
-          <%= f.input :creator, placeholder: 'Creator', label:false %>
-          <%= f.input :edition, placeholder: 'Edition', label:false %>
-          <%= f.input :release_date, placeholder: 'Release Date', label:false %>
-          <%= f.input :description, placeholder: 'Description', label:false %>
-          <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
-          <%= f.input :published_language, placeholder: 'Published Language', label:false %>
-          <%= f.input :original_language, placeholder: 'Original Language', label:false %>
+          <%= f.input :title, placeholder: 'Title', label:false, input_html: { id: "title" } %>
+          <%= f.input :author, placeholder: 'Author', label:false, input_html: { id: "author" } %>
+          <%= f.input :publisher, placeholder: 'Publisher', label:false, input_html: { id: "publisher" } %>
+
+          <%= f.input :creator, placeholder: 'Creator', label:false, input_html: { id: "creator" } %>
+          <%= f.input :edition, placeholder: 'Edition', label:false, input_html: { id: "edition" } %>
+
+          <%= f.input :description, placeholder: 'Description', label:false, input_html: { id: "description" } %>
+          <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false, input_html: { id: "numberofpages" } %>
+          <%= f.input :published_language, placeholder: 'Published Language', label:false, input_html: { id: "publishedlanguage" } %>
+          <%= f.input :original_language, placeholder: 'Original Language', label:false, input_html: { id: "originallanguage" } %>
 
           <% if @library.present? %>
             <%= f.association :library, collection: Library.where(user: current_user).where(name: @library.name), label_html: { class: 'form-details' } %>
@@ -102,8 +141,6 @@
       </div>
     </div>
 </div>
-<!--   </div> -->
-<!-- </div> -->
 
 <!-- use this for closing the page and coming back to the previous page -->
 <%#= link_to '&times;'.html_safe, request.referer.present? ? request.referer : default_path %>
