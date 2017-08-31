@@ -44,11 +44,40 @@
     </div>
     <div class="fw6 dtc tl">Product details:
       <p class="f8 copy mid-gray">Paperback: 328 pages</p>
-      <p class="f8 copy mid-gray">Publisher: Signet Classic (January 1, 1961)</p>
+      <p class="f8 copy mid-gray">Publisher: Signet Classic</p>
       <p class="f8 copy mid-gray">Language: English</p>
     </div>
   </div>
 </article>
+
+<!-- <article class="cf ph1 ph5-ns pv1">
+      <% Book.last(4).each do |book| %>
+        <div class="card sm-col sm-col-4">
+          <%= link_to book_path(book), class: "link dt w-100 b--black-100 pt2 mt1 dim black" do %>
+            <div class="featured-card dtc w3">
+              <% if book.photo? %>
+                <%= cl_image_tag book.photo.path, crop: :fit%>
+              <% end %>
+            </div>
+            <%end%>
+          </div>
+        <% end %>
+</article> -->
+<!--
+<article class="cf ph1 ph5-ns pv1">
+ <div class="cf pa2">
+    <div class="fl w-50 w-25-m w-20-l pa2">
+        <img src="http://is4.mzstatic.com/image/thumb/Music62/v4/93/8f/75/938f7536-0188-f9ba-4585-0a77ceaebf0a/source/400x40000bb.png" alt="Frank Ocean Blonde Album Cover" class="w-130 db outline black-10"/>
+        <dl class="mt2 f6 lh-copy">
+          <dt class="clip">Title</dt>
+          <dd class="ml0 black truncate w-100">Blonde</dd>
+          <dt class="clip">Artist</dt>
+          <dd class="ml0 gray truncate w-100">Frank Ocean</dd>
+        </dl>
+      </a>
+    </div>
+  </div>
+</article> -->
 
 <% if @book.rating >= 1 %>
   <article class="mt3 cf ph2 ph5-ns pv1">
@@ -76,7 +105,7 @@
 <% end %>
 
 <!-- <article class="cf ph2 ph5-ns">
-  <div id="map" style="width: 100%; height: 350px;"></div>
+  <div id="map" style="width: 100%; height: 300px;"></div>
 </article> -->
 <!-- Google Map Goes here -->
 
@@ -95,6 +124,7 @@
     }
     });
     });
+
   <% end %>
 <% end %>
 
