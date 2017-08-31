@@ -62,12 +62,12 @@
     <% Library.last(6).each do |library| %>
       <div class="card sm-col sm-col-4">
         <article class="box left mw5 mw6-ns ba mv1">
-          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(15), library_path(library) %></h2>
+          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(25), library_path(library) %></h2>
           <div class="pa3 bt">
             <div id="<%= library.id %>" class="carousel slide" data-ride="carousel" >
               <ol class="carousel-indicators">
-                <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
-<!--            <li data-target="<%= library.id %>" data-slide-to="1"></li>
+<!--                 <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
+ --><!--            <li data-target="<%= library.id %>" data-slide-to="1"></li>
                 <li data-target="<%= library.id %>" data-slide-to="2"></li> -->
                 <% i = 1 %>
                 <% library.books.each do |book| %>
@@ -101,7 +101,7 @@
               </div>
 
               <!-- Left and right controls -->
-              <a class="left carousel-control" href="#<%= library.id %>" data-slide="prev">
+              <a class="left carousel-control" href="#<%= library.id %>" data-slide="prev mr2">
                 <span class="glyphicon glyphicon-chevron-left"></span>
                 <span class="sr-only">Previous</span>
               </a>
