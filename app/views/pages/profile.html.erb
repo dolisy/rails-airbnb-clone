@@ -12,8 +12,10 @@
           <a class="author db link black hover-grey" href="#">
             <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
           </a>
+
           <p class="date red mb1">Return: <%= booking.checkout_date %></p>
             <!-- Button trigger modal -->
+
           <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
             Add Review
           </a>
@@ -33,7 +35,7 @@
                     <%= f.error_notification %>
                     <%= f.hidden_field :booking_id, value: booking.id %>
                     <%= f.input :content %>
-                    <%= f.input :stars %>
+                    <%= f.input :stars, input_html: { class: "rating" } %>
                   </div>
                   <div class="modal-footer">
                     <%= f.button :submit, class: "left btn-outline" %>
