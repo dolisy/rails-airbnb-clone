@@ -92,7 +92,7 @@ class BooksController < ApplicationController
     # initialize
     @books = Book.all
 
-    if params[:isbn] != ""
+    if params[:isbn]
       # Request made from Heroku server with user's IP address
       user_ip = request.remote_ip # assuming user is accessing from a valid IP address
       @books = GoogleBooks.search("isbn:#{params[:isbn]}", {:country => params[:country], :count => 20}, user_ip) #=> returns valid hash of results
