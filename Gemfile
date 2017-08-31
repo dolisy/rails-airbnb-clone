@@ -74,6 +74,7 @@ gem 'amazon-ecs'
 gem 'asin'
 gem 'curb' # optional, see HTTPI
 
+gem 'openlibrary'
 
 
 

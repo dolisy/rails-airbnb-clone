@@ -80,7 +80,7 @@
               <div class="carousel-inner">
                 <div class="item active">
                   <% if library.books.first.photo? %>
-                    <%= cl_image_tag library.books.first.photo.path, crop: :fit %>
+                    <%= cl_image_tag library.books.first.photo.path, width: 200, height: 300, crop: :scale %>
                   <% end %>
                 </div>
 
@@ -94,7 +94,7 @@
                 <% library.books.each do |book| %>
                   <div class="item">
                     <% if book.photo? %>
-                      <%= cl_image_tag book.photo.path, crop: :fit %>
+                      <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :scale %>
                     <% end %>
                   </div>
                 <% end %>
