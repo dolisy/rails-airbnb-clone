@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830085813) do
+ActiveRecord::Schema.define(version: 20170831132756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20170830085813) do
     t.string   "author"
     t.string   "publisher"
     t.integer  "library_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "isbn"
     t.text     "description"
     t.string   "status"
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 20170830085813) do
     t.float    "longitude"
     t.string   "address"
     t.integer  "work_id"
+    t.date     "publication_date"
+    t.integer  "number_of_pages"
+    t.string   "creator"
+    t.string   "ean"
+    t.string   "asin"
+    t.string   "amazon_detail_page_url"
+    t.string   "published_language"
+    t.string   "original_language"
+    t.string   "edition"
+    t.date     "release_date"
     t.index ["library_id"], name: "index_books_on_library_id", using: :btree
     t.index ["work_id"], name: "index_books_on_work_id", using: :btree
   end

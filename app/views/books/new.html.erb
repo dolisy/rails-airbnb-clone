@@ -32,12 +32,29 @@
                   </td>
                   <td>
                     <p class="title"><%= result[1][:title] %></p>
-                    <% result[1].each do |first| %>
-                      <p class="f7 fw4 mb0 black-60"><%= first[0] %>: <%= first[1] %></p>
-                    <% end %>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:author] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:publisher] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:publication_date] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:creator] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:edition] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:release_date] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:description] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:number_of_pages] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:published_language] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:original_language] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:isbn] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:ean] %></p>
+                    <p class="f7 fw4 mb0 black-60">#####: <%= result[1][:asin] %></p>
+                    <p class="f7 fw4 mb0 black-60">
+                      Generated from: <% if result[1][:detail_page_url] %>
+                        <a href="<%= result[1][:detail_page_url] %>">Amazon</a>
+                      <% else %>
+                        <%= "Google Books" %>
+                      <% end %>
+                    </p>
                   </td>
                   <td class="lg-col-2">
-                    <p class="title"><%= link_to "Add(+)", new_book_path(isbn: params[:isbn], title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], description: result[1][:description], image_link: result[1][:image_link]) %></p>
+                    <p class="title"><%= link_to "Add(+)", new_book_path(title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: result[1][:description], number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %></p>
                   </td>
                 </tr>
               <%end%>
@@ -62,9 +79,15 @@
 
           <%= f.input :title, placeholder: 'Title', label:false %>
           <%= f.input :author, placeholder: 'Author', label:false %>
-          <%= f.input :genre, placeholder: 'Genre', label:false %>
           <%= f.input :publisher, placeholder: 'Publisher', label:false %>
+          <%= f.input :publication_date, placeholder: 'Publication Date', label:false %>
+          <%= f.input :creator, placeholder: 'Creator', label:false %>
+          <%= f.input :edition, placeholder: 'Edition', label:false %>
+          <%= f.input :release_date, placeholder: 'Release Date', label:false %>
           <%= f.input :description, placeholder: 'Description', label:false %>
+          <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
+          <%= f.input :published_language, placeholder: 'Published Language', label:false %>
+          <%= f.input :original_language, placeholder: 'Original Language', label:false %>
 
           <% if @library.present? %>
             <%= f.association :library, collection: Library.where(user: current_user).where(name: @library.name), label_html: { class: 'form-details' } %>
