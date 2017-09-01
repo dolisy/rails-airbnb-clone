@@ -271,3 +271,33 @@ input[type="location"], textarea {
 .top .close {
   margin-top: -48px;
 }
+
+.attachinary_container{
+  margin-top: 20px;
+}
+
+.attachinary_container ul{
+  padding-left:0px;
+}
+
+.attachinary_container ul li{
+  position:relative;
+  display: inline-block;
+}
+
+.attachinary_container ul li a{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  background-color: rgba(0,0,0,.85);
+}
+
+.form-group .attachinary .optional .book_photo img {
+  width: 300px;
+}
+
+.t-sm {
+  font-size: 15px;
+}

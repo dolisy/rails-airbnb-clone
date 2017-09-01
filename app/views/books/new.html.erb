@@ -3,57 +3,30 @@
 <!-- <div class="wrapper upload"> -->
 <!--   <div class="container upload"> -->
 <!-- begining isbn search form -->
-    <div class="wrapper">
-        <div class="measure-narrow">
-        <%= form_tag(new_book_path, method: :get) do %>
-          <label for="password" class="f6 b db mb1">Search by ISBN number</label>
-          <%= text_field_tag :isbn, params[:isbn], placeholder: 'Ex: 9781472244444', class: "input-reset ba b--black-20 pa2 mb1 db w-100" %>
-        <% end %>
-          <small id="password-desc" class="f8 lh-copy black-60 db">
-            Must be in the correct format.
-          </small>
-        </div>
 
-      <div id="work">
-          <div class="col-5 right">
-          <% if @library.present? %>
-            <%= "Add a Book to #{@library.name}" %>
-          <% else %>
-            <%= 'Add a Book to Your Library' %>
+<!-- <article class="cf">
+  <div class="fl w-100 w-50-ns bg-near-white tc">
+    <h1>Column One</h1>
+  </div>
+  <div class="fl w-100 w-50-ns bg-light-gray tc">
+    <h1>Column Two</h1>
+  </div>
+</article>
+ -->  <article class="cf ph2 ph5-ns pt3 mb2 mt2">
+        <div class="fl w-100 w-50-ns">
+          <div class="measure-narrow">
+          <%= form_tag(new_book_path, method: :get) do %>
+            <label for="password" class="f6 b db mb1">Search by ISBN number</label>
+            <%= text_field_tag :isbn, params[:isbn], placeholder: 'Ex: 9781472244444', class: "input-reset ba b--black-20 pa2 mb1 db w-100" %>
           <% end %>
-        <%= simple_form_for @book do |f| %>
-          <%= f.error_notification %>
-
-          <%= f.input :title, placeholder: 'Title', label:false %>
-          <%= f.input :author, placeholder: 'Author', label:false %>
-          <%= f.input :publisher, as: :hidden, placeholder: 'Publisher', label:false %>
-          <%= f.input :creator, as: :hidden, placeholder: 'Creator', label:false %>
-          <%= f.input :edition, as: :hidden, placeholder: 'Edition', label:false %>
-          <%= f.input :description, placeholder: 'Description', label:false %>
-          <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
-          <%= f.input :published_language, placeholder: 'Published Language', label:false %>
-          <%= f.input :original_language, placeholder: 'Original Language', label:false %>
-
-          <% if @library.present? %>
-            <%= f.association :library, collection: Library.where(user: current_user).where(name: @library.name), label_html: { class: 'form-details' } %>
-          <% else %>
-            <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'form-details' } %>
-          <% end %>
-
-          <%= f.input :photo, as: :attachinary, label_html: { class: 'form-details' }%>
-
-          <%= f.submit 'New Book', class: "form-button" %>
-        <% end %>
-        </div>
-      </div>
-
-
-      <div class="col-6">
-        <div class="table-wrap overflow-scroll">
+            <small id="password-desc" class="f8 lh-copy black-60 db">
+              Must be in the correct format.
+            </small>
+          </div>
+          <div class="table-wrap overflow-scroll">
           <table class="table">
             <thead>
               <tr>
-                <!-- <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th> -->
               </tr>
             </thead>
             <tbody>
@@ -75,40 +48,40 @@
                   <td>
                     <p class="title"><%= result[1][:title] %></p>
                     <% if result[1][:author] %>
-                      <p class="f7 fw4 mb0 black-60">Author: <%= result[1][:author] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Author: <%= result[1][:author] %></p>
                     <% end %>
                     <% if result[1][:publisher] %>
-                      <p class="f7 fw4 mb0 black-60">Publisher: <%= result[1][:publisher] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Publisher: <%= result[1][:publisher] %></p>
                     <% end %>
                     <% if result[1][:publication_date] %>
-                      <p class="f7 fw4 mb0 black-60">Publication Date: <%= result[1][:publication_date] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Publication Date: <%= result[1][:publication_date] %></p>
                     <% end %>
                     <% if result[1][:creator] %>
-                      <p class="f7 fw4 mb0 black-60">Creator: <%= result[1][:creator] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Creator: <%= result[1][:creator] %></p>
                     <% end %>
                     <% if result[1][:edition] %>
-                      <p class="f7 fw4 mb0 black-60">Edition: <%= result[1][:edition] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Edition: <%= result[1][:edition] %></p>
                     <% end %>
                     <% if result[1][:release_date] %>
-                      <p class="f7 fw4 mb0 black-60">Release Date: <%= result[1][:release_date] %>
+                      <p class="t-sm f7 fw4 mb0 black-60">Release Date: <%= result[1][:release_date] %>
                       <% end %>
                     <% if result[1][:description] %>
                       </p>
-                      <p class="f7 fw4 mb0 black-60">Description: <%= formatted_description %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Description: <%= formatted_description %></p>
                     <% end %>
                     <% if result[1][:number_of_pages] %>
-                      <p class="f7 fw4 mb0 black-60">Pages: <%= result[1][:number_of_pages] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Pages: <%= result[1][:number_of_pages] %></p>
                     <% end %>
                     <% if result[1][:published_language] %>
-                      <p class="f7 fw4 mb0 black-60">Published Language: <%= result[1][:published_language] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Published Language: <%= result[1][:published_language] %></p>
                     <% end %>
                     <% if result[1][:original_language] %>
-                      <p class="f7 fw4 mb0 black-60">Original Language: <%= result[1][:original_language] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">Original Language: <%= result[1][:original_language] %></p>
                     <% end %>
                     <% if result[1][:isbn] %>
-                      <p class="f7 fw4 mb0 black-60">ISBN: <%= result[1][:isbn] %></p>
+                      <p class="t-sm f7 fw4 mb0 black-60">ISBN: <%= result[1][:isbn] %></p>
                     <% end %>
-                    <p class="f7 fw4 mb0 black-60">
+                    <p class="t-sm f7 fw4 mb0 black-60">
                       Generated from: <% if result[1][:detail_page_url] %>
                         <a href="<%= result[1][:detail_page_url] %>">Amazon</a>
                       <% else %>
@@ -124,8 +97,41 @@
             </tbody>
           </table>
         </div>
+        </div>
+
+        <div class="fr w-100 w-40-ns pl1 pr3">
+        <% if @library.present? %>
+            <%= "Add a Book to #{@library.name}" %>
+          <% else %>
+            <p class="f6 b db mb1"><%= 'Add Manually or Edit Here' %></p>
+          <% end %>
+        <%= simple_form_for @book do |f| %>
+          <%= f.error_notification %>
+
+          <%= f.input :title, placeholder: 'Title', label:false %>
+          <%= f.input :author, placeholder: 'Author', label:false %>
+          <%= f.input :publisher, as: :hidden, placeholder: 'Publisher', label:false %>
+          <%= f.input :creator, as: :hidden, placeholder: 'Creator', label:false %>
+          <%= f.input :edition, as: :hidden, placeholder: 'Edition', label:false %>
+          <%= f.input :description, placeholder: 'Description', label:false %>
+          <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
+          <%= f.input :published_language, placeholder: 'Published Language', label:false %>
+          <%= f.input :original_language, placeholder: 'Original Language', label:false %>
+
+          <% if @library.present? %>
+            <%= f.association :library, collection: Library.where(user: current_user).where(name: @library.name), label_html: { class: 'form-details' } %>
+          <% else %>
+            <%= f.association :library, collection: Library.where(user: current_user), label_html: { class: 'measure f7' } %>
+          <% end %>
+
+          <%= f.input :photo, as: :attachinary, label_html: { class: 'measure f7' }%>
+
+          <%= f.submit 'Create', class: "btn-outline" %>
+        <% end %>
+        </div>
+  </article>
+
         <!-- end isbn search form -->
-  </div>
 
 <!-- use this for closing the page and coming back to the previous page -->
 <%#= link_to '&times;'.html_safe, request.referer.present? ? request.referer : default_path %>
