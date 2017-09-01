@@ -26,7 +26,9 @@
           <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, crop: :scale%>
+                <%= cl_image_tag book.photo.path, crop: :fit %>
+              <% else %>
+                <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", crop: :fit %>
               <% end %>
             </div>
             <div class="dtc v-top pl3">
@@ -57,7 +59,11 @@
   </div>
 
   <div class="cards row clearfix">
-    <% Library.last(6).each do |library| %>
+    <% library_length = Library.all.length %>
+    <% if Library.all.length >= 6 %>
+      <% library_length = 6 %>
+    <% end %>
+    <% Library.last(library_length).each do |library| %>
       <div class="card sm-col sm-col-4">
         <article class="box left mw5 mw6-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(25), library_path(library) %></h2>
@@ -77,8 +83,14 @@
               <!-- Wrapper for slides -->
               <div class="carousel-inner">
                 <div class="item active">
-                  <% if library.books.first.photo? %>
-                    <%= cl_image_tag library.books.first.photo.path, width: 200, height: 300, crop: :scale %>
+                  <% if library.books.count > 0 %>
+                    <% if library.books.first.photo? %>
+                      <%= cl_image_tag library.books.first.photo.path, width: 200, height: 300, crop: :scale %>
+                    <% else %>
+                      <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale %>
+                    <% end %>
+                  <% else %>
+                    <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale %>
                   <% end %>
                 </div>
 
@@ -93,6 +105,8 @@
                   <div class="item">
                     <% if book.photo? %>
                       <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :scale %>
+                    <% else %>
+                      <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale %>
                     <% end %>
                   </div>
                 <% end %>
