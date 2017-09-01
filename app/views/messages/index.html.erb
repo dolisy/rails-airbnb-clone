@@ -21,9 +21,12 @@
             <%= message.booking.checkin_date %> to
             <%= message.booking.checkout_date %>
             </td>
-            <td class="pv3 pr3 bb b--black-20 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= message.booking.status.capitalize %> <br>
-              <button class="btn btn-success">accept</button>
-              <button class="btn btn-danger">decline</button>
+
+            <td class="pv3 pr3 bb b--black-20"> <%= message.booking.status.capitalize %> <br>
+            <% if message.booking.status == "pending" %>
+              <%= link_to "Confirm", confirm_booking_path(message.booking), method: :patch, class: "btn btn-success" %>
+              <%= link_to "Decline", decline_booking_path(message.booking), method: :patch, class: "btn btn-danger" %>
+            <% end %>
             </td>
           </tr>
           <% end %>
