@@ -58,6 +58,11 @@
             </thead>
             <tbody>
               <% @results.each do |result| %>
+              <% if result[1][:description] %>
+                <% formatted_description = result[1][:description].slice(0, 200) %>
+              <% else %>
+                <% formatted_description = "" %>
+              <% end %>
                 <tr>
                   <td class="lg-col-2">
                     <% image = if result[1][:image_link] %>
@@ -89,7 +94,7 @@
                       <% end %>
                     <% if result[1][:description] %>
                       </p>
-                      <p class="f7 fw4 mb0 black-60">Description: <%= result[1][:description].slice(0, 200) %></p>
+                      <p class="f7 fw4 mb0 black-60">Description: <%= formatted_description %></p>
                     <% end %>
                     <% if result[1][:number_of_pages] %>
                       <p class="f7 fw4 mb0 black-60">Pages: <%= result[1][:number_of_pages] %></p>
@@ -112,7 +117,7 @@
                     </p>
                   </td>
                   <td class="lg-col-2">
-                    <p class="title"><%= link_to "Select(+)", new_book_path(title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: result[1][:description].slice(0, 200), number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %></p>
+                    <p class="title"><%= link_to "Select(+)", new_book_path(title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: formatted_description, number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %></p>
                   </td>
                 </tr>
               <%end%>

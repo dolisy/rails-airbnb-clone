@@ -249,21 +249,30 @@ class BooksController < ApplicationController
           # result[:sku] = item.item_attributes.sku
           # result[:studio] = item.item_attributes.studio
 
-          item.image_sets.image_set.each do |element|
-            begin
-              result[element[0].downcase.to_sym] = element[1].url
-            rescue
+          begin
+            item.image_sets.image_set.each do |element|
+              begin
+                result[element[0].downcase.to_sym] = element[1].url
+              rescue
+              end
             end
+          rescue
           end
 
-          item.item_attributes.languages.language.each do |hash|
-            if hash["Type"] == "Published"
-              result[:published_language] = hash["Name"]
-            elsif hash["Type"] == "Original Language"
-              result[:original_language] = hash["Name"]
-            # elsif
-            #   result[:unknown_language] = hash["Name"]
+          begin
+            item.item_attributes.languages.language.each do |hash|
+              begin
+                if hash["Type"] == "Published"
+                  result[:published_language] = hash["Name"]
+                elsif hash["Type"] == "Original Language"
+                  result[:original_language] = hash["Name"]
+                # elsif
+                #   result[:unknown_language] = hash["Name"]
+                end
+              rescue
+              end
             end
+          rescue
           end
 
           @results[i] = result
