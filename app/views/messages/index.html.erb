@@ -1,23 +1,31 @@
 <p>messages#index</p>
 
 
-<% @messages.each do |message| %>
-  <!-- sender icon -->
-  <% avatar_url = message.booking.user.facebook_picture_url || message.booking.user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-  <%= image_tag avatar_url %>
+ <article class="mt3 cf ph2 ph5-ns pv1">
+    <div class="overflow-auto">
+      <table class="f6 w-100 mw8 left" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="fw6 bb b--black-20 tl pb1 bg-white">Requester</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Message</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Status</th>
+          </tr>
+        </thead>
+        <tbody class="f7 copy">
+          <% @messages.each do |message| %>
+            <tr>
+            <td class="pv3 pr3 bb b--black-20"> <br> <%= message.created_at.strftime("%b %d") %></td>
+            <td class="pv3 pr3 bb b--black-20">
+            <strong><%= message.subject %></strong> <br>
+            <%= message.content %>
+            </td>
+            <td class="pv3 pr3 bb b--black-20">pending</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </article>
 
-  <!-- sender first and last name -->
-  <%= message.booking.user.first_name %>
-  <%= message.booking.user.last_name %>
+  <%= link_to 'Add', new_message_path  %>
 
-  <!-- message sent date -->
-  <%= message.created_at %>
-
-  <!-- subject and content -->
-  <%= message.subject %>
-  <%= message.content %>
-
-  <!-- booking status -->
-  <%= message.booking.status %>
-
-<% end %>
