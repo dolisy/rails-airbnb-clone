@@ -1,6 +1,19 @@
 class MessagesController < ApplicationController
   def index
-    @messages = Message.all
+    @messages = []
+    Message.all.each do |message|
+      if message.booking.user == current_user && message.message_type == "confirmed_message"
+        @messages << message
+      end
+
+      if message.booking.user == current_user && message.message_type == "declined_message"
+        @messages << message
+      end
+
+      if message.booking.book.library.user == current_user && message.message_type == "pending_message"
+        @messages << message
+      end
+    end
   end
 
   def show

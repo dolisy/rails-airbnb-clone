@@ -30,6 +30,7 @@ class BookingsController < ApplicationController
       @message = Message.new(
         subject: "You have a new book request for #{@booking.book.title}",
         content: "Please confirm the request",
+        message_type: "pending_message",
         booking_id: @booking.id
       )
       @message.save
