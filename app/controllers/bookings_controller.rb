@@ -3,6 +3,20 @@ class BookingsController < ApplicationController
     @bookings = Booking.all
   end
 
+  def confirm
+    @booking = Booking.find(params[:id])
+    @booking.status = "confirmed"
+    @booking.save
+    redirect_to messages_path
+  end
+
+  def decline
+    @booking = Booking.find(params[:id])
+    @booking.status = "declined"
+    @booking.save
+    redirect_to messages_path
+  end
+
   def show
     @book = Book.find(params[:book_id])
     @booking = Booking.find(params[:id])

@@ -19,6 +19,13 @@ Rails.application.routes.draw do
       # resources :reviews, only: [ :new, :create, :edit, :update ]
   end
 
+  resources :bookings, only: [] do
+    member do
+      patch "confirm", to: "bookings#confirm"
+      patch "decline", to: "bookings#decline"
+    end
+  end
+
   resources :reviews, only: :create
 
   resources :messages, only: [ :index, :show, :new, :create ]
