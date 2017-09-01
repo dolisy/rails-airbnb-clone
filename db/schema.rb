@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831160124) do
+ActiveRecord::Schema.define(version: 20170901101348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,12 @@ ActiveRecord::Schema.define(version: 20170831160124) do
     t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "checkin_date"
     t.date     "checkout_date"
+    t.integer  "number_of_pick_days"
+    t.string   "status"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
     t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
   end
@@ -96,6 +98,15 @@ ActiveRecord::Schema.define(version: 20170831160124) do
     t.float    "longitude"
     t.string   "address"
     t.index ["user_id"], name: "index_libraries_on_user_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "content"
+    t.integer  "booking_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_messages_on_booking_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -148,6 +159,7 @@ ActiveRecord::Schema.define(version: 20170831160124) do
   add_foreign_key "books", "libraries"
   add_foreign_key "books", "works"
   add_foreign_key "libraries", "users"
+  add_foreign_key "messages", "bookings"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "libraries"
   add_foreign_key "reviews", "users"

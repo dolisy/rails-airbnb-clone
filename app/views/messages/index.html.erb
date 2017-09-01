@@ -1,0 +1,23 @@
+<p>messages#index</p>
+
+
+<% @messages.each do |message| %>
+  <!-- sender icon -->
+  <% avatar_url = message.booking.user.facebook_picture_url || message.booking.user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+  <%= image_tag avatar_url %>
+
+  <!-- sender first and last name -->
+  <%= message.booking.user.first_name %>
+  <%= message.booking.user.last_name %>
+
+  <!-- message sent date -->
+  <%= message.craeted_at %>
+
+  <!-- subject and content -->
+  <%= message.subject %>
+  <%= message.content %>
+
+  <!-- booking status -->
+  <%= message.booking.status %>
+
+<% end %>
