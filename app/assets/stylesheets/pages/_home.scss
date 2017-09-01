@@ -230,17 +230,26 @@ a {
   visibility: hidden;
 }
 
-// .carousel-control.right {
-//   background-image: none;
-//   color: black;
-//   opacity: 1;
-// }
+.carousel-control.right {
+  background-image: none;
+  color: black;
+  opacity: 1;
+}
 
-// .carousel-control.left {
-//     background-image: none;
-//     color: black;
-//     opacity: 1;
-// }
+.carousel-control.left {
+    background-image: none;
+    color: black;
+    opacity: 1;
+}
+
+.carousel-control .icon-next, .carousel-control .glyphicon-menu-left {
+  top: 50%;
+}
+
+.carousel-control .icon-next, .carousel-control .glyphicon-menu-right {
+  top: 50%;
+}
+
 
 #work {
   position: sticky!important;
