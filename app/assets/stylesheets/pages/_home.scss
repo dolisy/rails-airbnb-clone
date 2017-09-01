@@ -29,8 +29,8 @@ a:hover {
 }
 
 .wrapper {
-  padding-top: 1.5em;
-  padding-bottom: 2em;
+  padding-top: .5em;
+  padding-bottom: .5em;
   padding-left: 2.2em;
   padding-right: 2.2em;
 }
@@ -207,7 +207,7 @@ a {
 }
 
 .cards {
-  padding-bottom: 2.2em;
+  padding-bottom: 1.5em;
   margin-top: 1em;
 }
 
@@ -257,7 +257,6 @@ a {
 }
 
 
-
 // ----------ARTICLE-------------//
 
 .align {
@@ -266,5 +265,10 @@ a {
 
 .box {
   padding-bottom: 0em;
+}
+
+.wrapper-libs {
+  margin-left: 2.5em;
+
 }
 
