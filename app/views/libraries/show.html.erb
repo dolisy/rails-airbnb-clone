@@ -12,20 +12,20 @@
         <%= @library.name %>
       </div>
       <div class="right">
-        Number of Books: <%= @library.books.count %>
+        Number of Books (<%= @library.books.count %>)
       </div>
     <% end %>
   </article>
 
   <section class="cf w-100 pa2-ns">
     <% @library.books.each do |book| %>
-      <article class="p2 fl w-100 w-50-m w-25-ns pa2-ns">
-        <div class="aspect-ratio aspect-ratio--3x4">
+      <article class="p2 fl w-100 w-50-m w-25-ns pa2-ns tc">
+        <div class="center">
           <% if book.photo? %>
-            <%= cl_image_tag book.photo.path, crop: :fit, class: "fit aspect-ratio--object" %>
+            <%= cl_image_tag book.photo.path, height: 300, crop: :fill, class: "mb1" %>
           <% end %>
         </div>
-          <%= link_to book.title, book_path(book), class: "library-title" %>
+          <%= link_to book.title.truncate(53), book_path(book), class: "db link black hover-grey" %>
       </article>
     <% end %>
   </section>

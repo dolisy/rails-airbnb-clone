@@ -41,12 +41,12 @@
       <p class="f7 copy mid-gray"><%=@book.library.address.capitalize%></p>
     </div>
     <div class="fw6 dtc tl">Curated in:
-      <p class="f8 copy mid-gray"><%=link_to @book.library.name, library_path(@book.library), class: "f7 copy mid-gray"%></p>
+      <p class="f8 copy mid-gray"><%=link_to @book.library.name, library_path(@book.library)%></p>
     </div>
     <div class="fw6 dtc tl">Product details:
-      <p class="f8 copy mid-gray">Paperback: 328 pages</p>
-      <p class="f8 copy mid-gray">Publisher: Signet Classic</p>
-      <p class="f8 copy mid-gray">Language: English</p>
+      <p class="f8 copy mid-gray">Pages: <%=@book.number_of_pages %></p>
+      <p class="f8 copy mid-gray">Publisher: <%=@book.publisher %></p>
+      <p class="f8 copy mid-gray">Language: <%=@book.published_language %></p>
     </div>
   </div>
 </article>

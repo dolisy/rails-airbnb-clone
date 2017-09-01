@@ -26,13 +26,13 @@
           <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, crop: :fit %>
+                <%= cl_image_tag book.photo.path, height: 200, crop: :fill %>
               <% else %>
-                <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", crop: :fit %>
+                <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", height: 200, crop: :fill %>
               <% end %>
             </div>
-            <div class="dtc v-top pl3">
-              <h1 class="f6 f5-ns fw6 lh-title black mv0 mb1"><%= book.title %></h1>
+            <div class="text-flex dtc v-top pl3">
+              <h1 class="f6 f5-ns fw6 lh-title black mv0 mb1"><%= book.title.truncate(33) %></h1>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.author %></h2>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.publisher %></h2>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.genre %></h2>
@@ -51,21 +51,25 @@
         </div>
       <% end %>
   </div>
+</div>
 
+<div class="wrapper">
   <div class="flex wrap">
     <div class="col-6">
       <h2>Featured Libraries</h2>
     </div>
   </div>
+</div>
 
+<div class="wrapper-libs">
   <div class="cards row clearfix">
     <% library_length = Library.all.length %>
     <% if Library.all.length >= 6 %>
       <% library_length = 6 %>
     <% end %>
     <% Library.last(library_length).each do |library| %>
-      <div class="card sm-col sm-col-4">
-        <article class="box left mw5 mw7-ns ba mv1">
+      <div class="md-col md-col-4">
+        <article class="box left mw5 mw7-ns ba mv1 mb3">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(25), library_path(library) %></h2>
           <div class="pa3 bt">
             <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
@@ -123,11 +127,12 @@
               </a>
               <!-- end carousel -->
             </div>
-            <p class="mt1 f7 b f5-ns lh-copy measure mv0">Curated by:</p>
-            <p class="black-70"><%= library.user.email.truncate(30) %></p>
+            <p class="mt2 f7 b f5-ns lh-copy measure mv0">Curated by:</p>
+            <p class="mt0 black-80"><%= library.user.email.truncate(30) %></p>
           </div>
         </article>
       </div>
     <%end%>
   </div>
 </div>
+
