@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       # resources :reviews, only: [ :new, :create, :edit, :update ]
   end
 
-  # resources :reviews, only: :create
+  resources :reviews, only: :create
 
   resources :messages, only: [ :index, :show, :new, :create ]
 
