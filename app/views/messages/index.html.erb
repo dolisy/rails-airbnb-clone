@@ -1,0 +1,31 @@
+<p>messages#index</p>
+
+
+ <article class="mt3 cf ph2 ph5-ns pv1">
+    <div class="overflow-auto">
+      <table class="f6 w-100 mw8 left" cellspacing="0">
+        <thead>
+          <tr>
+            <th class="fw6 bb b--black-20 tl pb1 bg-white">Requester</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Message</th>
+            <th class="fw6 bb b--black-20 tl pb1 pr3 bg-white">Status</th>
+          </tr>
+        </thead>
+        <tbody class="f7 copy">
+          <% @messages.each do |message| %>
+            <tr>
+            <td class="pv3 pr3 bb b--black-20"> <br> <%= message.created_at.strftime("%b %d") %></td>
+            <td class="pv3 pr3 bb b--black-20">
+            <strong><%= message.subject %></strong> <br>
+            <%= message.content %>
+            </td>
+            <td class="pv3 pr3 bb b--black-20">pending</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <%= link_to 'Add', new_message_path  %>
+

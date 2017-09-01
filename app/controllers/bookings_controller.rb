@@ -11,6 +11,15 @@ class BookingsController < ApplicationController
     # for reviews-ajax
     @user = current_user
     @review = Review.new(user: current_user)
+
+    if @booking.status == "pending"
+      @message = Message.new(
+        subject: "You have a new book request for #{@booking.book.title}",
+        content: "Please confirm the request",
+        booking_id: @booking.id
+      )
+      @message.save
+    end
   end
 
   def new
@@ -29,6 +38,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:checkin_date, :checkout_date, :user_id, :book_id)
+    params.require(:booking).permit(:checkin_date, :checkout_date, :status, :user_id, :book_id)
   end
 end

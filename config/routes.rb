@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
   resources :reviews, only: :create
 
+  resources :messages, only: [ :index, :show, :new, :create ]
+
   # resources :bookings, only:
 
   get '/profile', to: 'pages#profile'
-
-  get '/google_books', to: 'pages#google_books'
 end

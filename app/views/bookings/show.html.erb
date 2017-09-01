@@ -1,17 +1,23 @@
 <div class="wrapper">
-  <h4 class="confirm-text">Confirm Your Booking:</h4>
+  <h4 class="confirm-text">
+      Booking status: <%= @booking.status %>
+  </h4>
   <div class="confirmation-content">
     <div class="text-container">
         <h4><%= @booking.book.title %></h4>
-        <h5>by <%= @booking.book.author %></h5>
+        <% if @booking.book.author != "" %>
+          <h5>by <%= @booking.book.author %></h5>
+        <% else %>
+          <h5>-----</h5>
+        <% end %>
         <p class="date">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
-        <p class="date">Return: <%= l(@booking.checkout_date, format: :custom) %></p>
+        <p class="date">Return:  <%= l(@booking.checkout_date, format: :custom) %></p>
     </div>
     <div class="row left">
       <%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
-      <a class="btn btn-outline" href="#">
+<!--       <a class="btn btn-outline" href="#">
         Go to Payment
-      </a>
+      </a> -->
     </div>
     <div class="book-container right fn fl-ns w-50-ns">
       <% if @booking.book.photo? %>
@@ -23,4 +29,4 @@
   </div>
 </div>
 
-
+<%= @booking.messages %>
