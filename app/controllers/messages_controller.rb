@@ -11,9 +11,10 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
-  def craete
+  def create
     @message = Message.new(message_params)
     @message.save
+    redirect_to messages_path
   end
 
   private
