@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901101348) do
+ActiveRecord::Schema.define(version: 20170901131726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20170901101348) do
     t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "checkin_date"
     t.date     "checkout_date"
+    t.integer  "number_of_pick_days"
     t.string   "status"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
     t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
@@ -103,8 +104,9 @@ ActiveRecord::Schema.define(version: 20170901101348) do
     t.string   "subject"
     t.text     "content"
     t.integer  "booking_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "message_type"
     t.index ["booking_id"], name: "index_messages_on_booking_id", using: :btree
   end
 
