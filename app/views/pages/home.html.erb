@@ -21,13 +21,12 @@
   </div>
 
   <div class="cards row clearfix">
-      <article>
       <% Book.last(4).each do |book| %>
-        <div class="card sm-col sm-col-6">
+        <div class="card col sm-col-6">
           <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, crop: :fit%>
+                <%= cl_image_tag book.photo.path, crop: :scale%>
               <% end %>
             </div>
             <div class="dtc v-top pl3">
@@ -35,13 +34,13 @@
               <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.author %></h2>
               <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.publisher %></h2>
               <h2 class="align f7 fw4 mt2 mb0 black-60"><%= book.genre %></h2>
-              <dl class="mt2 f7">
+              <dl class="mt3 f7">
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
                   <% if book.rating == 0 %>
                     <%= 'No Reviews' %>
                   <% else %>
-                    <%= book.rating %> Stars
+                    Rating: <%= book.rating %> / 5.0
                   <% end %>
                 </dd>
               </dl>
@@ -49,7 +48,6 @@
           <% end %>
         </div>
       <% end %>
-      </article>
   </div>
 
   <div class="flex wrap">
