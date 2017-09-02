@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902190849) do
+ActiveRecord::Schema.define(version: 20170902205338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20170902190849) do
     t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "checkin_date"
     t.date     "checkout_date"
+    t.integer  "number_of_pick_days"
     t.string   "status"
     t.integer  "conversation_id"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
@@ -86,6 +87,8 @@ ActiveRecord::Schema.define(version: 20170902190849) do
     t.string   "edition"
     t.date     "release_date"
     t.string   "number_of_pages"
+    t.string   "new_library_name"
+    t.string   "new_library_address"
     t.index ["library_id"], name: "index_books_on_library_id", using: :btree
     t.index ["work_id"], name: "index_books_on_work_id", using: :btree
   end
