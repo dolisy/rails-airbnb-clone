@@ -29,9 +29,9 @@ PrivateMessage.destroy_all
 Booking.destroy_all
 PrivateMessage.destroy_all
 Conversation.destroy_all
-# Book.destroy_all
-# Library.destroy_all
-# Work.destroy_all
+Book.destroy_all
+Library.destroy_all
+Work.destroy_all
 
 
 

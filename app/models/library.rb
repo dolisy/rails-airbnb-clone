@@ -2,6 +2,8 @@ class Library < ApplicationRecord
   belongs_to :user
 
   has_many :books
+  accepts_nested_attributes_for :books
+
   has_many :bookings, through: :books
   has_many :reviews, through: :bookings
 
