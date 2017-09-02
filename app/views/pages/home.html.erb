@@ -17,7 +17,7 @@
     </div>
     <div class="col-6">
       <h2 class="view-all">
-        <%= link_to "View all", books_path %>
+        <%= link_to "View all", view_all_books_path %>
       </h2>
     </div>
   </div>
@@ -38,6 +38,7 @@
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.author %></h2>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.publisher %></h2>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.genre %></h2>
+              <h2 class="align f7 fw4 mt1 mb0 black-60">Curated In: <%= link_to book.library.name, library_path(book.library) %></h2>
               <dl class="mt2 f7">
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
