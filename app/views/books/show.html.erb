@@ -38,7 +38,11 @@
       <p class="f7 copy mid-gray"><%= link_to @book.library.user.email, profile_path(@profile), class:"f7 copy mid-gray"%></p>
     </div>
     <div class="fw6 dtc tl">Located in:
-      <p class="f7 copy mid-gray"><%=@book.library.address.capitalize%></p>
+      <p class="f7 copy mid-gray">
+        <% if @book.library.city %>
+          <%=@book.library.city.capitalize%>
+        <% end %>
+      </p>
     </div>
     <div class="fw6 dtc tl">Curated in:
       <p class="f8 copy mid-gray"><%=link_to @book.library.name, library_path(@book.library)%></p>

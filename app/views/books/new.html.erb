@@ -120,7 +120,7 @@
             </div>
             <div id="newlibrary">
               <%= f.input :new_library_name, placeholder: 'New Library Name', label:false %>
-              <%= f.input :new_library_address, placeholder: 'New Library Address', label:false %>
+              <%= f.input :new_library_address, :input_html => { :id => 'geo-new-library' }, placeholder: 'New Library Address', label:false %>
             </div>
           <% end %>
 

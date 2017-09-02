@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   end
 
   get '/profile', to: 'pages#profile'
+  get '/view_all_books', to: 'pages#view_all_books'
 end
