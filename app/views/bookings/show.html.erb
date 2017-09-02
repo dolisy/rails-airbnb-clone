@@ -1,24 +1,32 @@
+<div class="row left">
+  <%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
+</div>
 <div class="wrapper">
   <h4 class="confirm-text">
-      Booking status: <%= @booking.status %>
+    <% if @booking.status == "confirm" %>
+      <%= "Send request to #{@booking.book.library.user.email}" %>
+    <% else %>
+      <%= "Booking status: #{@booking.status}" %>
+    <% end %>
   </h4>
   <div class="confirmation-content">
     <div class="text-container">
-        <h4><%= @booking.book.title %></h4>
-        <% if @booking.book.author != "" %>
-          <h5>by <%= @booking.book.author %></h5>
+      <h4><%= @booking.book.title %></h4>
+      <% if @booking.book.author != "" %>
+        <h5>by <%= @booking.book.author %></h5>
+      <% end %>
+      <p class="date">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
+      <p class="date">Return:  <%= l(@booking.checkout_date, format: :custom) %></p>
+    </div>
+    <article class="mt3 cf ph2 ph5-ns pv1">
+      <div class="overflow-auto">
+        <% if @booking.status == "confirm" %>
+          <%= link_to "Send request", pending_booking_path(@booking), method: :patch, class: "btn btn-primary" %>
         <% else %>
-          <h5>-----</h5>
+          <%= render 'private_messages/index' %>
         <% end %>
-        <p class="date">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
-        <p class="date">Return:  <%= l(@booking.checkout_date, format: :custom) %></p>
-    </div>
-    <div class="row left">
-      <%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
-<!--       <a class="btn btn-outline" href="#">
-        Go to Payment
-      </a> -->
-    </div>
+      </div>
+    </article>
     <div class="book-container right fn fl-ns w-50-ns">
       <% if @booking.book.photo? %>
         <%= cl_image_tag @booking.book.photo.path, width: 300, height: 450, crop: :fill, class: "fit" %>
@@ -28,3 +36,5 @@
     </div>
   </div>
 </div>
+
+

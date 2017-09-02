@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     end
 
     filtering_params(params).each do |key, value|
-      @books = @books.public_send(key, value) if value.present?
+      @books = @books.public_send(key, value)
     end
 
     if params[:sort_by] == 'all'

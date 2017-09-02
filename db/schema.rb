@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901131726) do
+ActiveRecord::Schema.define(version: 20170902190849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,9 @@ ActiveRecord::Schema.define(version: 20170901131726) do
     t.date     "checkout_date"
     t.integer  "number_of_pick_days"
     t.string   "status"
+    t.integer  "conversation_id"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
+    t.index ["conversation_id"], name: "index_bookings_on_conversation_id", using: :btree
     t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
   end
 
@@ -89,6 +91,17 @@ ActiveRecord::Schema.define(version: 20170901131726) do
     t.index ["work_id"], name: "index_books_on_work_id", using: :btree
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "booking_id"
+    t.boolean  "sender_active",    default: false
+    t.boolean  "recipient_active", default: false
+    t.index ["booking_id"], name: "index_conversations_on_booking_id", using: :btree
+  end
+
   create_table "libraries", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -108,6 +121,19 @@ ActiveRecord::Schema.define(version: 20170901131726) do
     t.datetime "updated_at",   null: false
     t.string   "message_type"
     t.index ["booking_id"], name: "index_messages_on_booking_id", using: :btree
+  end
+
+  create_table "private_messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.boolean  "read",            default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "booking_id"
+    t.index ["booking_id"], name: "index_private_messages_on_booking_id", using: :btree
+    t.index ["conversation_id"], name: "index_private_messages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_private_messages_on_user_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -156,11 +182,14 @@ ActiveRecord::Schema.define(version: 20170901131726) do
   end
 
   add_foreign_key "bookings", "books"
+  add_foreign_key "bookings", "conversations"
   add_foreign_key "bookings", "users"
   add_foreign_key "books", "libraries"
   add_foreign_key "books", "works"
+  add_foreign_key "conversations", "bookings"
   add_foreign_key "libraries", "users"
   add_foreign_key "messages", "bookings"
+  add_foreign_key "private_messages", "bookings"
   add_foreign_key "reviews", "bookings"
   add_foreign_key "reviews", "libraries"
   add_foreign_key "reviews", "users"

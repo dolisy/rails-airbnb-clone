@@ -23,14 +23,15 @@ Rails.application.routes.draw do
     member do
       patch "confirm", to: "bookings#confirm"
       patch "decline", to: "bookings#decline"
+      patch "pending", to: "bookings#pending"
     end
   end
 
   resources :reviews, only: :create
 
-  resources :messages, only: [ :index, :show, :new, :create ]
-
-  # resources :bookings, only:
+  resources :conversations do
+    resources :private_messages
+  end
 
   get '/profile', to: 'pages#profile'
 end

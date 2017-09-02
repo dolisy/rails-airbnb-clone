@@ -24,12 +24,14 @@ addresses = [
 puts "cleaning..."
 
 # User.destroy_all
-Message.destroy_all
 Review.destroy_all
+PrivateMessage.destroy_all
 Booking.destroy_all
-Book.destroy_all
-Library.destroy_all
-Work.destroy_all
+PrivateMessage.destroy_all
+Conversation.destroy_all
+# Book.destroy_all
+# Library.destroy_all
+# Work.destroy_all
 
 
 
