@@ -21,7 +21,7 @@
         <div class="left ba b--black-100 mt2 p1 fl pa2-ns md-col md-col-12">
           <div class="w-100-ns left calendar pt0">
           <%= simple_form_for [@book, @booking] do |f| %>
-            <%= f.input :status, as: :hidden, input_html: { value: 'pending' } %>
+            <%= f.input :status, as: :hidden, input_html: { value: "confirm" } %>
             <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker left mb1' } %>
             <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker left mb2' } %>
             <%= f.button :submit, class: 'btn-outline w-100 center'%>

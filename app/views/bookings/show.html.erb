@@ -2,7 +2,12 @@
   <header class="fl w-100 w-50-ns pr4-ns">
     <h1 class="bb bw1 book-title f3 black lh-title fw9 mt0 pt1">
       Reservation Status:
-      <span class="red"><%= @booking.status.capitalize %></span>
+      <% if @booking.status == "confirm" %>
+        <%= "Send request to #{@booking.book.library.user.email}" %>
+        <span class="red">Send request to <%= @booking.book.library.user.email %></span>
+      <% else %>
+        <span class="red"><%= @booking.status.capitalize %></span>
+      <% end %>
     </h1>
     <h1 class="mt1 f4 black lh-title fw9 mt0 pt1 mb0">
       <%= @booking.book.title %>
@@ -16,6 +21,16 @@
     <p class="f5 black lh-title">Return: <%= l(@booking.checkout_date, format: :custom) %></p>
     <p class="w-100 mt2 "><%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %> <%= link_to 'Profile', profile_path(@profile), class: "btn btn-outline" %>
   </header>
+
+  <article class="mt3 cf ph2 ph5-ns pv1">
+    <div class="overflow-auto">
+      <% if @booking.status == "confirm" %>
+        <%= link_to "Send request", pending_booking_path(@booking), method: :patch, class: "btn btn-primary" %>
+      <% else %>
+        <%= render 'private_messages/index' %>
+      <% end %>
+    </div>
+  </article>
 
   <header class="fl w-100 w-50-ns tc">
     <% if @book.photo? %>
