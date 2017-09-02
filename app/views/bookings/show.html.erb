@@ -1,40 +1,40 @@
-<div class="row left">
-  <%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
-</div>
-<div class="wrapper">
-  <h4 class="confirm-text">
-    <% if @booking.status == "confirm" %>
-      <%= "Send request to #{@booking.book.library.user.email}" %>
-    <% else %>
-      <%= "Booking status: #{@booking.status}" %>
-    <% end %>
-  </h4>
-  <div class="confirmation-content">
-    <div class="text-container">
-      <h4><%= @booking.book.title %></h4>
-      <% if @booking.book.author != "" %>
-        <h5>by <%= @booking.book.author %></h5>
-      <% end %>
-      <p class="date">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
-      <p class="date">Return:  <%= l(@booking.checkout_date, format: :custom) %></p>
-    </div>
-    <article class="mt3 cf ph2 ph5-ns pv1">
-      <div class="overflow-auto">
-        <% if @booking.status == "confirm" %>
-          <%= link_to "Send request", pending_booking_path(@booking), method: :patch, class: "btn btn-primary" %>
-        <% else %>
-          <%= render 'private_messages/index' %>
-        <% end %>
-      </div>
-    </article>
-    <div class="book-container right fn fl-ns w-50-ns">
-      <% if @booking.book.photo? %>
-        <%= cl_image_tag @booking.book.photo.path, width: 300, height: 450, crop: :fill, class: "fit" %>
+<article class="cf ph2 ph5-ns pt3 mb2">
+  <header class="fl w-100 w-50-ns pr4-ns">
+    <h1 class="bb bw1 book-title f3 black lh-title fw9 mt0 pt1">
+      Reservation Status:
+      <% if @booking.status == "confirm" %>
+        <%= "Send request to #{@booking.book.library.user.email}" %>
+        <span class="red">Send request to <%= @booking.book.library.user.email %></span>
       <% else %>
-        <img src="https://unsplash.it/400/500?image=1083" alt="picture of book" class="fit">
+        <span class="red"><%= @booking.status.capitalize %></span>
+      <% end %>
+    </h1>
+    <h1 class="mt1 f4 black lh-title fw9 mt0 pt1 mb0">
+      <%= @booking.book.title %>
+    </h1>
+    <h2 class="author f10 mid-gray lh-title">
+      <% if @booking.book.author != "" %>
+        <%= @booking.book.author %>
+      <% end %>
+    </h2>
+    <p class="mt3 f5 black lh-title">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
+    <p class="f5 black lh-title">Return: <%= l(@booking.checkout_date, format: :custom) %></p>
+    <p class="w-100 mt2 "><%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %> <%= link_to 'Profile', profile_path(@profile), class: "btn btn-outline" %>
+  </header>
+
+  <article class="mt3 cf ph2 ph5-ns pv1">
+    <div class="overflow-auto">
+      <% if @booking.status == "confirm" %>
+        <%= link_to "Send request", pending_booking_path(@booking), method: :patch, class: "btn btn-primary" %>
+      <% else %>
+        <%= render 'private_messages/index' %>
       <% end %>
     </div>
-  </div>
-</div>
+  </article>
 
-
+  <header class="fl w-100 w-50-ns tc">
+    <% if @book.photo? %>
+      <%= cl_image_tag @book.photo.path, height: 450, crop: :scale, class: "mt2 pa3 ba" %>
+    <% end %>
+  </header>
+</article>
