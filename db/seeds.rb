@@ -26,6 +26,7 @@ puts "cleaning..."
 # User.destroy_all
 Review.destroy_all
 PrivateMessage.destroy_all
+Message.destroy_all
 Booking.destroy_all
 PrivateMessage.destroy_all
 Conversation.destroy_all

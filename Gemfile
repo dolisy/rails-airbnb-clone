@@ -40,7 +40,6 @@ gem 'omniauth-facebook'
 # Google Authenticate
 gem 'omniauth-google-oauth2'
 
-
 # Geocoding
 gem 'geocoder'
 # gem 'coffee-rails' already there
