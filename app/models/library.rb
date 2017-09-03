@@ -40,6 +40,11 @@ class Library < ApplicationRecord
   end
   after_validation :geocode, :reverse_geocode
 
+  # for search
+
+  scope :term, -> (term) { where("name ILIKE :search OR user ILIKE :search ", search: "%#{term}%") }
+
+  scope :location, -> (location) { where("location like ?", "%#{location}%") }
 
   private
 

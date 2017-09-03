@@ -13,10 +13,11 @@
     </h2>
   </div>
   <div class="table-wrap overflow-scroll">
+<!-- books -->
     <table class="table">
       <thead>
         <tr>
-          <th>Title</th> <th></th> <th>Rating</th> <th>Reviews</th>
+          <th>Books</th> <th></th> <th>Rating</th> <th>Reviews</th>
         </tr>
       </thead>
       <tbody>
@@ -60,8 +61,50 @@
         <%end%>
       </tbody>
     </table>
+<!-- libraries -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Libraries</th> <th></th> <th>---</th> <th>Number of Books</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for library in @libraries %>
+          <tr>
+            <td class="lg-col-2">
+              <% if library.books.first.photo? %>
+                <%= cl_image_tag library.books.first.photo.path, width: 600, crop: :scale%>
+              <% end %>
+            </td>
+            <td>
+              <p class="title">
+                <%= link_to library.name, library_path(library)%>
+              </p>
+              <p class="f7 fw4 black-60">
+                <%= library.address %>
+              </p>
+              <p class="f7 fw4 black-60">
+                <%=  %>
+              </p>
+            </td>
+            <td>
+              <p class="title">
+                <%=  %>
+              </p>
+            </td>
+            <td>
+              <p class="title">
+                <%= library.books.count %>
+              </p>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
   </div>
 </div>
+
+<!-- map -->
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
