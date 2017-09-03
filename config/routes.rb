@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :libraries, only: [ :show, :new, :create, :edit, :update ] do
-    resources :books, only: [ :new, :create ]
+    resources :books, only: [ :new, :create, :show ]
   end
   #   resources :reviews, only: [ :new, :create, :edit, :update ]
   # end
@@ -23,14 +23,16 @@ Rails.application.routes.draw do
     member do
       patch "confirm", to: "bookings#confirm"
       patch "decline", to: "bookings#decline"
+      patch "pending", to: "bookings#pending"
     end
   end
 
   resources :reviews, only: :create
 
-  resources :messages, only: [ :index, :show, :new, :create ]
-
-  # resources :bookings, only:
+  resources :conversations do
+    resources :private_messages
+  end
 
   get '/profile', to: 'pages#profile'
+  get '/view_all_books', to: 'pages#view_all_books'
 end

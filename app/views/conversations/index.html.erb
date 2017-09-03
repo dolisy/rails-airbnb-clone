@@ -1,0 +1,41 @@
+<style type="text/css">
+  .grid {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 100%;
+  }
+  .all-conversations-grid {
+    /*g-r: 1 / span 1;*/
+    g-c: 1 / span 1;
+  }
+
+  .one-conversation-grid {
+    /*g-r: 1 / span 1;*/
+    g-c: 4 / span 3;
+  }
+</style>
+
+<div class="grid">
+  <div class="all-conversations-grid">
+    <div class="ui segment">
+      <h3>My Conversations</h3>
+      <div class="ui list">
+        <div class="item">
+          <% @conversations.each do |conversation| %>
+            <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+              <% if conversation.sender_id == current_user.id %>
+                <% @recipient = User.find(conversation.recipient_id) %>
+              <% else %>
+                <% @recipient = User.find(conversation.sender_id) %>
+              <% end %>
+              <p><%= link_to @recipient.email, conversation_path(conversation) %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="one-conversation-grid">
+    <%= render 'private_messages/index' %>
+  </div>
+</div>

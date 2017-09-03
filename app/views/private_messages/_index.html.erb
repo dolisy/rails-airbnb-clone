@@ -1,0 +1,42 @@
+<% if @over_ten %>
+  <%= link_to 'Show Previous Messages', '?m=all' %>
+<% end %>
+<% if @private_messages %>
+  <div class="ui segment">
+    <% @private_messages.each do |private_message| %>
+      <% if private_message.body %>
+        <% user = User.find(private_message.user_id) %>
+        <div class="item">
+          <div class="content">
+            <div class="header">
+              <strong><%= user.email %></strong> <%= private_message.private_message_time %>
+            </div>
+            <div class="list">
+              <div class="item">
+                <i class="right triangle icon"></i>
+                <%= private_message.body %>
+                <% if private_message.booking %>
+                  <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
+                    <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "btn btn-success" %>
+                    <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-danger" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<% if @conversation %>
+  <%= form_for [@conversation, @private_message], html: {class: "ui reply form"} do |f| %>
+    <div class="field">
+      <%= f.text_area :body, class: "form-control" %>
+    </div>
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+    <div>
+      <%= f.submit "Add Reply", class: "ui blue labeled submit icon button" %>
+    </div>
+  <% end %>
+<% end %>

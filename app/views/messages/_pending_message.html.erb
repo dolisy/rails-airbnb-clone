@@ -1,0 +1,10 @@
+<%= simple_form_for [@message] do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :message_type, as: :hidden, input_html: { value: "pending_message" } %>
+  <%= f.input :booking, as: :hidden, input_html: { value: "pending_message" } %>
+  <%= f.input :subject %>
+  <%= f.input :content %>
+
+  <%= f.submit 'Send request' %>
+<% end %>

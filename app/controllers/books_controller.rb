@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     end
 
     filtering_params(params).each do |key, value|
-      @books = @books.public_send(key, value) if value.present?
+      @books = @books.public_send(key, value)
     end
 
     if params[:sort_by] == 'all'
@@ -55,6 +55,13 @@ class BooksController < ApplicationController
   end
 
   def new
+# FOR LIBRARY
+    if params[:library_id]
+      @library = Library.find(params[:library_id])
+    end
+
+# FOR BOOK
+
     @book = Book.new(
       library_id: params[:library_id],
       title: params[:title],
@@ -80,10 +87,6 @@ class BooksController < ApplicationController
 
     if params[:large_image]
       @book.photo_url = params[:large_image]
-    end
-
-    if params[:library_id]
-      @library = Library.find(params[:library_id])
     end
 
     require 'asin'
@@ -287,11 +290,21 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.address = @book.library.address
 
     if params[:library_id]
-      @book.library = Library.find(params[:library_id])
+      @library = Library.find(params[:library_id])
+      @book.library = @library
+      @book.save
     end
+
+    if @book.new_library_name != "" && @book.new_library_address != ""
+      @library = Library.new(user: current_user, name: @book.new_library_name, address: @book.new_library_address)
+      @library.save
+      @book.library = @library
+      @book.save
+    end
+
+    @book.address = @book.library.address
 
     @book.save
 
@@ -313,7 +326,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :description, :publication_date, :creator, :edition, :release_date, :number_of_pages, :published_language, :original_language, :library_id, :photo)
+    params.require(:book).permit(:title, :genre, :author, :publisher, :description, :publication_date, :creator, :edition, :release_date, :number_of_pages, :published_language, :original_language, :new_library_name, :new_library_address, :library_id, :photo)
   end
 
   # list of the param names that can be used for filtering the list
