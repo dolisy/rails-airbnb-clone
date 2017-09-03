@@ -34,8 +34,6 @@ class Book < ApplicationRecord
 
   # for search
 
-  scope :status, -> (status) { where status: status }
-
   # scope :title, -> (title) { where("title like ?", "%#{title}%") }
   # scope :author, -> (author) { where("author like ?", "%#{author}%") }
   # scope :publisher, -> (publisher) { where("publisher like ?", "%#{publisher}%") }
