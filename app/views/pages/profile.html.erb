@@ -1,16 +1,15 @@
 <div class="wrapper">
-
   <!-- My Bookings -->
   <div class="bookings clearfix">
     <h2>My Bookings:</h2>
     <% @user.bookings.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
+      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
         <div class="aspect-ratio aspect-ratio--3x4">
          <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "fit" %>
+            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
           <% end %>
         </div>
-        <div class="pa1 mt2 bt b--black-100">
+        <div class="pa1 mt1 bt b--black-100">
           <a class="author db link black hover-grey" href="#">
             <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
           </a>
@@ -63,12 +62,12 @@
       <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
         <div class="aspect-ratio aspect-ratio--3x4">
          <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "fit" %>
+            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
           <% end %>
         </div>
-        <div class="pa1 mt2 bt b--black-100">
+        <div class="pa1 mt1 bt b--black-100">
           <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
+            <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
           </a>
 
           <p class="date red mb1">Return: <%= booking.checkout_date %></p>
