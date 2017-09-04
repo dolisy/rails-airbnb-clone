@@ -1,94 +1,101 @@
+<%= @user.email %>
 <div class="wrapper">
-  <!-- My Bookings -->
-  <div class="bookings clearfix">
-    <h2>My Bookings:</h2>
-    <% @user.bookings.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
-        <div class="aspect-ratio aspect-ratio--3x4">
-         <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
-          <% end %>
-        </div>
-        <div class="pa1 mt1 bt b--black-100">
-          <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
-          </a>
+<!-- My Bookings -->
+  <% if @user == current_user %>
+    <div class="bookings clearfix">
+      <h2>My Bookings:</h2>
+      <% @user.bookings.each do |booking| %>
+        <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
+          <div class="aspect-ratio aspect-ratio--3x4">
+           <% if booking.book.photo? %>
+              <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
+            <% end %>
+          </div>
+          <div class="pa1 mt1 bt b--black-100">
+            <a class="author db link black hover-grey" href="#">
+              <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
+            </a>
 
-          <p class="date red mb1">Return: <%= booking.checkout_date %></p>
-            <!-- Button trigger modal -->
+            <p class="date red mb1">Return: <%= booking.checkout_date %></p>
+              <!-- Button trigger modal -->
 
-          <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
-            Add Review
-          </a>
+            <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
+              Add Review
+            </a>
 
-          <!-- Modal -->
-          <div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
-                  <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+            <!-- Modal -->
+            <div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
+                    <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <%= simple_form_for @review do |f| %>
+                    <div class="modal-body">
+                      <%= f.error_notification %>
+                      <%= f.hidden_field :booking_id, value: booking.id %>
+                      <%= f.input :content %>
+                      <%= f.input :stars, input_html: { class: "rating" } %>
+                    </div>
+                    <div class="modal-footer">
+                      <%= f.button :submit, class: "left btn-outline" %>
+                    </div>
+                  <% end %>
+                  <%= content_for(:after_js) do %>
+                    <script>
+                      $('#review_stars').rating({'size':'xs'});
+                    </script>
+                  <% end %>
                 </div>
-                <%= simple_form_for @review do |f| %>
-                  <div class="modal-body">
-                    <%= f.error_notification %>
-                    <%= f.hidden_field :booking_id, value: booking.id %>
-                    <%= f.input :content %>
-                    <%= f.input :stars, input_html: { class: "rating" } %>
-                  </div>
-                  <div class="modal-footer">
-                    <%= f.button :submit, class: "left btn-outline" %>
-                  </div>
-                <% end %>
-                <%= content_for(:after_js) do %>
-                  <script>
-                    $('#review_stars').rating({'size':'xs'});
-                  </script>
-                <% end %>
               </div>
             </div>
           </div>
-        </div>
-      </article>
-    <% end %>
-  </div>
-
-  <!-- My Requests -->
-  <div class="bookings clearfix">
-    <h2>My Requests:</h2>
-    <% @requests.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
-        <div class="aspect-ratio aspect-ratio--3x4">
-         <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
-          <% end %>
-        </div>
-        <div class="pa1 mt1 bt b--black-100">
-          <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
-          </a>
-
-          <p class="date red mb1">Return: <%= booking.checkout_date %></p>
-            <!-- Button trigger modal -->
-
-          <div class="add tc ph1 pv1 db bg-animate ba">
-            <% if booking.status == "pending" %>
-              <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-success" %>
-              <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger" %>
-            <% else %>
-              <%= booking.status %>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+<!-- My Requests -->
+  <% if @user == current_user %>
+    <div class="bookings clearfix">
+      <h2>My Requests:</h2>
+      <% @requests.each do |booking| %>
+        <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
+          <div class="aspect-ratio aspect-ratio--3x4">
+           <% if booking.book.photo? %>
+              <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
             <% end %>
           </div>
-        </div>
-      </article>
-    <% end %>
-  </div>
+          <div class="pa1 mt1 bt b--black-100">
+            <a class="author db link black hover-grey" href="#">
+              <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
+            </a>
 
-  <!-- My Libraries -->
+            <p class="date red mb1">Return: <%= booking.checkout_date %></p>
+              <!-- Button trigger modal -->
+
+            <div class="add tc ph1 pv1 db bg-animate ba">
+              <% if booking.status == "pending" %>
+                <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-success" %>
+                <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger" %>
+              <% else %>
+                <%= booking.status %>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+<!-- My Libraries -->
   <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
-  <h2>My Libraries:</h2>
+  <% if @user == current_user %>
+    <h2>My Libraries:</h2>
+  <% else %>
+    <h2>Libraries:</h2>
+  <% end %>
   <div class="cards row clearfix">
     <% @user.libraries.each do |library| %>
       <div class="card sm-col sm-col-4">
@@ -120,14 +127,6 @@
                     <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2" %>
                   <% end %>
                 </div>
-
-<!--            <div class="item">
-                  <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
-                </div>
-
-                <div class="item">
-                  <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
-                </div> -->
                 <% library.books.each do |book| %>
                   <div class="item">
                     <% if book.photo? %>
@@ -156,6 +155,8 @@
       </div>
     <%end%>
   </div>
+
+
 </div>
 
 <!-- ##################################################### -->

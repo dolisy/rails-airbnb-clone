@@ -5,17 +5,31 @@ class PagesController < ApplicationController
   end
 
   def profile
-    @user = current_user
-    @review = Review.new(user: current_user)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @user = current_user
+    end
 
-    @requests = []
-    @user.libraries.each do |library|
+    @libraries = @user.libraries
+
+    @books = []
+    @libraries.each do |library|
       library.books.each do |book|
-        book.bookings.each do |booking|
-          @requests << booking
-        end
+        @books << book
       end
     end
+
+    @requests = []
+    @books.each do |book|
+      book.bookings.each do |booking|
+        @requests << booking
+      end
+    end
+
+    @bookings = @user.bookings
+
+    @review = Review.new(user: @user)
   end
 
   def view_all_books

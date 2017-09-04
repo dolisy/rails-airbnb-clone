@@ -41,6 +41,8 @@
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.genre %></h2>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= link_to book.library.name, library_path(book.library)%>
               </h2>
+              <h2 class="align f7 fw4 mt1 mb0 black-60"><%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %>
+              </h2>
               <dl class="mt2 f7">
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
@@ -138,6 +140,8 @@
             </div>
             <p class="mt2 f7 b f5-ns lh-copy measure mv0">Curated by:</p>
             <p class="mt0 black-80"><%= library.user.email.truncate(30) %></p>
+            <p class="mt2 f7 b f5-ns lh-copy measure mv0">Located in:</p>
+            <p class="mt0 black-80"><%= library.city %></p>
           </div>
         </article>
       </div>
