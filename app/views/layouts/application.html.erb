@@ -13,10 +13,41 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body>
+
   <%= render 'shared/navbar' %>
   <%= render 'shared/flashes' %>
   <%= yield %>
   <%= render 'shared/footer'%>
+
+  <!-- sign in modal goes here -->
+  <div class="modal" id="signupModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      <button class="close" data-dismiss="modal"> &times;</button>
+        <legend> Sign In <br> Read More</legend>
+        <%= simple_form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :email, placeholder: 'example@email.com', required: false, input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
+        <%= f.input :password, placeholder: '*****', required: false, input_html: { class: 'textinput' }, label_html: { class: 'label-text' } %>
+      </div>
+      <div class="forget form-group center">
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to "Forgot your password?", new_password_path(:user), {class: 'forgotstuff'} %><br />
+        <% end -%>
+      </div>
+      <div class="logins">
+        <%= render "devise/shared/links", resource_name: :user, resource_class: User %>
+      </div>
+      <div class="form-actions center">
+        <%= f.button :submit, "Log in", class: "btn-signup btn-outline" %>
+        <%= f.input :remember_me, input_html: { class: 'form-fonts' }, as: :boolean if devise_mapping.rememberable? %>
+      </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
   <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
   <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
