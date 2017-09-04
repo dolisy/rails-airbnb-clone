@@ -1,6 +1,6 @@
-<div class="cf ph2 ph5-ns pt3 mb2">
+<div class="cf ph2 ph5-ns pt3">
   <div class="fl w-30">
-      <h3 class="book-title f3 black lh-title fw9 mt0 pt1 pb3">Messages
+      <h3 class="book-title f3 black lh-title fw9 mt0 pt0 pb2">Messages
       </h3>
           <% @conversations.each do |conversation| %>
             <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
@@ -9,7 +9,7 @@
               <% else %>
                 <% @recipient = User.find(conversation.sender_id) %>
               <% end %>
-              <blockquote class="bq f7 ml0 mt0 pl2 black-90 focus">
+              <blockquote class="f7 ml0 mt0 black-90">
                 <% avatar_url = @recipient.facebook_picture_url || @recipient.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
                 <%= image_tag avatar_url, class: "br-100 w2 dib" %>
                 <%= link_to @recipient.email, conversation_path(conversation) %>
