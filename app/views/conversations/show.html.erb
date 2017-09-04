@@ -1,26 +1,7 @@
-<!-- <style type="text/css">
-  .grid {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 100%;
-  }
-  .all-conversations-grid {
-    /*g-r: 1 / span 1;*/
-    g-c: 1 / span 1;
-  }
-
-  .one-conversation-grid {
-    /*g-r: 1 / span 1;*/
-    g-c: 4 / span 3;
-  }
-</style> -->
-
-<div class="pa4">
-  <div class="all-conversations-grid">
-    <div class="ui segment">
-      <h3>My Conversations</h3>
-      <div class="ui list">
-        <div class="item">
+<div class="cf ph2 ph5-ns pt3 mb2">
+  <div class="fl w-30">
+      <h3 class="book-title f3 black lh-title fw9 mt0 pt1 pb3">Messages
+      </h3>
           <% @conversations.each do |conversation| %>
             <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
               <% if conversation.sender_id == current_user.id %>
@@ -28,14 +9,16 @@
               <% else %>
                 <% @recipient = User.find(conversation.sender_id) %>
               <% end %>
-              <p><%= link_to @recipient.email, conversation_path(conversation) %></p>
+              <blockquote class="bq f7 ml0 mt0 pl2 black-90 focus">
+                <% avatar_url = @recipient.facebook_picture_url || @recipient.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+                <%= image_tag avatar_url, class: "br-100 w2 dib" %>
+                <%= link_to @recipient.email, conversation_path(conversation) %>
+              </blockquote>
             <% end %>
           <% end %>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="one-conversation-grid">
-    <%= render 'private_messages/index' %>
-  </div>
+    <div class="fl w-70">
+      <%= render 'private_messages/index' %>
+    </div>
 </div>
+
