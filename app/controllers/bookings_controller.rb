@@ -56,6 +56,9 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
 
     @user = @booking.user
+
+    # conversation
+
     @messages = Message.where(booking: @booking).sort_by{ |message| message.created_at }
 
     @conversation = Conversation.find_or_create_by(sender_id: @booking.user.id, recipient_id: @booking.book.library.user.id)

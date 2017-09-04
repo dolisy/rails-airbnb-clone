@@ -35,4 +35,5 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'pages#profile'
   get '/view_all_books', to: 'pages#view_all_books'
+  get '/view_all_libraries', to: 'pages#view_all_libraries'
 end

@@ -1,78 +1,22 @@
 <div id="map"></div>
 <div class="wrapper">
   <div style="display: flex; align-items: center; justify-content: space-between;">
-    <!-- <h2>Search Results For: "<%= @search %>"</h2> -->
+    <h2>Search Results For Libraries: "<%= @search %>"</h2>
     <h2>
-      <%= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
-        <%= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
-        <%= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
-        <%= select_tag :sort_by, options_for_select(["all", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
-      <% end %>
-    </h2>
-  </div>
-  <div class="table-wrap overflow-scroll">
-<!-- books -->
-    <h2>Search Results For Books: "<%= @search %>"</h2>
-    <!-- <h2> -->
+      <!-- order -->
+      <!-- sort_by -->
       <%#= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
         <%#= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
         <%#= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
         <%#= select_tag :sort_by, options_for_select(["all", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
       <%# end %>
-    <!-- </h2> -->
+    </h2>
+  </div>
+  <div class="table-wrap overflow-scroll">
     <table class="table">
       <thead>
         <tr>
-          <th>Books</th> <th></th> <th>Rating</th> <th>Reviews</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for book in @books %>
-          <tr>
-            <td class="lg-col-2">
-              <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, width: 600, crop: :scale%>
-              <% end %>
-            </td>
-            <td>
-              <p class="title">
-                <%= link_to book.title, book_path(book)%>
-              </p>
-              <p class="f7 fw4 black-60">
-                <%= book.author %>
-              </p>
-              <p class="f7 fw4 black-60">
-                <%= book.publisher %>
-              </p>
-            </td>
-            <td>
-              <p class="title">
-                <% if book.rating == 0 %>
-                  <%= 'No Reviews' %>
-                <% else %>
-                  <%= book.rating %>
-                <% end %>
-              </p>
-            </td>
-            <td>
-              <p class="title">
-                <% if book.reviews_count == 0 %>
-                  <%= '' %>
-                <% else %>
-                  <%= book.reviews_count %>
-                <% end %>
-              </p>
-            </td>
-          </tr>
-        <%end%>
-      </tbody>
-    </table>
-<!-- libraries -->
-    <h2>Search Results For Libraries: "<%= @search %>"</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Libraries</th> <th></th> <th>---</th> <th>Number of Books</th>
+          <th></th> <th></th> <th></th> <th>Number of Books</th>
         </tr>
       </thead>
       <tbody>
@@ -88,20 +32,28 @@
                 <%= link_to library.name, library_path(library)%>
               </p>
               <p class="f7 fw4 black-60">
-                <%= library.address %>
+                <%#= book.author %>
               </p>
               <p class="f7 fw4 black-60">
-                <%=  %>
+                <%#= book.publisher %>
               </p>
             </td>
             <td>
               <p class="title">
-                <%=  %>
+                <%# if book.rating == 0 %>
+                  <%#= 'No Reviews' %>
+                <%# else %>
+                  <%#= book.rating %>
+                <%# end %>
               </p>
             </td>
             <td>
               <p class="title">
-                <%= library.books.count %>
+                <% if library.books.count == 0 %>
+                  <%= '' %>
+                <% else %>
+                  <%= library.books.count %>
+                <% end %>
               </p>
             </td>
           </tr>
@@ -110,8 +62,6 @@
     </table>
   </div>
 </div>
-
-<!-- map -->
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
@@ -142,6 +92,3 @@
     });
   <% end %>
 <% end %>
-
-
-
