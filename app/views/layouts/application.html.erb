@@ -34,6 +34,7 @@
       <div class="forget form-group center">
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
         <%= link_to "Forgot your password?", new_password_path(:user), {class: 'forgotstuff'} %><br />
+        <%= link_to "Sign up", '#', 'data-toggle'=> 'modal', 'data-target'=> '#registerModal' %><br />
         <% end -%>
       </div>
       <div class="logins">
@@ -44,6 +45,29 @@
         <%= f.input :remember_me, input_html: { class: 'form-fonts' }, as: :boolean if devise_mapping.rememberable? %>
       </div>
       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register modal goes here -->
+<div class="modal" id="registerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+      <button class="close" data-dismiss="modal"> &times;</button>
+        <%= simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :email, required: true, autofocus: true %>
+          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          <%= f.input :password_confirmation, required: true %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, "Sign up" %>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>
