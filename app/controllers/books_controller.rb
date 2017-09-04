@@ -5,8 +5,9 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @libraries = Library.all
 
-    #for search
+    #for books search
     unless params[:location] == ''
       @books = Book.near(params[:location],200)
     end
@@ -24,6 +25,25 @@ class BooksController < ApplicationController
     else
       @books = @books.order(params[:sort_by])
     end
+
+    #for libraries search
+    unless params[:location] == ''
+      @libraries = Library.near(params[:location],200)
+    end
+
+    filtering_params(params).each do |key, value|
+      @libraries = @libraries.public_send(key, value)
+    end
+
+    # if params[:sort_by] == 'all'
+    #   @books = @books.order('')
+    # elsif params[:sort_by] == 'rating'
+    #   @books = @books.sort_by { |b| -b.rating }
+    # elsif params[:sort_by] == 'library'
+    #   @books = @books.sort_by { |b| -b.library.name }
+    # else
+    #   @books = @books.order(params[:sort_by])
+    # end
 
     # for google maps
     @hash = Gmaps4rails.build_markers(@books) do |book, marker|

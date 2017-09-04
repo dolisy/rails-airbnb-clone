@@ -28,6 +28,17 @@ class PagesController < ApplicationController
       marker.infowindow render_to_string(partial: "/books/map_box", locals: { book: book })
     end
   end
+
+  def view_all_libraries
+    @libraries = Library.all
+
+    # for google maps
+    @hash = Gmaps4rails.build_markers(@libraries) do |library, marker|
+      marker.lat library.latitude
+      marker.lng library.longitude
+      marker.infowindow render_to_string(partial: "/libraries/map_box", locals: { library: library })
+    end
+  end
 end
 
 

@@ -7,6 +7,15 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.status = "confirmed"
     @booking.save
+
+    @private_message = PrivateMessage.new(
+      conversation_id: @booking.conversation.id,
+      body: "#{@booking.book.library.user.email} has accepted your request for this book: #{@booking.book.title}",
+      user_id: current_user.id,
+      booking_id: @booking.id
+    )
+    @private_message.save
+
     redirect_to request.referer.present? ? request.referer : default_path
   end
 
@@ -14,6 +23,15 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.status = "declined"
     @booking.save
+
+    @private_message = PrivateMessage.new(
+      conversation_id: @booking.conversation.id,
+      body: "#{@booking.book.library.user.email} has declined your request for this book: #{@booking.book.title}",
+      user_id: current_user.id,
+      booking_id: @booking.id
+    )
+    @private_message.save
+
     redirect_to request.referer.present? ? request.referer : default_path
   end
 
@@ -24,7 +42,7 @@ class BookingsController < ApplicationController
 
     @private_message = PrivateMessage.new(
       conversation_id: @booking.conversation.id,
-      body: "Please confirm my booking",
+      body: "#{@booking.user.email} is requesting this book: #{@booking.book.title}",
       user_id: current_user.id,
       booking_id: @booking.id
     )
@@ -38,6 +56,9 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
 
     @user = @booking.user
+
+    # conversation
+
     @messages = Message.where(booking: @booking).sort_by{ |message| message.created_at }
 
     @conversation = Conversation.find_or_create_by(sender_id: @booking.user.id, recipient_id: @booking.book.library.user.id)
