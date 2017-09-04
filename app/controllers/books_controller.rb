@@ -56,6 +56,18 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
 
+    # for booking_dates
+    @booking_dates = []
+    @book.bookings.each do |booking|
+      if booking.checkin_date && booking.checkout_date
+        date = booking.checkin_date
+        until date > booking.checkout_date
+          @booking_dates << "#{date.year}-#{date.month}-#{date.day}"
+          date += 1
+        end
+      end
+    end
+
     #show map
     @hash = Gmaps4rails.build_markers(@book) do |book, marker|
     marker.lat book.library.latitude
