@@ -28,17 +28,17 @@
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to profile_path, method: :get do %>
-                <i class="fa fa-user" aria-hidden="true"></i> <%= t(".sign_in", default: "My Profile") %>
+               <%= t(".sign_in", default: "My Profile") %>
               <% end %>
             </li>
             <li>
              <%= link_to conversations_path, method: :get do  %>
-              <i class="fa fa-envelope-open-o" aria-hidden="true"></i> <%= t(".sign_in", default: "Messages") %>
+              <%= t(".sign_in", default: "Inbox") %>
              <% end %>
            </li>
            <li>
              <%= link_to destroy_user_session_path, method: :delete do %>
-              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+              <%= t(".sign_out", default: "Log out") %>
              <% end %>
            </li>
          </ul>

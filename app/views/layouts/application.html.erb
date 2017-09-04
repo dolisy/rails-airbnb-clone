@@ -25,23 +25,32 @@
     <div class="modal-content">
       <div class="modal-body">
       <button class="close" data-dismiss="modal"> &times;</button>
-        <legend> Sign In <br> Read More</legend>
+        <legend>&nbsp;&nbsp;Sign In</legend>
         <%= simple_form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
       <div class="form-inputs">
-        <%= f.input :email, placeholder: 'example@email.com', required: false, input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
+        <%= f.input :email, autofocus: true, placeholder: 'user@email.com', required: false, input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
         <%= f.input :password, placeholder: '*****', required: false, input_html: { class: 'textinput' }, label_html: { class: 'label-text' } %>
       </div>
       <div class="forget form-group center">
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
         <%= link_to "Forgot your password?", new_password_path(:user), {class: 'forgotstuff'} %><br />
-        <%= link_to "Sign up", '#', 'data-toggle'=> 'modal', 'data-target'=> '#registerModal' %><br />
+        <%= link_to "Sign up", '#', class: 'signup', 'data-toggle'=> 'modal', 'data-target'=> '#registerModal', 'id'=> 'signupbutton' %><br />
         <% end -%>
       </div>
+
       <div class="logins">
-        <%= render "devise/shared/links", resource_name: :user, resource_class: User %>
+
+
+          <%#= link_to "Log in with Facebook", user_facebook_omniauth_authorize_path, class: 'omniauth facebook' %>
+          <%= render "devise/shared/links", resource_name: :user, resource_class: User %>
+
+
+
+         <%#= link_to "Log in with Google", user_google_oauth2_omniauth_authorize_path, class: 'omniauth google' %>
+        </div>
       </div>
       <div class="form-actions center">
-        <%= f.button :submit, "Log in", class: "btn-signup btn-outline" %>
+        <%= f.button :submit, "Log in", class: "btn-outline" %>
         <%= f.input :remember_me, input_html: { class: 'form-fonts' }, as: :boolean if devise_mapping.rememberable? %>
       </div>
       <% end %>
@@ -56,16 +65,17 @@
     <div class="modal-content">
       <div class="modal-body">
       <button class="close" data-dismiss="modal"> &times;</button>
+      <legend>&nbsp;&nbsp;Sign Up</legend>
         <%= simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
         <%= f.error_notification %>
 
         <div class="form-inputs">
-          <%= f.input :email, required: true, autofocus: true %>
-          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-          <%= f.input :password_confirmation, required: true %>
+          <%= f.input :email, required: true, autofocus: true, input_html: { class: 'textinput' },label_html: { class: 'label-text' }  %>
+          <%= f.input :password, required: true, input_html: { class: 'textinput' },label_html: { class: 'label-text' }, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          <%= f.input :password_confirmation, required: true, input_html: { class: 'textinput' }, label_html: { class: 'label-text' } %>
         </div>
         <div class="form-actions">
-          <%= f.button :submit, "Sign up" %>
+          <%= f.button :submit, "Sign up", class: "btn-outline"%>
         </div>
         <% end %>
       </div>
