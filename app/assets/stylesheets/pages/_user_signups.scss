@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400|Nunito|Roboto');
+// * {
+//   border: thin solid red;
+// }
+
+.modal-body {
+   background-image: url(raindrop-backdrop.png);
+  background-size: cover;
+  position: relative;
+  opacity: 0.85;
+}
+
+legend {
+  margin-bottom: 80px;
+  color: rgb(31, 30, 30);
+}
+
+.form-fonts {
+    font-family: 'Quicksand', 'sans-serif';
+}
+
+.textinput {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: thin solid #da3c3c !important;
+  font-family: 'Quicksand', 'sans-serif';
+}
+.label-text {
+  font-family: 'Nunito', serif;
+  font-weight: 500;
+}
+input::-webkit-input-placeholder {
+  color: rgba(3, 3, 3, 0.84) !important;
+}
+// .signup {
+//   position: absolute;
+//   bottom: 30px;
+//   left: 30px;
+//   padding: 0px 25px;
+//   border-bottom: thin solid black;
+//   font-family: 'Quicksand', 'sans-serif';
+//   font-size: 21px;
+//   font-weight: bold;
+// }
+.forgotstuff {
+  font-size: 12px;
+}
+.forget.form-group {
+  margin-bottom: 0px;
+}
+
+.logins {
+  display: flex;
+  justify-content: space-around;
+}
+
+.omniauth {
+  font-family: 'Nunito', serif;
+  font-weight: 400;
+  color: rgba(236, 234, 234, 0.9);
+  border: 1.5px solid white;
+    // &.facebook {
+    //   background-color: #3b5998;
+    //   color: white;
+    //   padding: 5px 10px;
+    //   font-family: 'Roboto', sans-serif;
+    //   font-weight: bold;
+    // }
+    // &.google {
+    //   background-color: #DB4437;
+    //   color: white;
+    //   padding: 5px 10px;
+    //   font-family: 'Arial', sans-serif;
+    // }
+
+
+}
+.form-group.email.optional.user_email {
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 2px;
+}

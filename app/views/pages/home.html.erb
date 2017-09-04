@@ -4,8 +4,11 @@
       <h2 class="pl4 banner-copy">Discover</h2>
       <h2 class="pl4 banner-copy">Borrow</h2>
       <h2 class="pl4 banner-copy">Inspire</h2>
-      <h2 class="pl4 banner-copy-yellow">Join.</h2>
+      <h2 id="join" data-toggle="modal", data-target="#signupModal">
+      <%= link_to 'Join.', '#', :style => 'color: green; font-weight: 500;'%>
+       </h2>
       <p class="pl4 banner-tagline">Find books on the web by browsing your neighbor's library.</p>
+
     </div>
   </div>
 </div>
@@ -24,23 +27,21 @@
 
   <div class="cards row clearfix">
       <% Book.last(6).each do |book| %>
-        <div class="card col sm-col-6">
-          <%= link_to book_path(book), class: "link dt w-100 bt b--black-100 pt2 mt1 dim black" do %>
+        <div class="card col sm-col-6 dt w-100 bt b--black-100 pt2">
+          <%= link_to book_path(book), class: "link mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
                 <%= cl_image_tag book.photo.path, height: 200, crop: :fill %>
               <% else %>
                 <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", height: 200, crop: :fill %>
               <% end %>
+            <% end %>
             </div>
             <div class="text-flex dtc v-top pl3">
-              <h1 class="f6 f5-ns fw6 lh-title black mv0 mb1"><%= book.title.truncate(33) %></h1>
+              <h1 class="f6 f5-ns fw6 black mv0 mb1"><%= link_to book.title.truncate(33), book_path(book) %></h1>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.author %></h2>
               <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.publisher %></h2>
-              <h2 class="align f7 fw4 mt1 mb0 black-60">
-              <%= book.genre %>
-              <%= link_to book.library.name, library_path(book.library) %>
-              <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %>
+              <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.genre %></h2>
               <dl class="mt2 f7">
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
@@ -50,9 +51,12 @@
                     Rating: <%= book.rating %> / 5.0
                   <% end %>
                 </dd>
+                <h2 class="align f7 fw4 mt1 mb0 black-90">Curated in: <%= link_to book.library.name, library_path(book.library)%>
+                </h2>
+                <h2 class="align f7 fw4 mt1 mb0 black-90">Added by: <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %>
+                </h2>
               </dl>
             </div>
-          <% end %>
         </div>
       <% end %>
   </div>
@@ -137,10 +141,8 @@
               </a>
               <!-- end carousel -->
             </div>
-            <p class="mt2 f7 b f5-ns lh-copy measure mv0">Curated by:</p>
-            <p class="mt0 black-80"><%= library.user.email.truncate(30) %></p>
-            <p class="mt2 f7 b f5-ns lh-copy measure mv0">Located in:</p>
-            <p class="mt0 black-80"><%= library.city %></p>
+            <p class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to library.user.email.truncate(30), profile_path(user_id: library.user_id)%> </p>
+            <p class="align f7 fw4 mt1 mb0 black-90">Located in: <%= library.city %></p>
           </div>
         </article>
       </div>
