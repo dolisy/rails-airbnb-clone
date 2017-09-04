@@ -100,23 +100,28 @@
           <%= f.error_notification %>
           <%= f.input :title, placeholder: 'Title', label:false %>
           <%= f.input :author, placeholder: 'Author', label:false %>
-          <%= f.input :publisher, as: :hidden, placeholder: 'Publisher', label:false %>
-          <%= f.input :creator, as: :hidden, placeholder: 'Creator', label:false %>
-          <%= f.input :edition, as: :hidden, placeholder: 'Edition', label:false %>
           <%= f.input :description, placeholder: 'Description', label:false %>
-          <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
           <%= f.input :published_language, placeholder: 'Published Language', label:false %>
-          <%= f.input :original_language, placeholder: 'Original Language', label:false %>
+          <div class = "mb1" id="morebookdetails">
+            <p>More Details +</p>
+          </div>
+          <div id="bookdetails">
+            <%= f.input :publisher, placeholder: 'Publisher', label:false %>
+            <%= f.input :creator, placeholder: 'Creator', label:false %>
+            <%= f.input :edition, placeholder: 'Edition', label:false %>
+            <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
+            <%= f.input :original_language, placeholder: 'Original Language', label:false %>
+          </div>
 
           <% if @library.present? %>
             <p class="f6 b db mb1"><%= 'Library' %></p>
             <%#= f.association :library, collection: Library.where(user: current_user).where(name: @library.name), label_html: { class: '' }, label:false %>
             <%#= f.association :library, input_html: {value: f.object.library || Library.where(user: current_user).where(name: @library.name).first }, label_html: { class: 'measure f7' }, label:false %>
           <% else %>
-            <p class="f6 b db mb1"><%= 'Select a Library or add a new one' %></p>
+            <p class="f6 b db mb1 mt1"><%= 'Select Or Create a New Library' %></p>
             <%= f.association :library, collection: Library.where(user: current_user), placeholder: 'Select Library', label_html: { class: 'measure f7' }, label:false %>
-            <div id="addlibrary" class="btn">
-              <p>Add Library +</p>
+            <div class= "mb1" id="addlibrary">
+              <p>Create New Library +</p>
             </div>
             <div id="newlibrary">
               <%= f.input :new_library_name, placeholder: 'New Library Name', label:false %>
@@ -124,22 +129,12 @@
             </div>
           <% end %>
 
-          <%= f.input :photo, as: :attachinary, label_html: { class: 'measure f7' }%>
+          <%= f.input :photo, as: :attachinary, label: "Book Cover", label_html: { class: 'measure f6 b db mb1 mt1' }%>
 
           <%= f.submit 'Create', class: "btn-outline" %>
       <% end %>
     </div>
 </article>
-
-<script type="text/javascript">
-  $(function() {
-    $('#newlibrary').hide();
-    $('#addlibrary').click(function(event){
-      event.preventDefault();
-      $('#newlibrary').toggle();
-    });
-  });
-</script>
 
 
 
