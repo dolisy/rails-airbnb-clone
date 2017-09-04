@@ -32,26 +32,56 @@
   </div>
   <!-- available dates START-->
   <% content_for(:after_js) do %>
-    <%= javascript_tag do %>
-      var dateDisabled = <%=raw @booking_dates %>;
+    <script>
+      $(document).ready( function() {
+        var dateDisabled = <%=raw @booking_dates %>;
 
-      $('.datepicker').datepicker({
-         // <-- you can pass options here! Get them on the demo page by playing with settings
-        maxViewMode: 2,
-        todayBtn: "linked",
-        orientation: "bottom auto",
-        autoclose: true,
-        format: "dd/mm/yyyy",
-        beforeShowDay: function(date)
-          {
-            if ($.inArray(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(), dateDisabled) !== -1)
+        $('.datepicker').datepicker({
+          maxViewMode: 2,
+          todayBtn: "linked",
+          orientation: "bottom auto",
+          autoclose: true,
+          format: "dd/mm/yyyy",
+          beforeShowDay: function(date)
             {
-              return false;
+              if ($.inArray(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(), dateDisabled) !== -1)
+              {
+                return false;
+              }
+              return;
             }
-            return;
-          }
+        });
+
+        // var dateIn = $('#txtDateIn').val();
+
+        // $('.datepicker').on('click', function(event) {
+        //   var dateIn = $('#txtDateIn').val();
+        //   console.log(dateIn);
+
+        //   var dateAbledOut = ['2017-9-24'];
+        //   console.log(dateAbledOut);
+
+        //   dateAbledOut.push(dateIn.charAt(6) + dateIn.charAt(7) + dateIn.charAt(8) + dateIn.charAt(9) + '-' + dateIn.charAt(3) + dateIn.charAt(4) + '-' + dateIn.charAt(0) + dateIn.charAt(1));
+        //   console.log(dateAbledOut);
+
+        //   $('#txtDateOut').datepicker({
+        //     maxViewMode: 2,
+        //     todayBtn: "linked",
+        //     orientation: "bottom auto",
+        //     autoclose: true,
+        //     format: "dd/mm/yyyy",
+        //     beforeShowDay: function(date)
+        //       {
+        //         if ($.inArray(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(), dateAbledOut) !== -1)
+        //         {
+        //           return;
+        //         }
+        //           return false;
+        //       }
+        //   });
+        // });
       });
-     <% end %>
+    </script>
   <% end %>
   <!-- available dates END-->
 </article>
