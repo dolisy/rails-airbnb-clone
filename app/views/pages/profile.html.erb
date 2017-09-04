@@ -1,4 +1,5 @@
 <%= @user.email %>
+<a href="#library">My Library</a>
 <div class="wrapper">
 <!-- My Bookings -->
   <% if @user == current_user %>
@@ -92,7 +93,9 @@
 <!-- My Libraries -->
   <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
   <% if @user == current_user %>
-    <h2>My Libraries:</h2>
+    <div id="library">
+      <h2>My Libraries:</h2>
+    </div>
   <% else %>
     <h2>Libraries:</h2>
   <% end %>
@@ -102,7 +105,7 @@
         <article class="box left mw5 mw6-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
-                        <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
+              <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
             <li data-target="<%= library.id %>" data-slide-to="1"></li>

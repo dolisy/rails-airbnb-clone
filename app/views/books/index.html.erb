@@ -44,6 +44,12 @@
               <p class="f7 fw4 black-60">
                 <%= book.publisher %>
               </p>
+              <p class="f7 fw4 mt2 black-60">
+                Curated in: <%= link_to book.library.name, library_path(book.library)  %>
+              </p>
+              <p class="f7 fw4 black-60">
+                Added by: <%= link_to book.library.user.email.truncate(30), profile_path(user_id: book.library.user_id)  %>
+              </p>
             </td>
             <td>
               <p class="title">
