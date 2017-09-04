@@ -28,11 +28,11 @@
           <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
           <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-<!--             <li>
+            <li>
               <%= link_to profile_path do %>
                 <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
               <% end %>
-            </li> -->
+            </li>
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
