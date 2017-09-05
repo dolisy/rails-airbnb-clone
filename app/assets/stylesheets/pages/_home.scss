@@ -92,9 +92,9 @@ a {
 
 .banner-tagline {
   color: black;
-  font-size: 14px;
-  font-weight: 100;
+  font-weight: 200;
   margin-right: 0em;
+  padding-top: 3em;
 }
 
 .banner h1 {
@@ -102,16 +102,16 @@ a {
   font-family: "arial";
 }
 
-.banner-tagline {
-  font-size: 14px;
-  padding-top: 3em;
-}
 
 .banner-copy {
   margin: 0 auto;
   color: black;
   font-size: 70px;
+   &.green {
+    color: green;
+   }
 }
+
 
 .banner-content {
   margin-top: -2em;

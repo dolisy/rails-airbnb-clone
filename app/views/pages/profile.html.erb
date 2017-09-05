@@ -93,6 +93,7 @@
   <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
   <% if @user == current_user %>
     <h2>My Libraries:</h2>
+    <%= link_to "Create Library", new_library_path %>
   <% else %>
     <h2>Libraries:</h2>
   <% end %>
