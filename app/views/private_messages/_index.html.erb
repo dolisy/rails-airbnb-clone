@@ -34,9 +34,9 @@
 <% end %>
 
 <% if @conversation %>
-  <%= form_for [@conversation, @private_message], html: {class: "ml2 w-70 black-80"} do |f| %>
+  <%= form_for [@conversation, @private_message], html: {class: "ml1 w-70 black-80"} do |f| %>
     <label for="password" class="mt2 f8 b tl db mb1">Write your message:</label>
-    <%= f.text_area :body, class: "mb1 form-control" %>
+    <%= f.text_area :body, class: "fl mb1 form-control" %>
     <%= f.text_field :user_id, value: current_user.id, type: "hidden", class:"input-reset ba b--black-20 pa2 mb1 db w-100" %>
     <div>
       <%= f.submit "Send Message", class: "center ui blue labeled submit icon button btn-outline" %>
