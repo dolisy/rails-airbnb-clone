@@ -26,9 +26,10 @@
 
 
 // Override Boostrap Bullshit
-
 html {
   font-size: 24px;
+  position: relative !important;
+  min-height: 100% !important;
 }
 
 a:link{

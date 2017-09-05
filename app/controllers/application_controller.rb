@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :authenticate_user!, :store_current_location, :unless => :devise_controller?
-
+  def default_url_options
+    { host: ENV["HOST"] || "localhost:3000"}
+  end
   private
 
   # override the devise helper to store the current location so we can

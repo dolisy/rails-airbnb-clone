@@ -6,9 +6,9 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, class: "form", method: :get) do %>
-  <%= text_field_tag :term, params[:term], placeholder: 'Search here..', class: "" %>
-  <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Location here..', class: "" %>
-  <%= submit_tag 'Search', name: nil, class: "btn btn-outline " %>
+  <%= text_field_tag :term, params[:term], placeholder: 'Ex: Also Sprach Zarathoustra', class: "submissionfield-term" %>
+  <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Ex: Berlin, Kochstrasse', class: "submissionfield-location" %>
+  <%= submit_tag 'Browse Books', name: nil, class: "btn btn-outline" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -17,27 +17,29 @@
     <% if user_signed_in? %>
 
     <!-- Links when logged in -->
-      <%= link_to "Add Book", new_book_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Lend a Book (+)", new_book_path, class: " navbar-wagon-item navbar-wagon-link" %>
 
     <!-- Avatar with dropdown menu -->
-      <div class="navbar-wagon-item">
+      <div class="navbar-wagon-item ">
         <div class="dropdown">
-          <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+          <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
+
           <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to profile_path, method: :get do %>
-               <%= t(".sign_in", default: "My Profile") %>
+               <%= t(".sign_in", default: "Profile") %>
               <% end %>
             </li>
             <li>
              <%= link_to conversations_path, method: :get do  %>
-              <%= t(".sign_in", default: "Inbox") %>
+              <%= t(".sign_in", default: "Messages") %>
              <% end %>
            </li>
+           <li class="log-out-break"></li>
            <li>
              <%= link_to destroy_user_session_path, method: :delete do %>
-              <%= t(".sign_out", default: "Log out") %>
+              <%= t(".sign_out", default: "Log Out") %>
              <% end %>
            </li>
          </ul>
@@ -54,10 +56,25 @@
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><%= link_to "New Library", new_library_path %></li>
-        <li><%= link_to "New Book", new_book_path %></li>
-        <li><%= link_to "Conversations", conversations_path %></li>
-        <li><%= link_to "Profile", profile_path %></li>
+        <li>
+          <%= link_to "Add Book to Libraries", new_book_path %>
+        </li>
+        <li>
+          <%= link_to profile_path, method: :get do %>
+            <%= t(".sign_in", default: "Profile") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to conversations_path, method: :get do  %>
+            <%= t(".sign_in", default: "Messages") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+            <%= t(".sign_out", default: "Log Out") %>
+          <% end %>
+        </li>
+
       </ul>
     </div>
   </div>

@@ -1,3 +1,6 @@
+<% content_for :meta_title, "Check out #{@library.name} on #{DEFAULT_META["meta_product_name"]}"  %>
+<% content_for :meta_description, "Browse through over 1200+ collections of libraries and find the book that reads to you the most right in your area" %>
+<% content_for :meta_image, cloudinary_url(@library.books.first.photo) %>
 <div class="wrapper">
   <article class="pt3 f4 pb1 dt w-100 bb b--black-70">
     <% if @library.user == current_user %>
@@ -30,3 +33,17 @@
     <% end %>
   </section>
 </div>
+<article class="cf ph1 ph5-ns pv1">
+  <div class="dt w-100 bt b--black-100 pt1 mt1 dt dt--fixed">
+    <div class="fw6 dtc tl">Curated by:
+      <p class="f7 copy mid-gray"><%= link_to @library.user.email, profile_path(@profile), class:"f7 copy mid-gray"%></p>
+    </div>
+    <div class="fw6 dtc tl">Located in:
+      <p class="f7 copy mid-gray">
+        <% if @library.city %>
+          <%=@library.city.capitalize%>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</article>

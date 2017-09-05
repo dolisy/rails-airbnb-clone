@@ -41,7 +41,7 @@ class Book < ApplicationRecord
   # scope :isbn, -> (isbn) { where("isbn like ?", "%#{isbn}%") }
   # scope :description, -> (description) { where("description like ?", "%#{description}%") }
 
-  scope :term, -> (term) { where("title ILIKE :search OR author ILIKE :search OR publisher ILIKE :search OR genre ILIKE :search OR isbn ILIKE :search OR description ILIKE :search", search: "%#{term}%") }
+  scope :term, -> (term) { where("title ILIKE :search OR author ILIKE :search OR isbn ILIKE :search OR published_language ILIKE :search OR description ILIKE :search", search: "%#{term}%") }
 
   scope :location, -> (location) { where("location like ?", "%#{location}%") }
 
@@ -67,7 +67,7 @@ class Book < ApplicationRecord
     if reviews_count == 0
       return average = 0
     else
-      return average = sum.fdiv(reviews_count).round(1)
+      return average = sum.fdiv(reviews_count).round(0)
     end
   end
 

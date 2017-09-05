@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :sent_messages, :class_name => 'Message', :foreign_key => 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'recipient_id'
 
+  scope :term, -> (term) { where("first_name ILIKE :search OR last_name ILIKE :search ", search: "%#{term}%") }
+
   #For Active Admin
     def  name
       "#{id} - #{email}"
