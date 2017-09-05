@@ -32,6 +32,18 @@ class PagesController < ApplicationController
     @review = Review.new(user: @user)
   end
 
+  def edit_profile
+    @user = current_user
+  end
+
+  def update_profile
+    @user = User.find(params[:id])
+
+    @user.update(user_params)
+
+    redirect_to profile_path(@user)
+  end
+
   def view_all_books
     @books = Book.all
 
