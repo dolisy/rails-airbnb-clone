@@ -1,3 +1,6 @@
+<% content_for :meta_title, "Check out #{@library.name} on #{DEFAULT_META["meta_product_name"]}"  %>
+<% content_for :meta_description, "Browse through over 1200+ collections of libraries and find the book that reads to you the most right in your area" %>
+<% content_for :meta_image, cloudinary_url(@library.books.first.photo) %>
 <div class="wrapper">
   <article class="pt3 f4 pb1 dt w-100 bb b--black-70">
     <% if @library.user == current_user %>
