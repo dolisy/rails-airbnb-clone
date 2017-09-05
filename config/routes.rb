@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :conversations, only: [] do
+    member do
+      patch "read", to: "conversations#read"
+    end
+  end
+
   resources :reviews, only: :create
 
   resources :conversations do
