@@ -26,14 +26,26 @@ class BooksController < ApplicationController
       @books = @books.order(params[:sort_by])
     end
 
-    #for libraries search
-    unless params[:location] == ''
-      @libraries = Library.near(params[:location],200)
-    end
+    # #for libraries search
+    # unless params[:location] == ''
+    #   @libraries = Library.near(params[:location],200)
+    # end
 
-    filtering_params(params).each do |key, value|
-      @libraries = @libraries.public_send(key, value)
-    end
+    # filtering_params(params).each do |key, value|
+    #   @libraries = @libraries.public_send(key, value)
+    # end
+
+    # if params[:sort_by] == 'all'
+    #   @libraries = @libraries.order('')
+    # elsif params[:sort_by] == 'rating'
+    #   @libraries = @libraries.sort_by { |b| -b.rating }
+    # elsif params[:sort_by] == 'library'
+    #   @libraries = @libraries.sort_by { |b| -b.library.name }
+    # else
+    #   @libraries = @libraries.order(params[:sort_by])
+    # end
+
+
 
     # if params[:sort_by] == 'all'
     #   @books = @books.order('')

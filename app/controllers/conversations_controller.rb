@@ -1,4 +1,17 @@
 class ConversationsController < ApplicationController
+  def read
+    @conversation = Conversation.find(params[:id])
+
+    @conversation.private_messages.each do |private_message|
+      if private_message.user != current_user
+        private_message.read = true
+        private_message.save
+      end
+    end
+
+    redirect_to conversation_path(@conversation)
+  end
+
   def index
     @conversations = []
     Conversation.all.each do |conversation|
@@ -10,25 +23,28 @@ class ConversationsController < ApplicationController
       end
     end
 
+    # @conversations.sort_by { |conversation| conversation.updated_at }
+
     @conversation = @conversations.last
 
     begin
-      @private_messages = @conversation.private_messages
-      if @private_messages.length > 10
-        @over_ten = true
-        @private_messages = @private_messages[-10..-1]
+      @private_messages = @conversation.private_messages.order('created_at')
+
+      if @private_messages.length > 5
+        @over_five = true
+        @private_messages = @private_messages[-5..-1]
       end
 
       if params[:m]
-        @over_ten = false
+        @over_five = false
         @private_messages = @conversation.private_messages
       end
 
-      if @private_messages.last
-        if @private_messages.last.user_id != current_user.id
-          @private_messages.last.read = true;
-        end
-      end
+      # if @private_messages.last
+      #   if @private_messages.last.user_id != current_user.id
+      #     @private_messages.last.read = true;
+      #   end
+      # end
 
       @private_message = @conversation.private_messages.new
     rescue
@@ -56,28 +72,31 @@ class ConversationsController < ApplicationController
       end
     end
 
+    # @conversations.sort_by { |conversation| conversation.updated_at }
+
     @conversation = Conversation.find(params[:id])
 
-    @conversations.delete(@conversation)
+    # @conversations.delete(@conversation)
 
-    @conversations << @conversation
+    # @conversations << @conversation
 
-    @private_messages = @conversation.private_messages
-    if @private_messages.length > 10
-      @over_ten = true
-      @private_messages = @private_messages[-10..-1]
+    @private_messages = @conversation.private_messages.order('created_at')
+
+    if @private_messages.length > 5
+      @over_five = true
+      @private_messages = @private_messages[-5..-1]
     end
 
     if params[:m]
-      @over_ten = false
+      @over_five = false
       @private_messages = @conversation.private_messages
     end
 
-    if @private_messages.last
-      if @private_messages.last.user_id != current_user.id
-        @private_messages.last.read = true;
-      end
-    end
+    # if @private_messages.last
+    #   if @private_messages.last.user_id != current_user.id
+    #     @private_messages.last.read = true;
+    #   end
+    # end
 
     @private_message = @conversation.private_messages.new
   end
