@@ -42,7 +42,7 @@ class Library < ApplicationRecord
 
   # for search
 
-  scope :term, -> (term) { where("name ILIKE :search OR user ILIKE :search ", search: "%#{term}%") }
+  scope :term, -> (term) { where("name ILIKE :search ", search: "%#{term}%") }
 
   scope :location, -> (location) { where("location like ?", "%#{location}%") }
 

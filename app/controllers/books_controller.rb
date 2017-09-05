@@ -6,26 +6,86 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
     @libraries = Library.all
+    @users = User.all
 
-    #for books search
     unless params[:location] == ''
       @books = Book.near(params[:location],200)
+      @libraries = Library.near(params[:location],200)
     end
 
     filtering_params(params).each do |key, value|
       @books = @books.public_send(key, value)
+      @libraries = @libraries.public_send(key, value)
+      @users = @users.public_send(key, value)
     end
 
-    if params[:sort_by] == 'all'
-      @books = @books.order('')
-    elsif params[:sort_by] == 'rating'
-      @books = @books.sort_by { |b| -b.rating }
-    elsif params[:sort_by] == 'library'
-      @books = @books.sort_by { |b| -b.library.name }
+    @other_books = []
+
+    @users.each do |user|
+      user.libraries.each do |library|
+        library.books.each do |book|
+          @other_books << book
+        end
+      end
+    end
+
+    @libraries.each do |library|
+      library.books.each do |book|
+        @other_books << book
+      end
+    end
+
+    @books.each do |book|
+      @other_books << book
+    end
+    @other_books = @other_books.uniq
+    @books = @other_books
+
+    if params[:order] == 'descending'
+      if params[:sort_by] == 'sort by'
+        @books = @books.sort_by { |b| - b.id }
+      elsif params[:sort_by] == 'title'
+        @books = @books.sort_by { |b| - b.title }
+      elsif params[:sort_by] == 'author'
+        @books = @books.sort_by { |b| - b.author }
+      elsif params[:sort_by] == 'isbn'
+        @books = @books.sort_by { |b| - b.isbn }
+      elsif params[:sort_by] == 'published language'
+        @books = @books.sort_by { |b| - b.published_language }
+      elsif params[:sort_by] == 'rating'
+        @books = @books.sort_by { |b| b.rating }
+      elsif params[:sort_by] == 'reviews'
+        @books = @books.sort_by { |b| - b.reviews_count }
+      elsif params[:sort_by] == 'curated in'
+        @books = @books.sort_by { |b| - b.library.name }
+      elsif params[:sort_by] == 'curated by'
+        @books = @books.sort_by { |b| - b.library.user.email }
+      else
+        @books = @books.sort_by { |b| - b.id }
+      end
     else
-      @books = @books.order(params[:sort_by])
+      if params[:sort_by] == 'sort by'
+        @books = @books.sort_by { |b| b.id }
+      elsif params[:sort_by] == 'title'
+        @books = @books.sort_by { |b| b.title }
+      elsif params[:sort_by] == 'author'
+        @books = @books.sort_by { |b| b.author }
+      elsif params[:sort_by] == 'isbn'
+        @books = @books.sort_by { |b| b.isbn }
+      elsif params[:sort_by] == 'published language'
+        @books = @books.sort_by { |b| b.published_language }
+      elsif params[:sort_by] == 'rating'
+        @books = @books.sort_by { |b| - b.rating }
+      elsif params[:sort_by] == 'reviews'
+        @books = @books.sort_by { |b| b.reviews_count }
+      elsif params[:sort_by] == 'curated in'
+        @books = @books.sort_by { |b| b.library.name }
+      elsif params[:sort_by] == 'curated by'
+        @books = @books.sort_by { |b| b.library.user.email }
+      else
+        @books = @books.sort_by { |b| b.id }
+      end
     end
-
     # #for libraries search
     # unless params[:location] == ''
     #   @libraries = Library.near(params[:location],200)
@@ -370,7 +430,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :genre, :author, :publisher, :description, :publication_date, :creator, :edition, :release_date, :number_of_pages, :published_language, :original_language, :new_library_name, :new_library_address, :library_id, :photo)
+    params.require(:book).permit(:title, :genre, :author, :isbn, :publisher, :description, :publication_date, :creator, :edition, :release_date, :number_of_pages, :published_language, :original_language, :new_library_name, :new_library_address, :library_id, :photo)
   end
 
   # list of the param names that can be used for filtering the list
