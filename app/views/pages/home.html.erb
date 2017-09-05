@@ -3,16 +3,15 @@
     <div class="clearfix">
       <h2 class="pl4 banner-copy">Discover</h2>
       <h2 class="pl4 banner-copy">Borrow</h2>
-      <h2 class="pl4 banner-copy">Inspire</h2>
+      <h2 class="pl4 banner-copy">Lend</h2>
       <% if user_signed_in? %>
-        <h2 class="pl4 banner-copy green"> Join.</h2>
+        <h2 class="pl4 banner-copy green">Join.</h2>
       <% else %>
         <h2 id="join" data-toggle="modal", data-target="#signupModal">
-        <%= link_to 'Join.', '#', :style => 'color: green; font-weight: 500;'%>
+          <%= link_to 'Join.', '#', :style => 'color: green; font-weight: 500;'%>
         </h2>
       <% end %>
       <h5 class="banner-tagline">Find books on the web through browsing your neighbor's library.</h5>
-
     </div>
   </div>
 </div>
@@ -43,10 +42,14 @@
             </div>
             <div class="text-flex dtc v-top pl3">
               <h1 class="f6 f5-ns fw6 black mv0 mb1"><%= link_to book.title.truncate(33), book_path(book) %></h1>
-              <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.author %></h2>
-              <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.publisher %></h2>
-              <h2 class="align f7 fw4 mt1 mb0 black-60"><%= book.genre %></h2>
-              <dl class="mt2 f7">
+              <h2 class="align f7 fw4 mt1 mb0 black-60">
+                <% if book.author != "" %>
+                  <%= book.author %>
+                <% else %>
+                  <p style="color: white"> author </p>
+                <% end %>
+              </h2>
+              <dl class="mt3 f7">
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
                   <% if book.rating == 0 %>
@@ -145,8 +148,12 @@
               </a>
               <!-- end carousel -->
             </div>
-            <p class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to library.user.email.truncate(30), profile_path(user_id: library.user_id)%> </p>
-            <p class="align f7 fw4 mt1 mb0 black-90">Located in: <%= library.city %></p>
+            <% if library.city.to_s == "" %>
+              <h2 class="align f7 fw4 mt1 mb0 white-90">Located in:</h2>
+            <% else %>
+              <h2 class="align f7 fw4 mt1 mb0 black-90">Located in:  <%= library.city %></h2>
+            <% end %>
+            <h2 class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to library.user.email, profile_path(user_id: library.user_id) %></h2>
           </div>
         </article>
       </div>

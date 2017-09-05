@@ -41,50 +41,26 @@ class BooksController < ApplicationController
     @other_books = @other_books.uniq
     @books = @other_books
 
-    if params[:order] == 'descending'
-      if params[:sort_by] == 'sort by'
-        @books = @books.sort_by { |b| - b.id }
-      elsif params[:sort_by] == 'title'
-        @books = @books.sort_by { |b| - b.title }
-      elsif params[:sort_by] == 'author'
-        @books = @books.sort_by { |b| - b.author }
-      elsif params[:sort_by] == 'isbn'
-        @books = @books.sort_by { |b| - b.isbn }
-      elsif params[:sort_by] == 'published language'
-        @books = @books.sort_by { |b| - b.published_language }
-      elsif params[:sort_by] == 'rating'
-        @books = @books.sort_by { |b| b.rating }
-      elsif params[:sort_by] == 'reviews'
-        @books = @books.sort_by { |b| - b.reviews_count }
-      elsif params[:sort_by] == 'curated in'
-        @books = @books.sort_by { |b| - b.library.name }
-      elsif params[:sort_by] == 'curated by'
-        @books = @books.sort_by { |b| - b.library.user.email }
-      else
-        @books = @books.sort_by { |b| - b.id }
-      end
+    if params[:sort_by] == 'sort by'
+      @books = @books.sort_by { |b| - b.id }
+    elsif params[:sort_by] == 'title'
+      @books = @books.sort_by { |b| - b.title }
+    elsif params[:sort_by] == 'author'
+      @books = @books.sort_by { |b| - b.author }
+    elsif params[:sort_by] == 'isbn'
+      @books = @books.sort_by { |b| - b.isbn }
+    elsif params[:sort_by] == 'published language'
+      @books = @books.sort_by { |b| - b.published_language }
+    elsif params[:sort_by] == 'rating'
+      @books = @books.sort_by { |b| b.rating }
+    elsif params[:sort_by] == 'reviews'
+      @books = @books.sort_by { |b| - b.reviews_count }
+    elsif params[:sort_by] == 'curated in'
+      @books = @books.sort_by { |b| - b.library.name }
+    elsif params[:sort_by] == 'curated by'
+      @books = @books.sort_by { |b| - b.library.user.email }
     else
-      if params[:sort_by] == 'sort by'
-        @books = @books.sort_by { |b| b.id }
-      elsif params[:sort_by] == 'title'
-        @books = @books.sort_by { |b| b.title }
-      elsif params[:sort_by] == 'author'
-        @books = @books.sort_by { |b| b.author }
-      elsif params[:sort_by] == 'isbn'
-        @books = @books.sort_by { |b| b.isbn }
-      elsif params[:sort_by] == 'published language'
-        @books = @books.sort_by { |b| b.published_language }
-      elsif params[:sort_by] == 'rating'
-        @books = @books.sort_by { |b| - b.rating }
-      elsif params[:sort_by] == 'reviews'
-        @books = @books.sort_by { |b| b.reviews_count }
-      elsif params[:sort_by] == 'curated in'
-        @books = @books.sort_by { |b| b.library.name }
-      elsif params[:sort_by] == 'curated by'
-        @books = @books.sort_by { |b| b.library.user.email }
-      else
-        @books = @books.sort_by { |b| b.id }
-      end
+      @books = @books.sort_by { |b| - b.id }
     end
     # #for libraries search
     # unless params[:location] == ''

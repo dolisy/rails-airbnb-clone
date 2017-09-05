@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902225602) do
+ActiveRecord::Schema.define(version: 20170905133517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20170902225602) do
     t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "checkin_date"
     t.date     "checkout_date"
+    t.integer  "number_of_pick_days"
     t.string   "status"
     t.integer  "conversation_id"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
@@ -63,12 +64,12 @@ ActiveRecord::Schema.define(version: 20170902225602) do
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "genre"
-    t.string   "author"
+    t.string   "author",                 default: "no author"
     t.string   "publisher"
     t.integer  "library_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "isbn"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.string   "isbn",                   default: "no isbn"
     t.text     "description"
     t.string   "status"
     t.float    "rate"
@@ -81,7 +82,7 @@ ActiveRecord::Schema.define(version: 20170902225602) do
     t.string   "ean"
     t.string   "asin"
     t.string   "amazon_detail_page_url"
-    t.string   "published_language"
+    t.string   "published_language",     default: "no published_language"
     t.string   "original_language"
     t.string   "edition"
     t.date     "release_date"

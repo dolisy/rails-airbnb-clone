@@ -67,7 +67,7 @@ class Book < ApplicationRecord
     if reviews_count == 0
       return average = 0
     else
-      return average = sum.fdiv(reviews_count).round(1)
+      return average = sum.fdiv(reviews_count).round(0)
     end
   end
 
