@@ -14,16 +14,16 @@ legend {
 }
 
 .form-fonts {
-    font-family: 'Quicksand', 'sans-serif';
+    font-family: 'arial';
 }
 
 .textinput {
   background-color: rgba(0, 0, 0, 0) !important;
   border: thin solid #da3c3c !important;
-  font-family: 'Quicksand', 'sans-serif';
+  font-family: 'arial';
 }
 .label-text {
-  font-family: 'Nunito', serif;
+  font-family: 'arial';
   font-weight: 500;
 }
 input::-webkit-input-placeholder {
@@ -52,7 +52,7 @@ input::-webkit-input-placeholder {
 }
 
 .omniauth {
-  font-family: 'Nunito', serif;
+  font-family: 'arial';
   font-weight: 400;
   color: rgba(236, 234, 234, 0.9);
   border: 1.5px solid white;

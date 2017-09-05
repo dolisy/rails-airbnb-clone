@@ -22,7 +22,7 @@
         <tbody>
           <% @results.each do |result| %>
             <% if result[1][:description] %>
-              <% formatted_description = result[1][:description].slice(0, 200) %>
+              <% formatted_description = result[1][:description].slice(0, 500) %>
             <% else %>
               <% formatted_description = "" %>
             <% end %>
@@ -98,11 +98,12 @@
       <p class="f6 b db mb1"><%= 'Add Manually or Edit Here' %></p>
         <%= simple_form_for @book do |f| %>
           <%= f.error_notification %>
+          <%= f.input :isbn, placeholder: 'ISBN', label:false %>
           <%= f.input :title, placeholder: 'Title', label:false %>
           <%= f.input :author, placeholder: 'Author', label:false %>
-          <%= f.input :description, placeholder: 'Description', label:false %>
           <%= f.input :published_language, placeholder: 'Published Language', label:false %>
-          <div class = "mb1" id="morebookdetails">
+          <%= f.input :description, placeholder: 'Description', label:false %>
+          <div class = "mb1 mt1" id="morebookdetails">
             <p>More Details <i class="fa fa-caret-down" aria-hidden="true"></i></p>
           </div>
           <div id="bookdetails">
@@ -120,7 +121,7 @@
           <% else %>
             <p class="f6 b db mb1 mt1"><%= 'Select Or Create a New Library' %></p>
             <%= f.association :library, collection: Library.where(user: current_user), placeholder: 'Select Library', label_html: { class: 'measure f7' }, label:false %>
-            <div class= "mb1" id="addlibrary">
+            <div class= "mb1 mt1" id="addlibrary">
               <p>Create New Library <i class="fa fa-caret-down" aria-hidden="true"></i></p>
             </div>
             <div id="newlibrary">

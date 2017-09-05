@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= favicon_link_tag %>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><%= meta_title %></title>
@@ -86,7 +87,7 @@
 
         <div class="form-inputs">
           <%= f.input :email, required: true, autofocus: true, input_html: { class: 'textinput' },label_html: { class: 'label-text' }  %>
-          <%= f.input :password, required: true, input_html: { class: 'textinput' },label_html: { class: 'label-text' }, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+          <%= f.input :password, required: true, placeholder: '6 characters min.', input_html: { class: 'textinput' },label_html: { class: 'label-text' }, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
           <%= f.input :password_confirmation, required: true, input_html: { class: 'textinput' }, label_html: { class: 'label-text' } %>
         </div>
         <div class="form-actions">
