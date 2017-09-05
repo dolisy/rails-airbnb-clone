@@ -96,6 +96,34 @@
                 <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
               <% end %>
             </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+<!-- My Libraries -->
+  <div class="mt3 mb3 dt w-100 bt b--black-100"></div>
+  <% if @user == current_user %>
+    <h2>My Libraries:</h2>
+    <%= link_to "Create Library", new_library_path %>
+  <% else %>
+    <h2>Libraries:</h2>
+  <% end %>
+  <div class="cards row clearfix">
+    <% @user.libraries.each do |library| %>
+      <div class="card sm-col sm-col-4">
+        <article class="box left mw5 mw6-ns ba mv1">
+          <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
+          <div class="pa3 bt">
+                        <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
+            <li data-target="<%= library.id %>" data-slide-to="1"></li>
+                <li data-target="<%= library.id %>" data-slide-to="2"></li>
+                <% i = 1 %>
+                <% library.books.each do |book| %>
+                  <li data-target="<%= library.id %>" data-slide-to="<%= i %>"></li>
+                  <% i += 1 %>
             <div class="pa1 mt1 bt b--black-100">
               <a class="author db link black hover-grey" href="#">
                 <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
