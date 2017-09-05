@@ -1,4 +1,4 @@
-<% if @over_ten %>
+<% if @over_five %>
   <%= link_to 'Show Previous Messages', '?m=all' %>
 <% end %>
 
@@ -7,10 +7,10 @@
     <% @private_messages.each do |private_message| %>
       <% if private_message.body %>
         <% user = User.find(private_message.user_id) %>
-          <div class="bl message">
-            <% avatar_url = user.facebook_picture_url || user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-            <%= image_tag avatar_url, class: "br-100 w2 dib mr1" %>
-            <div class="message-name mr2">
+        <div class="bl message">
+          <% avatar_url = user.facebook_picture_url || user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+          <%= image_tag avatar_url, class: "br-100 w2 dib mr1" %>
+          <div class="message-name mr2">
             <% if user.first_name? %>
               <p><%= user.first_name %></p>
             <% else %>
@@ -19,19 +19,19 @@
             <p class="message-time"><%= private_message.private_message_time %></p>
           </div>
           <div class="message-body">
-            <p><%= private_message.body %></p>
+            <p><%= private_message.body %><%= private_message.read %></p>
           </div>
           <% if private_message.booking %>
-              <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
-                <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
-                <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
-              <% end %>
+            <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
+              <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
+              <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
+            <% end %>
           <% end %>
         <% end %>
-        </div>
-      <% end %>
+      </div>
     <% end %>
-
+  </div>
+<% end %>
 
 <% if @conversation %>
   <%= form_for [@conversation, @private_message], html: {class: "ml2 w-70 black-80"} do |f| %>

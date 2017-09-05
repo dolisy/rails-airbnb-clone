@@ -12,7 +12,7 @@
   </div>
   <div class="table-wrap overflow-scroll">
 <!-- books -->
-    <h2>Search Results For Books: "<%= @search %>"</h2>
+    <h2>Search Results in Books For: "<%= @search %>"</h2>
     <!-- <h2> -->
       <%#= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
         <%#= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
@@ -67,47 +67,6 @@
                 <% else %>
                   <%= book.reviews_count %>
                 <% end %>
-              </p>
-            </td>
-          </tr>
-        <%end%>
-      </tbody>
-    </table>
-<!-- libraries -->
-    <h2>Search Results For Libraries: "<%= @search %>"</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Libraries</th> <th></th> <th>---</th> <th>Number of Books</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for library in @libraries %>
-          <tr>
-            <td class="lg-col-2">
-              <% if library.books.first.photo? %>
-                <%= cl_image_tag library.books.first.photo.path, width: 600, crop: :scale%>
-              <% end %>
-            </td>
-            <td>
-              <p class="title">
-                <%= link_to library.name, library_path(library)%>
-              </p>
-              <p class="f7 fw4 black-60">
-                <%= library.address %>
-              </p>
-              <p class="f7 fw4 black-60">
-                <%=  %>
-              </p>
-            </td>
-            <td>
-              <p class="title">
-                <%=  %>
-              </p>
-            </td>
-            <td>
-              <p class="title">
-                <%= library.books.count %>
               </p>
             </td>
           </tr>
