@@ -16,19 +16,25 @@
         <% else %>
           <% @recipient = User.find(conversation.sender_id) %>
         <% end %>
-        <blockquote class="f7 ml0 mt0 black-90">
-          <% avatar_url = @recipient.facebook_picture_url || @recipient.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-          <%= image_tag avatar_url, class: "br-100 w2 dib" %>
-          <%#= link_to @recipient.email, conversation_path(conversation) %>
-          <%= link_to @recipient.email, read_conversation_path(conversation), method: :patch %>
-          <% unread_messages = 0 %>
-          <% conversation.private_messages.each do |private_message| %>
-            <% if private_message.user != current_user && private_message.read == false %>
-              <% unread_messages += 1 %>
-            <% end %>
-          <% end %>
-          <p>Unread messages: <%= unread_messages %></p>
-        </blockquote>
+        <% if conversation.id == @conversation.id %>
+          <div class="bg-near-white bl bw2 b--green">
+        <% else %>
+          <div>
+        <% end %>
+            <blockquote class="f7 ml0 mt0 black-80 bl bw2">
+              <% avatar_url = @recipient.facebook_picture_url || @recipient.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+              <%= image_tag avatar_url, class: "br-100 w2 dib" %>
+              <%#= link_to @recipient.email, conversation_path(conversation) %>
+              <%= link_to @recipient.email, read_conversation_path(conversation), method: :patch %>
+              <% unread_messages = 0 %>
+              <% conversation.private_messages.each do |private_message| %>
+                <% if private_message.user != current_user && private_message.read == false %>
+                  <% unread_messages += 1 %>
+                <% end %>
+              <% end %>
+              <p>Unread messages: <%= unread_messages %></p>
+            </blockquote>
+          </div>
       <% end %>
     <% end %>
   </div>
