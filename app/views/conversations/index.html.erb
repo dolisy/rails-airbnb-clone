@@ -17,7 +17,7 @@
           <% else %>
             <% @recipient = User.find(conversation.sender_id) %>
           <% end %>
-          <blockquote class="bq f7 ml0 mt0 pl2 black-90 focus">
+          <blockquote class="f7 ml0 mt0 pl2 bl bw2">
             <% avatar_url = @recipient.facebook_picture_url || @recipient.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
             <%= image_tag avatar_url, class: "br-100 w2 dib" %>
             <%#= link_to @recipient.email, conversation_path(conversation) %>

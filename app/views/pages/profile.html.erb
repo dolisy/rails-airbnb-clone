@@ -1,25 +1,41 @@
-<div class="wrapper">
-  <article class="mw5 center bg-white pa2 mv2 mb3 b--black-100">
-    <div class="tc">
-      <% avatar_url = @user.facebook_picture_url || @user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-      <%= image_tag avatar_url, class: "br-100 h3 w3 dib" %>
-      <p class="f7"><%=@user.first_name%> (edit)</p>
-      <hr class="mb1 mt1 mr4 ml4 bb bw.5 b--black-100">
+<div class="wrapper cf">
+  <article class="mt2 w-100 mw-100 left bg-white pa2 mv2 mb1 b--black-100">
+    <div class="tl">
+      <p class="f4">
+        <span class="book-title f3 black lh-title fw9 mt0 pt1 mid-gray">Book Collective / </span>
+        <% if @user.first_name? %>
+          <span class="book-title f3 black lh-title fw3 mt0 pt1"><%=@user.first_name%>
+        <% else %>
+          <span class="book-title f3 black lh-title fw3 mt0 pt1"><%= @user.email %>
+        <% end %>
+      </p>
     </div>
-    <p class="tl black-70">
-      Quite affectionate and outgoing. She loves to get chin scratches and will roll around on the floor waiting for you give her more of them.
-    </p>
+    <div class="dib mt2 meta black-40 w-15">
+      <div class="meta-title bb b--black-40 pb.5">Info</div>
+        <ul class="views list pl0">
+          <li class="dib info">
+            <%= @user.libraries.count %> Libraries
+            <span> / </span>
+          </li>
+          <li class="dib info">
+            <%= @books.count %> Books
+          </li>
+        </ul>
+    </div>
+    <div class="ml3 dib mt2 meta black-40 w-20">
+      <div class="meta-title bb b--black-40 pb.5">View</div>
+        <ul class="views list pl0">
+          <li class="dib tab active" data-target="#bookings" id="bookings-btn">Bookings</li>
+          <span> / </span>
+          <li class="dib tab" data-target="#requests" id="requests-btn">Requests</li>
+          <span> / </span>
+          <li class="dib tab" data-target="#libraries" id="libarries-btn">Libraries</li>
+        </ul>
+    </div>
   </article>
-
-  <div class="menu container">
-    <p class="tab active menu-btn btn item" data-target="#bookings" id="bookings-btn">My Bookings</p>
-    <p class="tab menu-btn btn item" data-target="#requests" id="requests-btn">My Requests</p>
-    <p class="tab menu-btn btn item" data-target="#libraries" id="libarries-btn">My Libraries</p>
-  </div>
 
   <!-- My Bookings -->
   <div class="tab-content bookings clearfix" id="bookings">
-    <h2>My Bookings:</h2>
     <% @user.bookings.each do |booking| %>
       <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
         <div class="aspect-ratio aspect-ratio--3x4">
@@ -74,7 +90,7 @@
   </div>
 
   <!-- My Requests -->
-<div class="tab-content hidden bookings clearfix" id="requests">    <h2>My Requests:</h2>
+<div class="tab-content hidden bookings clearfix" id="requests">
     <% @requests.each do |booking| %>
       <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
         <div class="aspect-ratio aspect-ratio--3x4">
@@ -92,8 +108,8 @@
 
           <div class="add tc ph1 pv1 db bg-animate ba">
             <% if booking.status == "pending" %>
-              <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-success" %>
-              <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger" %>
+              <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-outline" %>
+              <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-outline" %>
             <% else %>
               <%= booking.status %>
             <% end %>
@@ -106,19 +122,19 @@
   <!-- My Libraries -->
     <% if @user == current_user %>
       <div class="tab-content hidden bookings clearfix" id="libraries">
-      <h2>My Libraries:</h2>
     <% else %>
       <h2>Libraries:</h2>
     <% end %>
+    <%= link_to "New Library +", new_library_path, class:"fr"%>
     <% @user.libraries.each do |library| %>
-      <div class="mt2 mb2 mr3 ml3 card sm-col sm-col-4">
+      <div class="mt2 mb2 mr0 ml0 card sm-col sm-col-4">
         <article class="box left mw5 mw6-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
-                        <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
+            <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
-            <li data-target="<%= library.id %>" data-slide-to="1"></li>
+                <li data-target="<%= library.id %>" data-slide-to="1"></li>
                 <li data-target="<%= library.id %>" data-slide-to="2"></li>
                 <% i = 1 %>
                 <% library.books.each do |book| %>
