@@ -50,14 +50,14 @@
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
                   <% if book.rating == 0 %>
-                    <%= 'No Reviews' %>
+                    <%= '-/5' %>
                   <% else %>
-                    Rating: <%= book.rating %> / 5.0
+                    Rating: <%= book.rating %>/5
                   <% end %>
                 </dd>
                 <h2 class="align f7 fw4 mt1 mb0 black-90">Curated in: <%= link_to book.library.name, library_path(book.library)%>
                 </h2>
-                <h2 class="align f7 fw4 mt1 mb0 black-90">Added by: <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %>
+                <h2 class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %>
                 </h2>
               </dl>
             </div>
