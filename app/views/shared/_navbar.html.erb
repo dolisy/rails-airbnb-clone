@@ -22,7 +22,7 @@
     <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+          <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || url("assets/images/rotate1.jpeg") %>
           <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
