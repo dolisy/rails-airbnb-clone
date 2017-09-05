@@ -103,7 +103,7 @@
           <%= f.input :description, placeholder: 'Description', label:false %>
           <%= f.input :published_language, placeholder: 'Published Language', label:false %>
           <div class = "mb1" id="morebookdetails">
-            <p>More Details +</p>
+            <p>More Details <i class="fa fa-caret-down" aria-hidden="true"></i></p>
           </div>
           <div id="bookdetails">
             <%= f.input :publisher, placeholder: 'Publisher', label:false %>
@@ -121,7 +121,7 @@
             <p class="f6 b db mb1 mt1"><%= 'Select Or Create a New Library' %></p>
             <%= f.association :library, collection: Library.where(user: current_user), placeholder: 'Select Library', label_html: { class: 'measure f7' }, label:false %>
             <div class= "mb1" id="addlibrary">
-              <p>Create New Library +</p>
+              <p>Create New Library <i class="fa fa-caret-down" aria-hidden="true"></i></p>
             </div>
             <div id="newlibrary">
               <%= f.input :new_library_name, placeholder: 'New Library Name', label:false %>
