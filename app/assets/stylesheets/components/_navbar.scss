@@ -17,8 +17,8 @@
 
 /* User Avatar */
 .navbar-wagon .avatar {
-  height: 35px;
-  width: 35px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
 }
 
@@ -31,6 +31,8 @@
 
 /* Basic navbar item */
 .navbar-wagon-item {
+  // height: 50px;
+  // border-radius: 50%;
   cursor: pointer;
   padding: 0 20px;
 }
@@ -55,9 +57,13 @@
   font-family: 'arial';
 }
 
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: white;
+}
+
 .navbar-wagon-dropdown-menu li > a {
   font-weight: lighter !important;
-  color: #999999 !important;
+  color: black !important;
   font-size: 15px !important;
   line-height: 22px !important;
   padding: 10px 20px;
@@ -79,3 +85,44 @@
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
 }
+
+
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+.submissionfield-term {
+  width: 320px;
+  height: 32px;
+  border: 1px solid #999999;
+  padding: 5px;
+}
+
+.submissionfield-location {
+  // width: 300px;
+  height: 32px;
+  border: 1px solid #999999;
+  padding: 5px;
+}
+
+.log-out-break {
+  border-top: 1px solid;
+  // width: 80%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
