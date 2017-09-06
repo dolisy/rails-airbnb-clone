@@ -1,5 +1,5 @@
 <div class="cf ph2 ph4-ns">
-  <div class="fl b--black-20 w-100 w-30-ns">
+  <div class="msg-block fl b--black-20 w-100 w-30-ns">
     <% @unread_messages = 0 %>
     <% Conversation.all.each do |conversation| %>
       <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
@@ -59,11 +59,3 @@
     });
   </script> -->
 <%# end %>
-
-
-
-
-
-
-
-
