@@ -17,21 +17,18 @@
 }
 
 blockquote {
-  padding: 12.5px 25px;
-  margin: 0 0 25px;
   font-size: 100;
   border-left: 5px solid grey;
+  margin-bottom: 0;
 }
 
 .active > blockquote {
-  padding: 12.5px 25px;
-  margin: 0 0 25px;
+  margin-bottom: 0;
   font-size: 100;
-  border-left: 5px solid green;
-  background-color: lightgrey;
+  border-left: 5px solid #19A974;
+  background-color: #f2f2f2;
 }
 
 blockquote:hover {
-  background-color: lightgrey;
-  border-left: 5px solid green;
+  background-color: #f2f2f2;
 }

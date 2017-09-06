@@ -129,23 +129,23 @@
   </div>
 
   <!-- My Libraries -->
-  <% if @user == current_user %>
-    <div class="tab-content hidden bookings clearfix" id="libraries">
-        <div class="fl w-100">
-          <%= link_to "New Library +", new_library_path, class:"ml1 f6"%>
-        </div>
+    <% if @user == current_user %>
+      <div class="tab-content hidden bookings clearfix" id="libraries">
+        <div class="ml1 w-100 fl">
+    <%= link_to "New Library (+)", new_library_path%>
+      </div>
     <% else %>
-      <h2 class="ml1">Libraries:</h2>
+      <h2>Libraries:</h2>
     <% end %>
     <% @user.libraries.each do |library| %>
-      <div class="mt1 mb2 mr2 ml3 p1 card sm-col sm-col-4">
-        <article class="box left mw5 mw6-ns ba mv1">
+      <div class="lib-card mt2 mb1 mr1 ml1 card sm-col sm-col-4">
+        <article class="box fl mw5 mw6-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
             <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
-                <li data-target="<%= library.id %>" data-slide-to="1"></li>
+            <ol class="carousel-indicators">
+            <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
+            <li data-target="<%= library.id %>" data-slide-to="1"></li>
                 <li data-target="<%= library.id %>" data-slide-to="2"></li>
                 <% i = 1 %>
                 <% library.books.each do |book| %>
@@ -200,8 +200,9 @@
           </div>
         </article>
       </div>
-    </div>
-  <%end%>
+    <%end%>
+  </div>
+</div>
 
 
 
