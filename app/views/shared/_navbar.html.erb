@@ -6,8 +6,8 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, class: "form", method: :get) do %>
-  <%= text_field_tag :term, params[:term], placeholder: 'Ex: Also Sprach Zarathoustra', class: "submissionfield-term" %>
-  <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Ex: Berlin, Kochstrasse', class: "submissionfield-location" %>
+  <%= text_field_tag :term, params[:term], placeholder: 'Search title, author, publisher, genre', class: "submissionfield-term" %>
+  <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Search location', class: "submissionfield-location" %>
   <%= submit_tag 'Browse Books', name: nil, class: "btn btn-outline" %>
   <% end %>
 
