@@ -35,12 +35,12 @@
     <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item ">
         <div class="dropdown">
-        <% if @user.avatar? %>
-          <%= cl_image_tag(@user.avatar.path, {size: '50x50', crop: thumb, gravity: :face}) %>
-        <% else %>
-           <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
-        <% end %>
-          <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% if current_user.avatar.present? %>
+            <%= cl_image_tag(current_user.avatar.path, { size: '50x50', crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" }) %>
+          <% else %>
+            <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
+            <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to profile_path(user_id: current_user.id), method: :get do %>
