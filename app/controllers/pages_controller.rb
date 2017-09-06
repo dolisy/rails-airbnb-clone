@@ -32,18 +32,6 @@ class PagesController < ApplicationController
     @review = Review.new(user: @user)
   end
 
-  def edit_profile
-    @user = current_user
-  end
-
-  def update_profile
-    @user = User.find(params[:id])
-
-    @user.update(user_params)
-
-    redirect_to profile_path(@user)
-  end
-
   def view_all_books
     @books = Book.all
 
@@ -64,6 +52,12 @@ class PagesController < ApplicationController
       marker.lng library.longitude
       marker.infowindow render_to_string(partial: "/libraries/map_box", locals: { library: library })
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user_id).permit(:first_name, :last_name, :email)
   end
 end
 
