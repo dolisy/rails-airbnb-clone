@@ -7,7 +7,6 @@ class LibrariesController < ApplicationController
   end
 
   def new
-    @skip_nav = true
     @user = current_user
     @library = Library.new(user: current_user)
   end

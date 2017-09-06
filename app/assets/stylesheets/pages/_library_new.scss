@@ -3,30 +3,21 @@
 // }
 
 .library-new-template {
-  display: grid;
-  grid-template-columns: 600px 1fr;
-  grid-template-rows: 50% 15% 25% 10%;
-  height: calc(100vh - 10px);
-  padding: 15px 70px 15px 70px;
-  button {
-    position: absolute;
-    left: -25px;
-    top: 10px;
-    background-color: white;
-    padding: 0px 5px 0px 5px !important;
-  }
+  // display: grid;
+  // grid-template-columns: 600px 1fr;
+  // grid-template-rows: 50% 15% 25% 10%;
+  // height: calc(100vh - 10px);
+  padding: 30px 60px;
 }
 
 .main-text {
-  grid-row: 1/ span 3;
-  grid-column: 1/ span 1;
-  // background-color: yellow;
+
   .main-content{
     padding: 0px 20px 20px 20px;
     font-size: 9vh;
     font-weight: 700;
     p {
-      line-height: 2em;
+      line-height: 1.5em;
 
     }
     p::first-letter {
@@ -37,17 +28,17 @@
 }
 
 .side-form {
-  grid-row: 1 / span 1;
-  grid-column: 2/ span 1;
-  // background-color: blue;
+
   .side-form-content {
-    padding: 50px 50px 20px 50px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 70px 0px;
   }
 }
 
 .side-text {
-  grid-row: 2/ span 1;
-  grid-column: 2/ span 1;
+  // grid-row: 2/ span 1;
+  // grid-column: 2/ span 1;
   // background-color: green;
   .side-text-content {
     padding: 5px 40px 40px 40px;
@@ -58,6 +49,5 @@
 }
 
 .library-container {
-  margin: 15px 60px 0px 60px;
-  position: relative;
+  margin: 10px 50px 0px 50px;
 }

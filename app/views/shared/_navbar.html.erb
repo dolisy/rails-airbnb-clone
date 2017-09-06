@@ -75,6 +75,7 @@
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
+        <% if user_signed_in? %>
           <%= link_to "Add Book to Libraries", new_book_path %>
         </li>
         <li>
@@ -92,7 +93,9 @@
             <%= t(".sign_out", default: "Log Out") %>
           <% end %>
         </li>
-
+        <% else %>
+          <%= link_to t(".sign_in", default: "Log In / Sign Up"), "#", 'data-toggle' => 'modal', 'data-target' => '#signupModal' %>
+        <% end %>
       </ul>
     </div>
   </div>
