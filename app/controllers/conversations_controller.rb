@@ -33,10 +33,10 @@ class ConversationsController < ApplicationController
 
     @private_messages = @conversation.private_messages.order('created_at')
 
-    if @private_messages.length > 5
-      @over_five = true
-      @private_messages = @private_messages[-5..-1]
-    end
+    # if @private_messages.length > 5
+    #   @over_five = true
+    #   @private_messages = @private_messages[-5..-1]
+    # end
 
     if params[:m]
       @over_five = false

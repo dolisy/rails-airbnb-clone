@@ -1,32 +1,37 @@
 <div class="fl h-100 bl b--black-20 mr3">
   <% if @private_messages %>
     <div class="message-wrap mt3">
+<!--       <div class="message">
+        <p class="ui blue labeled submit icon button btn-outline">Show previous messages</p>
+      </div> -->
       <% @private_messages.each do |private_message| %>
         <% if private_message.body %>
           <% user = User.find(private_message.user_id) %>
-            <div class="message">
-              <% avatar_url = user.facebook_picture_url || user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-              <%= image_tag avatar_url, class: "br-100 w2 dib mr1 ml1" %>
-              <div class="w-25 mr3">
-                <% if user.first_name? %>
-                  <p class="message-name"><%= user.first_name %></p>
-                <% else %>
-                  <p class="message-name"><%=user.email%></p>
-                <% end %>
-                <p class="timestamp"><%= private_message.private_message_time %></p>
-              </div>
-              <div class="w-100 message-body">
-                <p><%= private_message.body %><%= private_message.read %></p>
-              </div>
-              <% if private_message.booking %>
-                <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
-                  <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
-                  <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
-                <% end %>
+          <div class="message">
+            <% avatar_url = user.facebook_picture_url || user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
+            <%= image_tag avatar_url, class: "br-100 w2 dib mr1 ml1" %>
+            <div class="w-25 mr3">
+              <% if user.first_name? %>
+                <p class="message-name"><%= user.first_name %></p>
+              <% else %>
+                <p class="message-name"><%=user.email%></p>
+              <% end %>
+              <p class="timestamp"><%= private_message.private_message_time %></p>
+            </div>
+            <div class="w-100 message-body">
+              <p><%= private_message.body %><%= private_message.read %></p>
+            </div>
+            <% if private_message.booking %>
+              <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
+                <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
+                <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
               <% end %>
             <% end %>
           </div>
+        <% end %>
       <% end %>
+    </div>
+    <div class="message-wrap mt3">
       <% if @conversation %>
         <%= form_for [@conversation, @private_message], html: {class: "black-80"} do |f| %>
           <label for="password" class="mt2 f8 b tl db mb1">Write your message:</label>
@@ -36,8 +41,5 @@
         <% end %>
       <% end %>
     </div>
-    <% if @over_five %>
-      <%= link_to 'Previous Messages', '?m=all', class:"link-all mt2 ml3 fl" %>
-    <% end %>
   <% end %>
 </div>
