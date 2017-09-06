@@ -101,6 +101,8 @@ class BookingsController < ApplicationController
     redirect_to book_booking_path(@booking.book, @booking)
   end
 
+  private
+
   def booking_params
     params.require(:booking).permit(:checkin_date, :checkout_date, :status, :user_id, :book_id)
   end

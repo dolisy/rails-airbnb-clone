@@ -18,6 +18,19 @@
 
     <!-- Links when logged in -->
       <%= link_to "Lend a Book (+)", new_book_path, class: " navbar-wagon-item navbar-wagon-link" %>
+    <!-- get unread_messages -->
+    <% @unread_messages = 0 %>
+    <% Conversation.all.each do |conversation| %>
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+        <% if conversation.private_messages %>
+          <% conversation.private_messages.each do |private_message| %>
+            <% if private_message.user != current_user && private_message.read == false %>
+              <% @unread_messages += 1 %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
 
     <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item ">
@@ -27,14 +40,19 @@
           <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
-              <%= link_to profile_path, method: :get do %>
+              <%= link_to profile_path(user_id: current_user.id), method: :get do %>
                <%= t(".sign_in", default: "Profile") %>
               <% end %>
             </li>
             <li>
-             <%= link_to conversations_path, method: :get do  %>
-              <%= t(".sign_in", default: "Messages") %>
-             <% end %>
+            <% Conversation.all.each do |conversation| %>
+              <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                <% @conversation_last = conversation %>
+              <% end %>
+            <% end %>
+            <%= link_to conversation_path(@conversation_last), method: :get do  %>
+              <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+            <% end %>
            </li>
            <li class="log-out-break"></li>
            <li>
@@ -60,13 +78,13 @@
           <%= link_to "Add Book to Libraries", new_book_path %>
         </li>
         <li>
-          <%= link_to profile_path, method: :get do %>
+          <%= link_to profile_path(user_id: current_user.id), method: :get do %>
             <%= t(".sign_in", default: "Profile") %>
           <% end %>
         </li>
         <li>
           <%= link_to conversations_path, method: :get do  %>
-            <%= t(".sign_in", default: "Messages") %>
+            <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
           <% end %>
         </li>
         <li>

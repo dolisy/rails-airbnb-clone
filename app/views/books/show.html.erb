@@ -24,7 +24,7 @@
             <%= f.input :status, as: :hidden, input_html: { value: "confirm" } %>
             <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker left mb1', id: 'txtDateIn' } %>
             <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker left mb2', id: 'txtDateOut' } %>
-            <%= f.button :submit, class: 'btn-outline w-100 center'%>
+            <%= f.submit "Borrow Book", class: 'btn-outline w-100 center'%>
           <% end %>
         </div>
       <% end %>
@@ -195,19 +195,51 @@
         <h4 class="modal-title">Edit Book</h4>
       </div>
       <div class="modal-body">
-        <%= simple_form_for(@book) do |f| %>
-        <%= f.error_notification %>
-        <%= f.input :title, placeholder: 'Title', label:false %>
-        <%= f.input :genre, placeholder: 'Genre', label:false %>
-        <%= f.input :author, placeholder: 'Author', label:false %>
-        <%= f.input :publisher, placeholder: 'Publisher', label:false %>
-        <%= f.input :description, placeholder: 'Description', label:false %>
-        <%= f.association :library, collection: Library.where(user: current_user), label_html: { class:'' } %>
-        <%= f.input :photo, as: :attachinary, label_html: { class:'' }%>
+        <!-- <div class="fr w-100 w-40-ns pl1 pr3"> -->
+          <p class="f6 b db mb1"><%= 'Add Manually or Edit Here' %></p>
+          <%= simple_form_for @book do |f| %>
+            <%= f.error_notification %>
+            <%= f.input :isbn, placeholder: 'ISBN', label:false %>
+            <%= f.input :title, placeholder: 'Title', label:false %>
+            <%= f.input :author, placeholder: 'Author', label:false %>
+            <%= f.input :published_language, placeholder: 'Published Language', label:false %>
+            <%= f.input :description, placeholder: 'Description', label:false %>
+            <div class = "mb1 mt1" id="morebookdetails">
+              <p>More Details <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+            </div>
+            <div id="bookdetails">
+              <%= f.input :publisher, placeholder: 'Publisher', label:false %>
+              <%= f.input :creator, placeholder: 'Creator', label:false %>
+              <%= f.input :edition, placeholder: 'Edition', label:false %>
+              <%= f.input :number_of_pages, placeholder: 'Number of Pages', label:false %>
+              <%= f.input :original_language, placeholder: 'Original Language', label:false %>
+            </div>
+
+            <% if @library.present? %>
+              <p class="f6 b db mb1"><%= 'Library' %></p>
+              <%#= f.association :library, collection: Library.where(user: current_user).where(name: @library.name), label_html: { class: '' }, label:false %>
+              <%#= f.association :library, input_html: {value: f.object.library || Library.where(user: current_user).where(name: @library.name).first }, label_html: { class: 'measure f7' }, label:false %>
+            <% else %>
+              <p class="f6 b db mb1 mt1"><%= 'Select Or Create a New Library' %></p>
+              <%= f.association :library, collection: Library.where(user: current_user), placeholder: 'Select Library', label_html: { class: 'measure f7' }, label:false %>
+              <div class= "mb1 mt1" id="addlibrary">
+                <p>Create New Library <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+              </div>
+              <div id="newlibrary">
+                <%= f.input :new_library_name, placeholder: 'New Library Name', label:false %>
+                <%= f.input :new_library_address, :input_html => { :id => 'geo-new-library' }, placeholder: 'New Library Address', label:false %>
+              </div>
+            <% end %>
+
+            <%= f.input :photo, as: :attachinary, label: "Book Cover", label_html: { class: 'measure f6 b db mb1 mt1' }%>
+
+            <%= f.submit 'Edit', class: "btn-outline mt2" %>
+          <% end %>
+<!--         </div> -->
       </div>
       <div class="modal-footer">
-      <%= f.submit 'Confirm', class: "btn-outline left" %>
-        <% end %>
+      <%#= f.submit 'Confirm', class: "btn-outline left" %>
+        <%# end %>
       </div>
     </div>
   </div>
