@@ -6,9 +6,9 @@
 
   <!-- search tool -->
   <%= form_tag(books_path, class: "form", method: :get) do %>
-  <%= text_field_tag :term, params[:term], placeholder: 'Ex: Also Sprach Zarathoustra', class: "submissionfield-term" %>
-  <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Ex: Berlin, Kochstrasse', class: "submissionfield-location" %>
-  <%= submit_tag 'Search', name: nil, class: "btn btn-outline" %>
+  <%= text_field_tag :term, params[:term], placeholder: 'Search title, author, publisher', class: "submissionfield-term" %>
+  <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Location', class: "submissionfield-location" %>
+  <%= submit_tag 'Browse Books', name: nil, class: "btn btn-outline" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -35,9 +35,12 @@
     <!-- Avatar with dropdown menu -->
       <div class="navbar-wagon-item ">
         <div class="dropdown">
-          <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
-
-          <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% if current_user.avatar.present? %>
+            <%= cl_image_tag(current_user.avatar.path, { size: '50x50', crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" }) %>
+          <% else %>
+            <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
+            <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <% if current_user %>
