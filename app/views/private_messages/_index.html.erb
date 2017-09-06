@@ -19,7 +19,7 @@
             <p class="message-time"><%= private_message.private_message_time %></p>
           </div>
           <div class="message-body">
-            <p><%= private_message.body %><%= private_message.read %></p>
+            <p><%= private_message.body %></p>
           </div>
           <% if private_message.booking %>
             <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>

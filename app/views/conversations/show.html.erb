@@ -25,18 +25,17 @@
         <% else %>
           <div>
         <% end %>
+            <% @unread_conversation = 0 %>
+            <% conversation.private_messages.each do |private_message| %>
+              <% if private_message.user != current_user && private_message.read == false %>
+                <% @unread_conversation += 1 %>
+              <% end %>
+            <% end %>
             <blockquote class="f7 ml0 mt0 black-80 bl bw2">
               <% avatar_url = @recipient.facebook_picture_url || @recipient.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
               <%= image_tag avatar_url, class: "br-100 w2 dib" %>
               <%#= link_to @recipient.email, conversation_path(conversation) %>
-              <%= link_to @recipient.email, read_conversation_path(conversation), method: :patch %>
-              <% @unread_conversation = 0 %>
-              <% conversation.private_messages.each do |private_message| %>
-                <% if private_message.user != current_user && private_message.read == false %>
-                  <% @unread_conversation += 1 %>
-                <% end %>
-              <% end %>
-              <p>Unread conversation: <%= @unread_conversation %></p>
+              <%= link_to @recipient.email, read_conversation_path(conversation), method: :patch, class: "#{@unread_conversation > 0 ? 'unread' : ''}" %>
             </blockquote>
           </div>
       <% end %>
