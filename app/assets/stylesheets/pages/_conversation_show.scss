@@ -5,3 +5,10 @@
 .unread {
   font-weight: bold;
 }
+
+.active > blockquote {
+  padding: 12.5px 25px;
+  margin: 0 0 25px;
+  font-size: 22.5px;
+  border-left: 5px solid green;
+}

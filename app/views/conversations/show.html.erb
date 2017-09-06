@@ -21,7 +21,7 @@
           <% @recipient = User.find(conversation.sender_id) %>
         <% end %>
         <% if conversation.id == @conversation.id %>
-          <div class="bg-near-white bl bw2 b--green">
+          <div class="bg-near-white active">
         <% else %>
           <div>
         <% end %>
