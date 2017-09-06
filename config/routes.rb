@@ -39,8 +39,11 @@ Rails.application.routes.draw do
     resources :private_messages
   end
 
+  resources :users, only: [ :edit, :update ]
+
   get '/profile', to: 'pages#profile'
   get '/profile/:user_id', to: 'pages#profile'
   get '/view_all_books', to: 'pages#view_all_books'
   get '/view_all_libraries', to: 'pages#view_all_libraries'
+  get '/update_profile/:user_id', to: 'pages#update_profile'
 end
