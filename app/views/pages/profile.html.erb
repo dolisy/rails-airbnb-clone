@@ -131,11 +131,16 @@
   <!-- My Libraries -->
   <div class="tab-content hidden bookings clearfix" id="libraries">
     <% if @user == current_user %>
-      <%= link_to "New Library +", new_library_path, class:"fr"%>
+      <div class="pt3 f4 dt w-100 bb b--black-70 tab-content hidden bookings clearfix" id="libraries">
+      <div class="w-100">
+        <%= link_to "New Library (+)", new_library_path, class:"w-100 right"%>
+      </div>
+    <% else %>
+      <h2>Libraries:</h2>
     <% end %>
     <% @user.libraries.each do |library| %>
-      <div class="mt2 mb2 mr0 ml0 card sm-col sm-col-4">
-        <article class="box left mw5 mw6-ns ba mv1">
+      <div class="mt2 mr0 ml0 card sm-col sm-col-4">
+        <article class="box left mw5 mw7-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
             <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
@@ -193,28 +198,6 @@
   </div>
 </div>
 
-<!-- toggle tabs -->
-<% content_for(:after_js) do %>
-  <script>
-    $(document).ready(function(){
-
-      $(".tab").on("click", function(e){
-        // Change active tab
-        $('.tab').removeClass('active');
-        $(this).addClass('active');
-
-        // Hide all tab-content (use class="hidden")
-        $(".tab-content").addClass("hidden");
-
-        // Show target tab-content (use class="hidden")
-        tabTarget = $(this).data("target");
-        $(tabTarget).removeClass("hidden");
-      });
-    });
-  </script>
-<% end %>
-
-
 <!-- Modal goes below -->
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
@@ -236,3 +219,24 @@
     </div>
   </div>
 </div>
+
+<!-- toggle tabs -->
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function(){
+
+      $(".tab").on("click", function(e){
+        // Change active tab
+        $('.tab').removeClass('active');
+        $(this).addClass('active');
+
+        // Hide all tab-content (use class="hidden")
+        $(".tab-content").addClass("hidden");
+
+        // Show target tab-content (use class="hidden")
+        tabTarget = $(this).data("target");
+        $(tabTarget).removeClass("hidden");
+      });
+    });
+  </script>
+<% end %>
