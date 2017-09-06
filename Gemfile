@@ -75,6 +75,8 @@ gem 'curb' # optional, see HTTPI
 
 gem 'openlibrary'
 
+gem 'turbolinks', '~> 5.0.0'
+
 
 
 

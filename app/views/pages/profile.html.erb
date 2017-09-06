@@ -121,14 +121,16 @@
 
   <!-- My Libraries -->
     <% if @user == current_user %>
-      <div class="tab-content hidden bookings clearfix" id="libraries">
+      <div class="pt3 f4 dt w-100 bb b--black-70 tab-content hidden bookings clearfix" id="libraries">
+      <div class="w-100">
+        <%= link_to "New Library (+)", new_library_path, class:"w-100 right"%>
+      </div>
     <% else %>
       <h2>Libraries:</h2>
     <% end %>
-    <%= link_to "New Library +", new_library_path, class:"fr"%>
     <% @user.libraries.each do |library| %>
-      <div class="mt2 mb2 mr0 ml0 card sm-col sm-col-4">
-        <article class="box left mw5 mw6-ns ba mv1">
+      <div class="mt2 mr0 ml0 card sm-col sm-col-4">
+        <article class="box left mw5 mw7-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
             <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
