@@ -2,16 +2,15 @@
   <div class="banner-content">
     <div class="clearfix">
       <h2 class="pt2 pr2 banner-copy">Discover</h2>
-      <h2 class="pr2 banner-copy">Borrow</h2>
-      <h2 class="pr2 banner-copy">Lend</h2>
-      <% if user_signed_in? %>
-        <h2 class="pr2 banner-copy green">Join.</h2>
-      <% else %>
-        <h2 class="pr4 banner-copy green" id="join" data-toggle="modal", data-target="#signupModal">
-          <%= link_to 'Join.', '#', :style => 'color: green; font-weight: 500;'%>
-        </h2>
-      <% end %>
+      <h2 class="pr2 banner-copy">Read</h2>
+      <h2 class="pr2 banner-copy green">Books.</h2>
+
       <p class="tc pl5 tagline">Find books on the web by browsing your neighbor's library.</p>
+        <% if user_signed_in? %>
+
+      <% else %>
+          <%= link_to 'Join Us', '#', class: 'btn btn-primary'%>
+      <% end %>
     </div>
   </div>
 </div>
