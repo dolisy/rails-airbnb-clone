@@ -43,11 +43,11 @@
                 <%= book.author %>
               </p>
               <p class="f7 fw4 black-60">
-                <% if book.isbn %>
+                <% if book.isbn != "" %>
                   ISBN <%= book.isbn %>
                 <% end %>
               </p>
-              <% if book.published_language %>
+              <% if book.published_language != "" %>
                 <p class="f7 fw4 mt3 black-60">
                   Published language: <%= book.published_language %>
                 </p>
