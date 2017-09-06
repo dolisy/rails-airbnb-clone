@@ -8,7 +8,6 @@
 //= require gmaps/google
 //= require bootstrap-datepicker
 //= require_tree ./app
-//= require turbolinks
-$('.dropdown-toggle').dropdown();
+
 
 
