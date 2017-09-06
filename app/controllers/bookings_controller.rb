@@ -5,12 +5,12 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking = Booking.find(params[:id])
-    @booking.status = "confirmed"
+    @booking.status = "Confirmed"
     @booking.save
 
     @private_message = PrivateMessage.new(
       conversation_id: @booking.conversation.id,
-      body: "#{@booking.book.library.user.email} has accepted your request for this book: #{@booking.book.title}",
+      body: "#{@booking.book.library.user.email} has accepted your request for #{@booking.book.title}",
       user_id: current_user.id,
       booking_id: @booking.id
     )
@@ -21,12 +21,12 @@ class BookingsController < ApplicationController
 
   def decline
     @booking = Booking.find(params[:id])
-    @booking.status = "declined"
+    @booking.status = "Declined"
     @booking.save
 
     @private_message = PrivateMessage.new(
       conversation_id: @booking.conversation.id,
-      body: "#{@booking.book.library.user.email} has declined your request for this book: #{@booking.book.title}",
+      body: "#{@booking.book.library.user.email} has declined your request for #{@booking.book.title}",
       user_id: current_user.id,
       booking_id: @booking.id
     )
@@ -37,12 +37,12 @@ class BookingsController < ApplicationController
 
   def pending
     @booking = Booking.find(params[:id])
-    @booking.status = "pending"
+    @booking.status = "Pending"
     @booking.save
 
     @private_message = PrivateMessage.new(
       conversation_id: @booking.conversation.id,
-      body: "#{@booking.user.email} is requesting this book: #{@booking.book.title}",
+      body: "#{@booking.user.email} is requesting #{@booking.book.title}",
       user_id: current_user.id,
       booking_id: @booking.id
     )
@@ -100,6 +100,8 @@ class BookingsController < ApplicationController
 
     redirect_to book_booking_path(@booking.book, @booking)
   end
+
+  private
 
   def booking_params
     params.require(:booking).permit(:checkin_date, :checkout_date, :status, :user_id, :book_id)

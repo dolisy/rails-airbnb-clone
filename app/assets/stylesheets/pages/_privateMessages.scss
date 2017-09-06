@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
+  padding-bottom: 8px;
 }
 .message:last-child {
   border-bottom: none;
@@ -9,23 +10,19 @@
 .message-body {
   flex-grow: 1;
 }
-.message-name h3 {
-  font-size: 16px;
-  margin-bottom: 0px;
-}
-.message-name p {
-  font-size: 13px;
+.message-name {
   font-weight: lighter;
+  font-size: 13px;
+  margin-bottom: -6px;
 }
-.message-time {
+.timestamp {
   font-size: 12px;
   font-weight: lighter;
   opacity: 0.6;
 }
-
 .message-body {
   padding-left: 10px;
-  font-size: 15px;
+  font-size: 13px;
 }
 .message-body {
   padding-left: 20px;
@@ -46,3 +43,16 @@
 .status.pending {
   color: lightgrey;
 }
+
+#new_private_message {
+  width: 64%;
+  float: right;
+  padding-bottom: 3em;
+}
+
+#new_private_message:focus {
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+    outline-width: 5px;
+  }

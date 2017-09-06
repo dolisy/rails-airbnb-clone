@@ -7,6 +7,11 @@ body {
   letter-spacing: 0.01em;
 }
 
+.turbolinks-progress-bar {
+  background-color: black;
+  height: 3px;
+}
+
 h2 {
   font-family: 'Helvetica';
   color: black;
@@ -42,7 +47,7 @@ a:hover {
   padding-bottom: 2em;
   padding-right: 2.5em;
   padding-left: 2.5em;
-  border-bottom: 1px solid black;
+  border-bottom: .5px solid black;
 }
 
 .navbar-wagon-link:hover {
@@ -90,11 +95,11 @@ a {
   align-items: center;
 }
 
-.banner-tagline {
+.tagline {
   color: black;
   font-weight: 200;
-  margin-right: 0em;
-  padding-top: 3em;
+  padding-top: 2.5em;
+  width: 75%;
 }
 
 h5 {
@@ -106,7 +111,6 @@ h5 {
   font-family: "arial";
 }
 
-
 .banner-copy {
   margin: 0 auto;
   color: black;
@@ -115,7 +119,6 @@ h5 {
     color: green;
    }
 }
-
 
 .banner-content {
   margin-top: -2em;

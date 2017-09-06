@@ -12,55 +12,6 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(@conversation)
   end
 
-  def index
-    @conversations = []
-    Conversation.all.each do |conversation|
-      if conversation.sender_id == current_user.id
-        @conversations << conversation
-      end
-      if conversation.recipient_id == current_user.id
-        @conversations << conversation
-      end
-    end
-
-    # @conversations.sort_by { |conversation| conversation.updated_at }
-
-    @conversation = @conversations.last
-
-    begin
-      @private_messages = @conversation.private_messages.order('created_at')
-
-      if @private_messages.length > 5
-        @over_five = true
-        @private_messages = @private_messages[-5..-1]
-      end
-
-      if params[:m]
-        @over_five = false
-        @private_messages = @conversation.private_messages
-      end
-
-      # if @private_messages.last
-      #   if @private_messages.last.user_id != current_user.id
-      #     @private_messages.last.read = true;
-      #   end
-      # end
-
-      @private_message = @conversation.private_messages.new
-    rescue
-    end
-
-    @conversations.each do |conversation|
-      if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id
-        if conversation.sender_id == current_user.id
-          @recipient = User.find(conversation.recipient_id)
-        else
-          @recipient = User.find(conversation.sender_id)
-        end
-      end
-    end
-  end
-
   def show
     @conversations = []
     Conversation.all.each do |conversation|

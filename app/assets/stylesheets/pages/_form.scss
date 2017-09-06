@@ -301,3 +301,13 @@ input[type="location"], textarea {
 .t-sm {
   font-size: 15px;
 }
+
+textarea.form-control {
+  height: 150px;
+}
+
+.form-control {
+  border: 1px solid black;
+  border-radius:0;
+}
+

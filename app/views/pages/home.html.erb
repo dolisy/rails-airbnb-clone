@@ -1,17 +1,17 @@
 <div class="banner" style="background-image: url('http://i.imgur.com/vohnVNY.jpg');">
   <div class="banner-content">
     <div class="clearfix">
-      <h2 class="pl4 banner-copy">Discover</h2>
-      <h2 class="pl4 banner-copy">Borrow</h2>
-      <h2 class="pl4 banner-copy">Lend</h2>
+      <h2 class="pt2 pr2 banner-copy">Discover</h2>
+      <h2 class="pr2 banner-copy">Borrow</h2>
+      <h2 class="pr2 banner-copy">Lend</h2>
       <% if user_signed_in? %>
-        <h2 class="pl4 banner-copy green">Join.</h2>
+        <h2 class="pr2 banner-copy green">Join.</h2>
       <% else %>
-        <h2 id="join" data-toggle="modal", data-target="#signupModal">
+        <h2 class="pr4 banner-copy green" id="join" data-toggle="modal", data-target="#signupModal">
           <%= link_to 'Join.', '#', :style => 'color: green; font-weight: 500;'%>
         </h2>
       <% end %>
-      <h5 class="banner-tagline">Find books on the web through browsing your neighbor's library.</h5>
+      <p class="tc pl5 tagline">Find books on the web by browsing your neighbor's library.</p>
     </div>
   </div>
 </div>

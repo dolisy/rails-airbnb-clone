@@ -1,124 +1,152 @@
-<div class="wrapper">
-  <article class="mw5 center bg-white pa2 mv2 mb3 b--black-100">
-    <div class="tc">
-      <% avatar_url = @user.facebook_picture_url || @user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-      <%= image_tag avatar_url, class: "br-100 h3 w3 dib" %>
-      <p class="f7"><%=@user.first_name%> (edit)</p>
-      <hr class="mb1 mt1 mr4 ml4 bb bw.5 b--black-100">
+<div class="wrapper cf">
+  <article class="mt2 w-100 mw-100 left bg-white pa2 mv2 mb1 b--black-100">
+    <div class="tl">
+      <p class="f4">
+        <span class="book-title f3 black lh-title fw9 mt0 pt1 mid-gray">Book Collective / </span>
+        <% if @user.first_name? %>
+          <span class="book-title f3 black lh-title fw3 mt0 pt1"><%=@user.first_name%>
+        <% else %>
+          <span class="book-title f3 black lh-title fw3 mt0 pt1"><%= @user.email %>
+        <% end %>
+        <% if @user == current_user %>
+          <a class="edit-button" data-target="#editModal" data-toggle="modal">
+          (edit) <%= @user.photo %>
+          </a>
+        <% end %>
+      </p>
     </div>
-    <p class="tl black-70">
-      Quite affectionate and outgoing. She loves to get chin scratches and will roll around on the floor waiting for you give her more of them.
-    </p>
+    <div class="dib mt2 meta black-40 w-15">
+      <div class="meta-title bb b--black-40 pb.5">Info</div>
+        <ul class="views list pl0">
+          <li class="dib info">
+            <%= @user.libraries.count %> Libraries
+            <span> / </span>
+          </li>
+          <li class="dib info">
+            <%= @books.count %> Books
+          </li>
+        </ul>
+    </div>
+    <div class="ml3 dib mt2 meta black-40 w-20">
+      <div class="meta-title bb b--black-40 pb.5">View</div>
+        <ul class="views list pl0">
+          <li class="dib tab active" data-target="#bookings" id="bookings-btn">Bookings</li>
+          <span> / </span>
+          <li class="dib tab" data-target="#requests" id="requests-btn">Requests</li>
+          <span> / </span>
+          <li class="dib tab" data-target="#libraries" id="libarries-btn">Libraries</li>
+        </ul>
+    </div>
   </article>
 
-  <div class="menu container">
-    <p class="tab active menu-btn btn item" data-target="#bookings" id="bookings-btn">My Bookings</p>
-    <p class="tab menu-btn btn item" data-target="#requests" id="requests-btn">My Requests</p>
-    <p class="tab menu-btn btn item" data-target="#libraries" id="libarries-btn">My Libraries</p>
-  </div>
-
   <!-- My Bookings -->
-  <div class="tab-content bookings clearfix" id="bookings">
-    <h2>My Bookings:</h2>
-    <% @user.bookings.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
-        <div class="aspect-ratio aspect-ratio--3x4">
-         <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
-          <% end %>
-        </div>
-        <div class="pa1 mt1 bt b--black-100">
-          <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
-          </a>
+  <% if @user == current_user %>
+    <div class="tab-content bookings clearfix" id="bookings">
+      <% @user.bookings.each do |booking| %>
+        <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
+          <div class="aspect-ratio aspect-ratio--3x4">
+           <% if booking.book.photo? %>
+              <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
+            <% end %>
+          </div>
+          <div class="pa1 mt1 bt b--black-100">
+            <a class="author db link black hover-grey" href="#">
+              <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
+            </a>
 
-          <p class="date red mb1">Return: <%= booking.checkout_date %></p>
-            <!-- Button trigger modal -->
+            <p class="date red mb1">Return: <%= booking.checkout_date %></p>
+              <!-- Button trigger modal -->
 
-          <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
-            Add Review
-          </a>
+            <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
+              Add Review
+            </a>
 
-          <!-- Modal -->
-          <div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
-                  <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+            <!-- Modal -->
+            <div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
+                    <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <%= simple_form_for @review do |f| %>
+                    <div class="modal-body">
+                      <%= f.error_notification %>
+                      <%= f.hidden_field :booking_id, value: booking.id %>
+                      <%= f.input :content %>
+                      <%= f.input :stars, input_html: { class: "rating" } %>
+                    </div>
+                    <div class="modal-footer">
+                      <%= f.button :submit, class: "left btn-outline" %>
+                    </div>
+                  <% end %>
+                  <%= content_for(:after_js) do %>
+                    <script>
+                      $('#review_stars').rating({'size':'xs'});
+                    </script>
+                  <% end %>
                 </div>
-                <%= simple_form_for @review do |f| %>
-                  <div class="modal-body">
-                    <%= f.error_notification %>
-                    <%= f.hidden_field :booking_id, value: booking.id %>
-                    <%= f.input :content %>
-                    <%= f.input :stars, input_html: { class: "rating" } %>
-                  </div>
-                  <div class="modal-footer">
-                    <%= f.button :submit, class: "left btn-outline" %>
-                  </div>
-                <% end %>
-                <%= content_for(:after_js) do %>
-                  <script>
-                    $('#review_stars').rating({'size':'xs'});
-                  </script>
-                <% end %>
               </div>
             </div>
           </div>
-        </div>
-      </article>
-    <% end %>
-  </div>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
 
   <!-- My Requests -->
-<div class="tab-content hidden bookings clearfix" id="requests">    <h2>My Requests:</h2>
-    <% @requests.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
-        <div class="aspect-ratio aspect-ratio--3x4">
-         <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
-          <% end %>
-        </div>
-        <div class="pa1 mt1 bt b--black-100">
-          <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
-          </a>
-
-          <p class="date red mb1">Return: <%= booking.checkout_date %></p>
-            <!-- Button trigger modal -->
-
-          <div class="add tc ph1 pv1 db bg-animate ba">
-            <% if booking.status == "pending" %>
-              <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-success" %>
-              <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-danger" %>
-            <% else %>
-              <%= booking.status %>
+  <% if @user == current_user %>
+    <div class="tab-content hidden bookings clearfix" id="requests">
+      <% @requests.each do |booking| %>
+        <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
+          <div class="aspect-ratio aspect-ratio--3x4">
+           <% if booking.book.photo? %>
+              <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
             <% end %>
           </div>
-        </div>
-      </article>
-    <% end %>
-  </div>
+          <div class="pa1 mt1 bt b--black-100">
+            <a class="author db link black hover-grey" href="#">
+              <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
+            </a>
+
+            <p class="date red mb1">Return: <%= booking.checkout_date %></p>
+            <!-- Button trigger modal -->
+
+            <div class="add tc ph1 pv1 db bg-animate ba">
+              <% if booking.status == "pending" %>
+                <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-outline" %>
+                <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-outline" %>
+              <% else %>
+                <%= booking.status %>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
 
   <!-- My Libraries -->
+  <div class="tab-content hidden bookings clearfix" id="libraries">
     <% if @user == current_user %>
-      <div class="tab-content hidden bookings clearfix" id="libraries">
-      <h2>My Libraries:</h2>
+      <div class="pt3 f4 dt w-100 bb b--black-70 tab-content hidden bookings clearfix" id="libraries">
+      <div class="w-100">
+        <%= link_to "New Library (+)", new_library_path, class:"w-100 right"%>
+      </div>
     <% else %>
       <h2>Libraries:</h2>
     <% end %>
     <% @user.libraries.each do |library| %>
-      <div class="mt2 mb2 mr3 ml3 card sm-col sm-col-4">
-        <article class="box left mw5 mw6-ns ba mv1">
+      <div class="mt2 mr0 ml0 card sm-col sm-col-4">
+        <article class="box left mw5 mw7-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
-                        <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
+            <div id="<%= library.id %>" class="carousel slide pr3 pl3 tc w-100" data-ride="carousel">
               <ol class="carousel-indicators">
                 <li data-target="<%= library.id %>" data-slide-to="0" class="active"></li>
-            <li data-target="<%= library.id %>" data-slide-to="1"></li>
+                <li data-target="<%= library.id %>" data-slide-to="1"></li>
                 <li data-target="<%= library.id %>" data-slide-to="2"></li>
                 <% i = 1 %>
                 <% library.books.each do |book| %>
@@ -140,13 +168,6 @@
                     <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2" %>
                   <% end %>
                 </div>
-
-<!--            <div class="item">
-                  <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
-                </div>
-                <div class="item">
-                  <img class="fit" src="http://www.totemspropaganda.com/wp-content/uploads/2011/11/IMG_2920_small.jpg" />
-                </div> -->
                 <% library.books.each do |book| %>
                   <div class="item">
                     <% if book.photo? %>
@@ -177,22 +198,45 @@
   </div>
 </div>
 
-  <% content_for(:after_js) do %>
-    <script>
-      $(document).ready(function(){
+<!-- Modal goes below -->
+<div class="modal" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Profile</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @user do |f| %>
+          <%= f.input :first_name, placeholder: 'First Name', label:false %>
+          <%= f.input :last_name, placeholder: 'Last Name', label:false %>
+          <%= f.input :photo, as: :attachinary, label: "Profile Picture", label_html: { class: 'measure f6 b db mb1 mt1 attachinary-input' }%>
+          <%= f.submit 'Edit', class: "btn-outline mt2" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 
-        $(".tab").on("click", function(e){
-          // Change active tab
-          $('.tab').removeClass('active');
-          $(this).addClass('active');
+<!-- toggle tabs -->
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function(){
 
-          // Hide all tab-content (use class="hidden")
-          $(".tab-content").addClass("hidden");
+      $(".tab").on("click", function(e){
+        // Change active tab
+        $('.tab').removeClass('active');
+        $(this).addClass('active');
 
-          // Show target tab-content (use class="hidden")
-          tabTarget = $(this).data("target");
-          $(tabTarget).removeClass("hidden");
-        });
+        // Hide all tab-content (use class="hidden")
+        $(".tab-content").addClass("hidden");
+
+        // Show target tab-content (use class="hidden")
+        tabTarget = $(this).data("target");
+        $(tabTarget).removeClass("hidden");
       });
-    </script>
-  <% end %>
+    });
+  </script>
+<% end %>
