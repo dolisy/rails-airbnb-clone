@@ -24,7 +24,7 @@
             <%= f.input :status, as: :hidden, input_html: { value: "confirm" } %>
             <%= f.input :checkin_date, as: :string, input_html: { class: 'datepicker left mb1', id: 'txtDateIn' } %>
             <%= f.input :checkout_date, as: :string, input_html: { class: 'datepicker left mb2', id: 'txtDateOut' } %>
-            <%= f.button :submit, class: 'btn-outline w-100 center'%>
+            <%= f.submit "Borrow Book", class: 'btn-outline w-100 center'%>
           <% end %>
         </div>
       <% end %>
