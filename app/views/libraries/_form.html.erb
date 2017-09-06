@@ -1,8 +1,8 @@
 <%= simple_form_for(@library) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name, placeholder: 'Name your library here' %>
-  <%= f.input :address, :input_html => { :id => 'geo-address' }, placeholder: 'General location of library' %>
+  <%= f.input :name, placeholder: 'ex. My Library', input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
+  <%= f.input :address, :input_html => { :id => 'geo-address' }, placeholder: 'ex. 123 Sullivan st.', input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
 
-  <%= f.button :submit, class: "btn-outline" %>
+  <%= f.button :submit, class: "sign-up btn-outline" %>
 <% end %>
