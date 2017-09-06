@@ -53,6 +53,18 @@ a:active{
   text-decoration: none;
 }
 
+.name-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-up {
+  margin-top: 10px;
+}
+
+.name {
+  padding-left: 0px;
+}
 
 body {
   line-height: 1.3em;
