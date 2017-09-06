@@ -1,0 +1,124 @@
+<div id="map"></div>
+<div class="wrapper">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <h2>Search Results For: "<%= params[:term] %>"</h2>
+    <h2>
+      <%= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
+        <%= hidden_field_tag :term, params[:term], placeholder: 'ISBN, Title, Author, Language, Curated In, Curated By..', class: "field" %>
+        <%= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
+        <%#= select_tag :order, options_for_select(["ascending", "descending"], params[:order]), onchange: "this.form.submit();", class: "field" %>
+        <%= select_tag :sort_by, options_for_select(["sort by", "title", "author", "published language", "rating", "reviews", "curated in", "curated by"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
+      <% end %>
+    </h2>
+  </div>
+  <div class="table-wrap overflow-scroll">
+<!-- books -->
+    <!-- <h2>Search Results in Books For: "<%= @search %>"</h2> -->
+    <!-- <h2> -->
+      <%#= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
+        <%#= hidden_field_tag :term, params[:term], placeholder: 'Search here..', class: "field" %>
+        <%#= hidden_field_tag :location, params[:location], placeholder: 'Location here..', class: "field" %>
+        <%#= select_tag :sort_by, options_for_select(["all", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
+      <%# end %>
+    <!-- </h2> -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Books</th> <th></th> <th>Reviews</th> <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for book in @books %>
+          <tr>
+            <td class="lg-col-2">
+              <% if book.photo? %>
+                <%= cl_image_tag book.photo.path, width: 600, crop: :scale%>
+              <% end %>
+            </td>
+            <td>
+              <p class="title">
+                <%= link_to book.title, book_path(book)%>
+              </p>
+              <p class="f7 fw4 black-60">
+                <%= book.author %>
+              </p>
+              <p class="f7 fw4 black-60">
+                <% if book.isbn != "" %>
+                  ISBN <%= book.isbn %>
+                <% end %>
+              </p>
+              <% if book.published_language != "" %>
+                <p class="f7 fw4 mt3 black-60">
+                  Published language: <%= book.published_language %>
+                </p>
+                <p class="f7 fw4 black-60">
+                  Curated in: <%= link_to book.library.name, library_path(book.library)  %>
+                </p>
+                <p class="f7 fw4 black-60">
+                  Curated by: <%= link_to book.library.user.email.truncate(30), profile_path(user_id: book.library.user_id)  %>
+                </p>
+              <% else %>
+                <p class="f7 fw4 mt4 black-60">
+                  Curated in: <%= link_to book.library.name, library_path(book.library)  %>
+                </p>
+                <p class="f7 fw4 black-60">
+                  Curated by: <%= link_to book.library.user.email.truncate(30), profile_path(user_id: book.library.user_id)  %>
+                </p>
+              <% end %>
+            </td>
+            <td>
+              <p class="title tc">
+                <% if book.reviews_count == 0 %>
+                  <%= '-' %>
+                <% else %>
+                  <%= book.reviews_count %>
+                <% end %>
+              </p>
+            </td>
+            <td>
+              <p class="title tc">
+                <% if book.rating == 0 %>
+                  <%= '-/5' %>
+                <% else %>
+                  <%= book.rating %>/5
+                <% end %>
+              </p>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- map -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+    console.log(<%= raw @hash.to_json %>);
+      var handler = Gmaps.build('Google', { markers: {
+      randomize: true, maxRandomDistance: 10, clusterer: {
+      maxZoom: 20, gridSize: 100 } }});
+
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(10)
+          handler.map.centerOn(markers[0]);
+
+        } else {
+
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(2)
+          handler.map.centerOn(markers[0]);
+          handler.bounds.extendWith(markers);
+
+
+        }
+      });
+    });
+  <% end %>
+<% end %>
