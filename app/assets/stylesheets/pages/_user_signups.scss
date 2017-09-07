@@ -8,9 +8,13 @@
   opacity: 0.85;
 }
 
-legend {
-  margin-bottom: 80px;
-  color: rgb(31, 30, 30);
+#signupModal h2, #registerModal h2 {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+#registerModal, .modal-content {
+  padding-bottom: 20px;
 }
 
 .form-fonts {

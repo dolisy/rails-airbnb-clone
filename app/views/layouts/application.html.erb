@@ -41,7 +41,7 @@
     <div class="modal-content">
       <div class="modal-body">
       <button class="close" data-dismiss="modal"> &times;</button>
-        <legend>&nbsp;&nbsp;Sign In</legend>
+        <h2>Sign In</h2>
         <%= simple_form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
       <div class="form-inputs">
         <%= f.input :email, autofocus: true, placeholder: 'user@email.com', required: false, input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
@@ -80,27 +80,27 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-      <button class="close" data-dismiss="modal"> &times;</button>
-      <legend>&nbsp;&nbsp;Sign Up</legend>
+        <button class="close" data-dismiss="modal"> &times;</button>
+        <h2>Sign Up</h2>
         <%= simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
-        <%= f.error_notification %>
+          <%= f.error_notification %>
 
-        <div class="form-inputs">
-        <div class="name-container">
-        <div class="name col-xs-6">
-           <%= f.input :first_name, autofocus: true, placeholder: 'George', input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
-           </div>
-           <div class="name col-xs-6">
-            <%= f.input :last_name, autofocus: true, placeholder: 'Orwell', input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
+          <div class="row">
+            <div class="col-xs-6">
+              <%= f.input :first_name, autofocus: true, placeholder: 'George', input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
             </div>
+            <div class="col-xs-6">
+              <%= f.input :last_name, autofocus: true, placeholder: 'Orwell', input_html: { class: 'textinput' },label_html: { class: 'label-text' } %>
             </div>
+          </div>
+
           <%= f.input :email, required: true, autofocus: true, input_html: { class: 'textinput' },label_html: { class: 'label-text' }  %>
           <%= f.input :password, required: true, placeholder: '6 characters min.', input_html: { class: 'textinput' },label_html: { class: 'label-text' }, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
           <%= f.input :password_confirmation, required: true, input_html: { class: 'textinput' }, label_html: { class: 'label-text' } %>
-        </div>
-        <div class="form-actions">
-          <%= f.button :submit, "Sign up", class: "sign-up btn-outline"%>
-        </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class: "sign-up btn-outline"%>
+          </div>
         <% end %>
       </div>
     </div>

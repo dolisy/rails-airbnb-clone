@@ -33,13 +33,19 @@ class PrivateMessagesController < ApplicationController
 
     if @private_message.save
       # redirect_to conversation_private_messages_path(@conversation)
-      redirect_to request.referer.present? ? request.referer : default_path
+
+      if @private_message.booking
+        redirect_to [@private_message.booking.book, @private_message.booking]
+      else
+        redirect_to request.referer.present? ? request.referer : default_path
+      end
+
     end
   end
 
   private
 
   def private_message_params
-    params.require(:private_message).permit(:body, :user_id)
+    params.require(:private_message).permit(:body, :user_id, :booking_id)
   end
 end
