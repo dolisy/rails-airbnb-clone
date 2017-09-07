@@ -17,9 +17,9 @@ class User < ApplicationRecord
   scope :term, -> (term) { where("first_name ILIKE :search OR last_name ILIKE :search ", search: "%#{term}%") }
 
   #For Active Admin
-    def  name
-      "#{id} - #{email}"
-    end
+  def  name
+    "#{id} - #{email}"
+  end
 
   def self.find_for_google_oauth(auth)
     user_params = auth.slice(:provider, :uid)
@@ -61,6 +61,15 @@ class User < ApplicationRecord
     end
 
     return user
+  end
+
+  def username
+    if first_name && last_name
+      username = "#{first_name} #{last_name}"
+    else
+      username = /.*\@/.match(email)
+    end
+
   end
 end
 
