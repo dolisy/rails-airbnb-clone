@@ -2,9 +2,17 @@
   <%= simple_form_for [@conversation, @private_message], html: {class: "black-80"} do |f| %>
     <label for="password">
       <% if @conversation.private_messages.count == 0 %>
-        Say somethingh nice to @book.library.user.first_name so he lends you his book
+        <% if @conversation.sender_id == current_user.id %>
+          Say somethingh nice to persuade <%= @conversation.recipient.username %> to lend the book to you.
+        <% else %>
+          Say somethingh nice to persuade <%= @conversation.sender.username %> to lend the book to you.
+        <% end %>
       <% else %>
-        Write a message to @book.library.user.first_name
+        <% if @conversation.sender_id == current_user.id %>
+          Write a message to  <%= @conversation.recipient.username %>.
+        <% else %>
+          Write a message to <%= @conversation.sender.username %>.
+        <% end %>
       <% end %>
     </label>
 
