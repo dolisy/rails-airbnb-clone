@@ -1,3 +1,4 @@
+
 <% if @conversation %>
   <%= simple_form_for [@conversation, @private_message], html: {class: "black-80 submit-on-enter"} do |f| %>
     <label for="password">
@@ -21,8 +22,8 @@
     <% if @booking %>
       <%= f.input :booking_id, input_html: {value: @booking.id}, as: "hidden"%>
     <% end %>
-    <%= f.input :body, as: :string, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book...", input_html: { onchange: "this.form.submit();" } %>
-    <%#= f.button :submit, "Send Message", input_html: { class: "new-message-button" } %>
+    <%= f.input :body, as: :text, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book..." %>
+    <%= f.button :submit, "Send Message", input_html: { class: "new-message-button" } %>
   <% end %>
 <% end %>
 
