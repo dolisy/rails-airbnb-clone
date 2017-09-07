@@ -1,9 +1,9 @@
 <div class="wrapper cf" id="dashboard">
   <% if @user == current_user %>
-    <h2 style="font-size: 22px;">
-      Welcome to your dashboard
+    <h2 style="font-size: 28px;">
+      Welcome to your dashboard,
       <% if @user.first_name? %>
-        <span class="book-title black lh-title fw3 mt0 pt1"><%=@user.first_name%>
+        <span class="book-title black lh-title fw3 mt0 pt1"><%=@user.first_name.capitalize%>
       <% else %>
         <span class="book-title black lh-title fw3 mt0 pt1"><%= @user.username %>
       <% end %>
@@ -22,7 +22,7 @@
 
   <div class="dashboard-nav">
     <% if @user == current_user %>
-      <a class="tab" href="#" data-target="#libraries">Your Libraries (<%= @user.libraries.count %>)</a>
+      <a class="tab active" href="#" data-target="#libraries">Your Libraries (<%= @user.libraries.count %>)</a>
       /
       <a class="tab" href="#" data-target="#bookings">Conversations</a>
     <% else %>
@@ -32,15 +32,15 @@
 
   <!-- Bookings -->
   <% if @user == current_user %>
-    <div class="tab-content" id="bookings">
+    <div class="tab-content hidden" id="bookings">
       <div class="bookings-nav">
-        <a class="bookings-tab" href="#" data-target="#books-bookings">Your books</a>
+        <a class="bookings-tab" style="font-size:16px;" href="#" data-target="#books-bookings">Your Books</a>
         /
-        <a class="bookings-tab" href="#" data-target="#reservations-bookings">Your reservations</a>
+        <a class="bookings-tab active" style="font-size:16px;" href="#" data-target="#reservations-bookings">Your Reservations</a>
       </div>
 
-      <div class="bookings-tab-content" id="books-bookings">
-        <h2>People who want to borrow your books</h2>
+      <div class="bookings-tab-content hidden" id="books-bookings">
+
         <% @user.libraries.each do |libarry| %>
           <% libarry.books.each do |book| %>
             <% book.bookings.each do |booking| %>
@@ -50,8 +50,8 @@
         <% end %>
       </div>
 
-      <div class="bookings-tab-content hidden" id="reservations-bookings">
-        <h2>Your reservations</h2>
+      <div class="bookings-tab-content active" id="reservations-bookings">
+
         <% @user.bookings.each do |booking| %>
           <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
         <% end %>
@@ -61,8 +61,8 @@
 
   <!-- My Libraries -->
 
-  <div class="tab-content hidden bookings clearfix" id="libraries">
-    <div class="ml1 w-100 fl">
+  <div class="tab-content bookings clearfix" id="libraries">
+    <div class="ml1 mt2 w-100 fl">
       <%= link_to "New Library (+)", new_library_path%>
     </div>
     <% @user.libraries.each do |library| %>

@@ -88,11 +88,20 @@
   text-decoration: underline;
 }
 
+.bookings-tab.active {
+  color: black;
+  text-decoration: underline;
+}
+
 .views.list li {
   cursor: pointer;
 }
 
 .lib-card {
-  width:31.33333%;
+  width:31%;
   padding-bottom: 10px;
+}
+
+.dashboard-nav .bookings-nav a {
+  font-size: 24px;
 }
