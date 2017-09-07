@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid rgba(220,224,244,0.4);
+  padding-left: 0px;
+  border-bottom: 1px solid #999999;
 }
 .message:last-child {
   border-bottom: none;
@@ -26,7 +27,7 @@
 }
 .message-body {
   padding-left: 10px;
-  font-size: 13px;
+  font-size: 16px;
   color: rgba(0,0,0,0.7);
 }
 .message-body {
@@ -38,7 +39,7 @@
   color: rgba(0,0,0,0.9);
 }
 .message-body p {
-  margin: 6px 0;
+  margin: -4px 0;
 }
 .message-status {
   font-size: 14px;
@@ -53,3 +54,9 @@
 .status.confirm {
   color: lightgrey;
 }
+
+.mute {
+  width: 745px;
+  color: black;
+}
+

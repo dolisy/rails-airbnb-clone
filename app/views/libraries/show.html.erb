@@ -1,8 +1,6 @@
 <% content_for :meta_title, "Check out #{@library.name} on #{DEFAULT_META["meta_product_name"]}"  %>
 <% content_for :meta_description, "Browse through over 1200+ collections of libraries and find the book that reads to you the most right in your area" %>
 
-
-
 <div class="wrapper">
   <article class="pt3 f4 pb1 dt w-100 bb b--black-70">
     <% if @library.user == current_user %>
@@ -10,7 +8,7 @@
         <%= @library.name %> <a class="edit-button" data-target="#editModal" data-toggle="modal">(edit)</a>
       </div>
       <div class="right">
-        <%= link_to "Add Book +", new_book_path %>
+        <%= link_to "Add a Book (+)", new_book_path %>
       </div>
       <% else %>
       <div class="left black">
@@ -30,7 +28,7 @@
             <%= cl_image_tag book.photo.path, height: 300, crop: :fill, class: "mb1" %>
           <% end %>
         </div>
-          <%= link_to book.title.truncate(53), book_path(book), class: "db link black hover-grey" %>
+          <%= link_to book.title.truncate(53), book_path(book), class: "lib-title db link black hover-grey" %>
       </article>
     <% end %>
   </section>
