@@ -8,7 +8,7 @@
   <%= form_tag(books_path, class: "form", method: :get) do %>
   <%= text_field_tag :term, params[:term], placeholder: 'Search title, author, publisher, genre', class: "submissionfield-term" %>
   <%= text_field_tag :location, params[:location], :id => 'geo-location', placeholder: 'Search location', class: "submissionfield-location" %>
-  <%= submit_tag 'Browse Books', name: nil, class: "btn btn-outline" %>
+  <%= submit_tag 'Search', name: nil, class: "search-button btn btn-outline" %>
   <% end %>
 
   <!-- Right Navigation -->

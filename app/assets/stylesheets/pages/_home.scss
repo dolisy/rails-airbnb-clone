@@ -2,9 +2,15 @@
 
 // ----------- GLOBAL STYLING ------------//
 body {
-  font-family: "arial";
+  font-family: "Arial";
   background-color: white;
   letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Arial", "sans-serif";
+  line-height: 1.1;
 }
 
 .turbolinks-progress-bar {
@@ -13,7 +19,7 @@ body {
 }
 
 h2 {
-  font-family: 'Helvetica';
+  font-family: "Arial";
   color: black;
   font-size: 26px;
 }
@@ -28,7 +34,6 @@ a {
 }
 
 a:hover {
-  color: black;
   opacity: .5;
   text-decoration: none;
 }
