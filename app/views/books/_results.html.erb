@@ -22,6 +22,49 @@
     <!-- </h2> -->
   <div class="overflow-scroll row clearfix">
     <% for book in @books %>
+
+      <div class="book-card">
+        <% if  book.photo %>
+          <div class="book-image" style="background-image: url(<%= cl_image_path book.photo.path %>)"></div>
+        <% else %>
+          <div class="book-image" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF)"></div>
+        <% end %>
+        <div class="book-infos">
+          <div class="title">
+            <h2 class="f6 f6-ns black mv0 mb0"><%= link_to book.title.truncate(60), book_path(book), class:"fw5" %></h2>
+            <h3 class="align f7 fw3 mt1 mb0 black-50">
+            <% if book.author != "" %>
+              <%= book.author %>
+            <% else %>
+              <p style="color: white"> author </p>
+            <% end %>
+            </h3>
+          </div>
+          <div class="meta">
+            <p class="">
+              <span class="muted">Published language</span> — <%= book.published_language.capitalize %>
+            </p>
+            <p class=""><span class="muted">Curated in</span> — <%= link_to book.library.name, library_path(book.library), class:"fw3"%>
+            </p>
+            <p class=""><span class="muted">Curated by</span> — <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %> in <strong><%= book.library.city %></strong>
+            </p>
+          </div>
+          <div class="rating">
+            <p>
+              <% if book.rating == 0 %>
+                Rating — <%= 'None' %>
+              <% else %>
+                Rating — <strong><%= book.rating %></strong>/5
+              <% end %>
+            </p>
+            <p>
+              <%= book.reviews_count %> reviews
+            </p>
+          </div>
+        </div>
+      </div>
+
+<!--
       <div class="card col sm-col-12 dt w-100 bt b--black-100 pt2">
         <%= link_to book_path(book), class: "link mt1 dim black" do %>
         <div class="featured-card dtc w3">
@@ -59,7 +102,7 @@
             </p>
           </dl>
         </div>
-      </div>
+      </div> -->
     <% end %>
   </div>
 </div>

@@ -49,16 +49,16 @@
                 <% end %>
               <% end %>
             </li>
-            <li>
-            <% Conversation.all.each do |conversation| %>
-              <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-                <% @conversation_last = conversation %>
-              <% end %>
-            <% end %>
-            <%= link_to conversation_path(@conversation_last), method: :get do  %>
-              <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
-            <% end %>
-           </li>
+            <!-- <li> -->
+            <%# Conversation.all.each do |conversation| %>
+              <%# if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                <%# @conversation_last = conversation %>
+              <%# end %>
+            <%# end %>
+            <%#= link_to conversation_path(@conversation_last), method: :get do  %>
+              <%#= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+            <%# end %>
+           <!-- </li> -->
            <li class="log-out-break"></li>
            <li>
              <%= link_to destroy_user_session_path, method: :delete do %>
@@ -90,11 +90,11 @@
           <% end %>
         <% end %>
         </li>
-        <li>
-          <%= link_to conversations_path, method: :get do  %>
-            <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
-          <% end %>
-        </li>
+<!--         <li>
+          <%#= link_to conversation_path(, method: :get do  %>
+            <%#= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+          <%# end %>
+        </li> -->
         <li>
           <%= link_to destroy_user_session_path, method: :delete do %>
             <%= t(".sign_out", default: "Log Out") %>

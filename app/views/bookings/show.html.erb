@@ -8,14 +8,17 @@
         <%= @booking.book.author %>
       <% end %>
     </h2>
-    <p class="mt3 f5 dark-gray lh-title">Pick up: <%= l(@booking.checkin_date, format: :custom) %></p>
-    <p class="f5 dark-gray lh-title">Return: <%= l(@booking.checkout_date, format: :custom) %></p>
-    <p class="w-100 mt2 "><%= link_to 'Back', book_path(@booking.book), class: "btn btn-outline" %>
-      <% if @booking.status == "confirm" %>
-        <%= link_to "Next", pending_booking_path(@booking), method: :patch, class: "btn btn-outline" %>
-      <% else %>
-        <%= render 'private_messages/index' %>
-      <% end %>
+
+    <p>
+      <%= @booking.book.library.user.first_name %> will get back to you shortly
+    </p>
+
+    <p class="mt3 f5 dark-gray lh-title">Pickup location: <strong><%= @booking.book.library.address %></strong></p>
+    <p class="f5 dark-gray lh-title">Pick up: <strong><%= l(@booking.checkin_date, format: :custom) %></strong></p>
+    <p class="f5 dark-gray lh-title">Return: <strong><%= l(@booking.checkout_date, format: :custom) %></strong></p>
+
+    <%= link_to "Take me to my dashboard", profile_path(current_user), class: "mt3 btn btn-outline"%>
+
   </header>
 
   <header class="fl w-100 w-50-ns tc">
