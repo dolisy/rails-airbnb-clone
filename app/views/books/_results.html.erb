@@ -51,7 +51,7 @@
             </p>
             <p class="muted">
               <span class="">Curated by —
-                <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %> in <strong><%= book.library.city %></strong>
+                <%= link_to book.library.user.username, profile_path(user_id: book.library.user_id) %> in <strong><%= book.library.city %></strong>
               </span>
             </p>
           </div>
