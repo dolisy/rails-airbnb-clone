@@ -1,7 +1,7 @@
 <div id="map"></div>
 <div class="wrapper">
   <div style="display: flex; align-items: center; justify-content: space-between;">
-    <h2>Search Results For: "<%= params[:term] %>"</h2>
+    <h2>Search results for: "<%= params[:term] %>"</h2>
     <h2>
       <%= form_tag(books_path, id: "cusSelectbox", method: :get) do %>
         <%= hidden_field_tag :term, params[:term], placeholder: 'ISBN, Title, Author, Language, Curated In, Curated By..', class: "field" %>
@@ -11,7 +11,6 @@
       <% end %>
     </h2>
   </div>
-  <div class="table-wrap overflow-scroll">
 <!-- books -->
     <!-- <h2>Search Results in Books For: "<%= @search %>"</h2> -->
     <!-- <h2> -->
@@ -21,73 +20,47 @@
         <%#= select_tag :sort_by, options_for_select(["all", "title", "author", "genre", "publisher", "library", "rating"], params[:sort_by]), onchange: "this.form.submit();", class: "field" %>
       <%# end %>
     <!-- </h2> -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Books</th> <th></th> <th>Reviews</th> <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for book in @books %>
-          <tr>
-            <td class="lg-col-2">
-              <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, width: 600, crop: :scale%>
-              <% end %>
-            </td>
-            <td>
-              <p class="title">
-                <%= link_to book.title, book_path(book)%>
-              </p>
-              <p class="f7 fw4 black-60">
-                <%= book.author %>
-              </p>
-              <p class="f7 fw4 black-60">
-                <% if book.isbn != "" %>
-                  ISBN <%= book.isbn %>
-                <% end %>
-              </p>
-              <% if book.published_language != "" %>
-                <p class="f7 fw4 mt3 black-60">
-                  Published language: <%= book.published_language %>
-                </p>
-                <p class="f7 fw4 black-60">
-                  Curated in: <%= link_to book.library.name, library_path(book.library)  %>
-                </p>
-                <p class="f7 fw4 black-60">
-                  Curated by: <%= link_to book.library.user.email.truncate(30), profile_path(user_id: book.library.user_id)  %>
-                </p>
+  <div class="overflow-scroll row clearfix">
+    <% for book in @books %>
+      <div class="card col sm-col-12 dt w-100 bt b--black-100 pt2">
+        <%= link_to book_path(book), class: "link mt1 dim black" do %>
+        <div class="featured-card dtc w3">
+          <% if book.photo? %>
+            <%= cl_image_tag book.photo.path, height: 200, crop: :fill %>
+          <% else %>
+            <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", height: 200, crop: :fill %>
+          <% end %>
+        <% end %>
+        </div>
+        <div class="dtc v-top pl3">
+          <h1 class="f6 f6-ns black mv0 mb0"><%= link_to book.title.truncate(60), book_path(book), class:"fw5" %></h1>
+          <h2 class="align f7 fw3 mt1 mb0 black-50">
+          <% if book.author != "" %>
+            <%= book.author %>
+          <% else %>
+            <p style="color: white"> author </p>
+          <% end %>
+          </h2>
+          <dl class="f7 mt3 fw3 mt1 mb0 black-60">
+            <p class="clip">Rating</p>
+            <p class="ml0">
+              <% if book.rating == 0 %>
+                Rating — <%= 'None' %>
               <% else %>
-                <p class="f7 fw4 mt4 black-60">
-                  Curated in: <%= link_to book.library.name, library_path(book.library)  %>
-                </p>
-                <p class="f7 fw4 black-60">
-                  Curated by: <%= link_to book.library.user.email.truncate(30), profile_path(user_id: book.library.user_id)  %>
-                </p>
+                Rating — <%= book.rating %>/5
               <% end %>
-            </td>
-            <td>
-              <p class="title tc">
-                <% if book.reviews_count == 0 %>
-                  <%= '-' %>
-                <% else %>
-                  <%= book.reviews_count %>
-                <% end %>
-              </p>
-            </td>
-            <td>
-              <p class="title tc">
-                <% if book.rating == 0 %>
-                  <%= '-/5' %>
-                <% else %>
-                  <%= book.rating %>/5
-                <% end %>
-              </p>
-            </td>
-          </tr>
-        <%end%>
-      </tbody>
-    </table>
+            </p>
+            <p class="ml0">
+              Published language — <%= book.published_language.capitalize %>
+            </p>
+            <p class="f7 fw3 mb0 black-60">Curated in — <%= link_to book.library.name, library_path(book.library), class:"fw3"%>
+            </p>
+            <p class="f7 fw3 mb0 black-60">Curated by — <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id), class:"f7 fw3 mb0 black-60" %>
+            </p>
+          </dl>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
