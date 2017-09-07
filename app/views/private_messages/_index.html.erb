@@ -1,6 +1,6 @@
 <div class="fl h-100 bl b--black-20 mr3">
   <% if @private_messages %>
-    <div class="message-wrap mt3">
+    <div class="message-wrap mt2">
 <!--       <div class="message">
         <p class="ui blue labeled submit icon button btn-outline">Show previous messages</p>
       </div> -->
@@ -31,7 +31,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="message-wrap mt3">
+    <div class="pt3">
       <%= render "private_messages/message_form" %>
     </div>
   <% end %>

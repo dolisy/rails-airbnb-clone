@@ -56,3 +56,21 @@
     outline-style: auto;
     outline-width: 5px;
   }
+
+#new_private_message {
+    margin: 0 auto;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 61%;
+}
+
+textarea.form-control {
+    height: 70px;
+}
+
+#new-message-button {
+  margin-bottom: 30px;
+  height: 400px;
+}
+

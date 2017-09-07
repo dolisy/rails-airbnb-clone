@@ -1,18 +1,32 @@
 <% if @conversation %>
-  <%= simple_form_for [@conversation, @private_message], html: {class: "black-80"} do |f| %>
+  <%= simple_form_for [@conversation, @private_message], html: {class: "black-80 submit-on-enter"} do |f| %>
     <label for="password">
       <% if @conversation.private_messages.count == 0 %>
         Say somethingh nice to @book.library.user.first_name so he lends you his book
       <% else %>
-        Write a message to @book.library.user.first_name
-      <% end %>
+<!--         Write a message to @book.library.user.first_name
+ -->      <% end %>
     </label>
 
-    <%= f.input :body, as: :text, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book..." %>
+
     <%= f.input :user_id, input_html: {value: current_user.id}, as: "hidden"%>
     <% if @booking %>
       <%= f.input :booking_id, input_html: {value: @booking.id}, as: "hidden"%>
     <% end %>
-    <%= f.button :submit, "Send Message" %>
+    <%= f.input :body, as: :string, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book...", input_html: { onchange: "this.form.submit();" } %>
+    <%#= f.button :submit, "Send Message", input_html: { class: "new-message-button" } %>
   <% end %>
+<% end %>
+
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready( function() {
+      $(".submit-on-enter").keydown(function(event) {
+        if (event.keyCode == 13) {
+          this.form.submit();
+          return false;
+        }
+      });
+    });
+  </script>
 <% end %>
