@@ -32,14 +32,7 @@
       <% end %>
     </div>
     <div class="message-wrap mt3">
-      <% if @conversation %>
-        <%= form_for [@conversation, @private_message], html: {class: "black-80"} do |f| %>
-          <label for="password" class="mt2 f8 b tl db mb1">Write your message:</label>
-          <%= f.text_area :body, class: "fl mb1 form-control" %>
-          <%= f.text_field :user_id, value: current_user.id, type: "hidden", class:"input-reset ba b--black-20 pa2 mb1 db" %>
-          <%= f.submit "Send Message", class: "center ui blue labeled submit icon button btn-outline" %>
-        <% end %>
-      <% end %>
+      <%= render "private_messages/message_form" %>
     </div>
   <% end %>
 </div>

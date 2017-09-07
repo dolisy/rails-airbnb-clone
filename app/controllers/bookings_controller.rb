@@ -98,7 +98,14 @@ class BookingsController < ApplicationController
     @booking.conversation = Conversation.find_or_create_by(sender_id: @booking.user.id, recipient_id: @booking.book.library.user.id)
     @booking.save
 
-    redirect_to book_booking_path(@booking.book, @booking)
+    @conversation = @booking.conversation
+    @book = @booking.book
+
+    @private_message = PrivateMessage.new
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   private
