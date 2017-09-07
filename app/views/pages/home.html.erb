@@ -63,7 +63,7 @@
                   </p>
                   <p class="muted">
                     <span class="">Curated by —
-                      <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %> in <strong><%= book.library.city %></strong>
+                      <%= link_to book.library.user.username, profile_path(user_id: book.library.user_id) %> in <strong><%= book.library.city %></strong>
                     </span>
                   </p>
                 <% end %>
@@ -158,7 +158,7 @@
             <% else %>
               <h2 class="align f7 fw4 mt1 mb0 black-90">Located in:  <%= library.city %></h2>
             <% end %>
-            <h2 class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to library.user.email, profile_path(user_id: library.user_id) %></h2>
+            <h2 class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to library.user.username, profile_path(user_id: library.user_id) %></h2>
           </div>
         </article>
       </div>
