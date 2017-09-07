@@ -21,7 +21,7 @@
         <div class="left ba b--black-100 mt2 p1 fl pa2-ns md-col md-col-12">
           <div class="w-100-ns left calendar pt0">
           <%= simple_form_for [@book, @booking], remote: true do |f| %>
-            <%= f.input :status, as: :hidden, input_html: { value: "confirm" } %>
+            <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>
             <%= f.input :checkin_date, placeholder: "Start reading on?", as: :string, input_html: { class: 'datepicker left mb1', id: 'txtDateIn' } %>
             <%= f.input :checkout_date, placeholder: "Return it on?", as: :string, input_html: { class: 'datepicker left mb2', id: 'txtDateOut' } %>
             <%= f.submit "Borrow Book", class: 'btn-outline w-100 center'%>
