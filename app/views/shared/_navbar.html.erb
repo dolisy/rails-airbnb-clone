@@ -53,8 +53,10 @@
                 <% @conversation_last = conversation %>
               <% end %>
             <% end %>
-            <%= link_to conversation_path(@conversation_last), method: :get do  %>
-              <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+            <% if @conversation_last %>
+              <%= link_to conversation_path(@conversation_last), method: :get do  %>
+                <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+              <% end %>
             <% end %>
            </li>
            <li class="log-out-break"></li>
@@ -94,8 +96,10 @@
               <% @conversation_last = conversation %>
             <% end %>
           <% end %>
-          <%= link_to conversation_path(@conversation_last), method: :get do  %>
-            <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+          <% if @conversation_last %>
+            <%= link_to conversation_path(@conversation_last), method: :get do  %>
+              <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+            <% end %>
           <% end %>
         </li>
         <li>
