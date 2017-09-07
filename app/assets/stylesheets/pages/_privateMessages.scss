@@ -22,7 +22,7 @@
 }
 .message-body {
   padding-left: 10px;
-  font-size: 13px;
+  font-size: 12px;
 }
 .message-body {
   padding-left: 20px;
@@ -41,7 +41,8 @@
   color: red;
 }
 .status.pending {
-  color: lightgrey;
+  color: #999999;
+  font-size: 16px;
 }
 
 // #new_private_message {

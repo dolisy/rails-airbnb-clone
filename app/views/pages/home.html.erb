@@ -29,7 +29,7 @@
 
   <div class="cards row clearfix">
       <% Book.last(6).each do |book| %>
-        <div class="card col sm-col-6 dt w-100 bt b--black-100 pt2">
+        <div class="card col sm-col-6 dt w-100 bt b--black-100 pa3">
           <%= link_to book_path(book), class: "link mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
