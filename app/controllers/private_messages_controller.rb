@@ -35,7 +35,7 @@ class PrivateMessagesController < ApplicationController
       # redirect_to conversation_private_messages_path(@conversation)
 
       if @private_message.booking
-        redirect_to [@private_message.booking.book, @private_message.booking]
+        redirect_to book_booking_path(@private_message.booking.book, @private_message.booking)
       else
         redirect_to request.referer.present? ? request.referer : default_path
       end
