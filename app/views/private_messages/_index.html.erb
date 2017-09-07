@@ -8,8 +8,12 @@
         <% if private_message.body %>
           <% user = User.find(private_message.user_id) %>
           <div class="message">
-            <% avatar_url = user.facebook_picture_url || user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
-            <%= image_tag avatar_url, class: "br-100 w2 dib mr1 ml1" %>
+            <% if user.avatar.present? %>
+              <%= cl_image_tag(user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib mr1 ml1" }) %>
+            <% else %>
+              <% avatar_url = user.facebook_picture_url || user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
+              <%= image_tag avatar_url, class: "br-100 w2 dib mr1 ml1" %>
+            <% end %>
             <div class="w-25 mr3">
               <% if user.username %>
                 <p class="message-name"><%= user.username %></p>
@@ -34,7 +38,7 @@
       <% end %>
     </div>
     <div class="pt2 pb3">
-      <%= render "private_messages/message_form" %>
+      <%= render "private_messages/index_message_form" %>
     </div>
   <% end %>
 </div>
