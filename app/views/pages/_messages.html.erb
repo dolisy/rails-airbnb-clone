@@ -15,21 +15,24 @@
           <p><%= last_message.body %></p>
         <% end %>
 
-        <p class="black"><%= link_to "See the full conversation with #{booking.book.library.user.username}", conversation_path(conversation) %></p>
+        <p class="mute muted-title"><%= link_to "See the full conversation with #{booking.book.library.user.username}", conversation_path(conversation) %></p>
 
       <% elsif booking.book.library.user == current_user %>
-        <% avatar_url = booking.user.facebook_picture_url || booking.user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
-        <p class="black"><%= image_tag avatar_url, class: "br-100 w2 dib" %> <%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(55)} from #{booking.checkin_date} to #{booking.checkout_date}" %></p>
-
+        <% if booking.user.avatar.present? %>
+          <p class="mute"><%= cl_image_tag(booking.user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib" }) %> <%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(40)} from #{booking.checkin_date} to #{booking.checkout_date}" %></p>
+        <% else %>
+          <% avatar_url = booking.user.facebook_picture_url || booking.user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
+          <p class="mute"><%= image_tag avatar_url, class: "br-100 w2 dib" %> <%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(55)} from #{booking.checkin_date} to #{booking.checkout_date}" %></p>
+        <% end %>
         <% last_message = booking.private_messages.where(user: booking.user).last %>
         <% if last_message %>
           <p><%= last_message.body %></p>
         <% end %>
 
-        <p class="black"><%= link_to "See the full conversation with #{booking.user.username}", conversation_path(conversation) %></p>
+        <p class="mute"><%= link_to "See the full conversation with #{booking.user.username}", conversation_path(conversation) %></p>
       <% end %>
     </div>
-    <div class="message-status mr4">
+    <div class="message-status mb1">
       <p class="status <%= booking.status %>"><%= booking.status.capitalize %></p>
       <% if booking.status == "pending" && booking.book.library.user == current_user %>
         <p class="white">
@@ -80,20 +83,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
