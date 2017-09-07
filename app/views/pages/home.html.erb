@@ -3,6 +3,15 @@
     <div class="clearfix">
       <h2 class="pt2 pr2 banner-copy">Discover</h2>
       <h2 class="pr2 banner-copy">Read</h2>
+<<<<<<< HEAD
+      <h2 class="pr2 banner-copy" id="books">Books.</h2>
+      <% if user_signed_in? %>
+      <% else %>
+          <p class="tc pl5 tagline">Find books on the web by browsing your neighbor's library.
+          </p>
+          <%= link_to 'Join Us.', '#', class: 'btn btn-outline'%>
+    <% end %>
+=======
       <h2 class="pr2 banner-copy green">Books.</h2>
 
       <p class="tc pl5 tagline">Find books on the web by browsing your neighbor's library.</p>
@@ -11,6 +20,7 @@
       <% else %>
           <%= link_to 'Join Us', '#', class: 'btn btn-primary'%>
       <% end %>
+>>>>>>> master
     </div>
   </div>
 </div>
