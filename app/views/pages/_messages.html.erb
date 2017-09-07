@@ -1,5 +1,8 @@
-<% conversation = Conversation.find_by(sender_id: booking.user.id) %>
-  <% if conversation %>
+<% begin conversation = Conversation.find_by!(sender_id: booking.user.id) %>
+<% rescue %>
+  <% conversation = Conversation.find_by!(sender_id: booking.book.library.user.id) %>
+<% end %>
+<% if conversation %>
   <div class="pt2 message">
     <%# avatar_url = booking.user.facebook_picture_url || booking.user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
     <%#= image_tag avatar_url, class: "br-100 w2 dib" %>
@@ -43,6 +46,71 @@
           <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-outline" %>
         </p>
       <% end %>
+      <% if booking.status == "accepted" && booking.user == current_user %>
+        <!-- Button trigger modal -->
+        <% reviews_count = 0 %>
+        <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
+          Add Review
+        </a>
+      <% end %>
     </div>
   </div>
 <% end %>
+
+<!-- Add Review Modal -->
+<div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
+        <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @review do |f| %>
+        <div class="modal-body">
+          <%= f.error_notification %>
+          <%= f.hidden_field :booking_id, value: booking.id %>
+          <%= f.input :content %>
+          <%= f.input :stars, input_html: { class: "rating" } %>
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit, class: "left btn-outline" %>
+        </div>
+      <% end %>
+      <%= content_for(:after_js) do %>
+        <script>
+          $('#review_stars').rating({'size':'xs'});
+        </script>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

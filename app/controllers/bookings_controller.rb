@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
 
   def confirm
     @booking = Booking.find(params[:id])
-    @booking.status = "Accepted"
+    @booking.status = "accepted"
     @booking.save
 
     @private_message = PrivateMessage.new(
@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
 
   def decline
     @booking = Booking.find(params[:id])
-    @booking.status = "Declined"
+    @booking.status = "declined"
     @booking.save
 
     @private_message = PrivateMessage.new(
