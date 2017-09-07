@@ -1,4 +1,7 @@
-<div class="wrapper cf" id="dashboard">
+<div class="wrapper cf">
+
+<!-- ################################################# -->
+
   <% if @user == current_user %>
     <h2 style="font-size: 28px;">
       Welcome to your dashboard,
@@ -10,61 +13,71 @@
       <a class="edit-button" data-target="#editModal" data-toggle="modal">(edit profile)</a>
     </h2>
   <% else %>
-    <h2 style="font-size: 22px;">
+    <h2 style="font-size: 28px;">
       <% if @user.first_name? %>
-        <span class="book-title black lh-title fw3 mt0 pt1"><%=@user.first_name%>
+        <span class="book-title black lh-title fw3 mt0 pt1"><%=@user.username%>
       <% else %>
-        <span class="book-title black lh-title fw3 mt0 pt1"><%= @user.username %>
-      <% end %>
-      's dashboard
+        <span class="book-title black lh-title fw3 mt0 pt1"><%= @user.username s profile %>
+      <% end %> has <%= @user.libraries.count %> libraries:</span>
     </h2>
   <% end %>
 
-  <div class="dashboard-nav">
-    <% if @user == current_user %>
-      <a class="tab active" href="#" data-target="#libraries">Your Libraries (<%= @user.libraries.count %>)</a>
-      /
-      <a class="tab" href="#" data-target="#bookings">Conversations</a>
-    <% else %>
-      <a class="tab" href="#" data-target="#libraries">Libraries (<%= @user.libraries.count %>)</a>
-    <% end %>
-  </div>
+<!-- ################################################# -->
 
-  <!-- Bookings -->
+<!-- tabs -->
+  <!-- my libraries tab -->
   <% if @user == current_user %>
-    <div class="tab-content hidden" id="bookings">
-      <div class="bookings-nav">
-        <a class="bookings-tab" style="font-size:16px;" href="#" data-target="#books-bookings">Your Books</a>
-        /
-        <a class="bookings-tab active" style="font-size:16px;" href="#" data-target="#reservations-bookings">Your Reservations</a>
-      </div>
-
-      <div class="bookings-tab-content hidden" id="books-bookings">
-
-        <% @user.libraries.each do |libarry| %>
-          <% libarry.books.each do |book| %>
-            <% book.bookings.each do |booking| %>
-              <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="bookings-tab-content active" id="reservations-bookings">
-
-        <% @user.bookings.each do |booking| %>
-          <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
-        <% end %>
-      </div>
+    <div class="dib mt2 meta black-40 w-15">
+      <div class="meta-title bb b--black-40 pb.5">Info</div>
+      <ul class="views list pl0 dashboard-nav">
+        <li class="dib info">
+          <a class="tab active" href="#" data-target="#libraries">Your Libraries (<%= @user.libraries.count %>)</a>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+  <!-- my books + my reservations tabs -->
+  <% if @user == current_user %>
+    <div class="dib mt2 meta black-40 w-15">
+      <div class="meta-title bb b--black-40 pb.5">Info</div>
+      <ul class="views list pl0 dashboard-nav">
+        <li class="dib info">
+          <a class="tab" href="#" data-target="#books-bookings">Your books</a>
+        </li>
+        <span>/</span>
+        <li class="dib info">
+          <a class="tab" href="#" data-target="#reservations-bookings">Your Reservations</a>
+        </li>
+      </ul>
     </div>
   <% end %>
 
-  <!-- My Libraries -->
+<!-- data -->
+  <!-- my books data -->
+  <div class="tab-content hidden" id="books-bookings">
+    <% @user.libraries.each do |libarry| %>
+      <% libarry.books.each do |book| %>
+        <% book.bookings.each do |booking| %>
+          <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 
+  <!-- my reservations data -->
+  <div class="tab-content hidden" id="reservations-bookings">
+    <% @user.bookings.each do |booking| %>
+      <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
+    <% end %>
+  </div>
+
+  <!-- my Libraries data -->
   <div class="tab-content bookings clearfix" id="libraries">
-    <div class="ml1 mt2 w-100 fl">
-      <%= link_to "New Library (+)", new_library_path%>
-    </div>
+    <% if @user == current_user %>
+      <div class="ml1 mt2 w-100 fl">
+        <%= link_to "New Library (+)", new_library_path%>
+      </div>
+    <% end %>
     <% @user.libraries.each do |library| %>
       <div class="lib-card mt2 mb1 mr1 ml1 card sm-col sm-col-4">
         <article class="box fl mw5 mw6-ns ba mv1">
@@ -117,7 +130,10 @@
               </a>
               <!-- end carousel -->
             </div>
-            <p class="mt2 f6 b f5-ns lh-copy measure mv0">Books in this library: <%=library.books.count.to_s%></p>
+            <p class="mt2 f6 b f5-ns measure mv0">Books in this library: <%=library.books.count.to_s%>
+            </p>
+            <p class="f6 b f5-ns measure mv0">Located in: <%=library.city%>
+            </p>
           </div>
         </article>
       </div>
@@ -125,7 +141,8 @@
   </div>
 </div>
 
-<!-- ####################################################################################################################################### -->
+<!-- ################################################# -->
+
 <!-- Modal goes below -->
 <div class="modal" id="editModal" tabindex="-1">
   <div class="modal-dialog">
