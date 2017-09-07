@@ -41,8 +41,8 @@ a:hover {
 .wrapper {
   padding-top: .5em;
   padding-bottom: .5em;
-  padding-left: 2.2em;
-  padding-right: 2.2em;
+  padding-left: 3.5em;
+  padding-right: 3.5em;
 }
 
 // ----------- NAV ------------//
@@ -148,6 +148,15 @@ h5 {
   padding: 10px;
 }
 
+.featured-book {
+  font-size: 15px;
+  font-weight: lighter;
+  color: #5c5c5c;
+  margin-top: 5em;
+  letter-spacing: 0.01em;
+  line-height: 1.2em;
+}
+
 .form {
   text-align: center;
 }
@@ -157,23 +166,22 @@ h5 {
 }
 
 .cards {
-  padding-bottom: 1.5em;
   margin-top: 1em;
 }
 
-.cards p {
-  font-size: 18px;
-  margin-left: 11px;
-}
+// .cards p {
+//   font-size: 18px;
+//   margin-left: 11px;
+// }
 
 .card {
-  padding-bottom: 1.5em;
   padding-right: .5em;
   padding-left: .5em;
 }
 
 .featured-card img {
   max-width: 125%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .carousel-indicators li {

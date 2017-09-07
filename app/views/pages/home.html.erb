@@ -15,7 +15,6 @@
     </div>
   </div>
 </div>
-
 <div class="wrapper">
   <div class="flex wrap">
     <div class="col-6">
@@ -34,34 +33,38 @@
           <%= link_to book_path(book), class: "link mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, height: 200, crop: :fill %>
+                <%= cl_image_tag book.photo.path, height: 190, crop: :fill %>
               <% else %>
                 <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", height: 200, crop: :fill %>
               <% end %>
             <% end %>
             </div>
             <div class="text-flex dtc v-top pl3">
-              <h1 class="f6 f5-ns fw6 black mv0 mb1"><%= link_to book.title.truncate(33), book_path(book) %></h1>
-              <h2 class="align f7 fw4 mt1 mb0 black-60">
+              <h2 class="f6 fw5 f5-ns black mv0"><%= link_to book.title.truncate(33), book_path(book), class:"fw5"%> </h2>
+              <h2 class="f7 mt0 mb0 black-50">
                 <% if book.author != "" %>
                   <%= book.author %>
                 <% else %>
                   <p style="color: white"> author </p>
                 <% end %>
               </h2>
-              <dl class="mt3 f7">
+              <dl class="featured-book">
                 <dt class="clip">Rating</dt>
                 <dd class="ml0">
                   <% if book.rating == 0 %>
-                    <%= '-/5' %>
+                    Rating — <%= 'None' %>
                   <% else %>
-                    Rating: <%= book.rating %>/5
+                    Rating — <strong><%= book.rating %></strong>/5
                   <% end %>
                 </dd>
-                <h2 class="align f7 fw4 mt1 mb0 black-90">Curated in: <%= link_to book.library.name, library_path(book.library)%>
-                </h2>
-                <h2 class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %>
-                </h2>
+                <p class="muted">Curated in —
+                  <%= link_to book.library.name, library_path(book.library)%>
+                </p>
+                <p class="muted">
+                  <span class="">Curated by —
+                    <%= link_to book.library.user.email, profile_path(user_id: book.library.user_id) %> in <strong><%= book.library.city %></strong>
+                  </span>
+                </p>
               </dl>
             </div>
         </div>
@@ -82,7 +85,7 @@
   </div>
 </div>
 
-<div class="wrapper-libs">
+<div class="wrapper">
   <div class="cards row clearfix">
     <% library_length = Library.all.length %>
     <% if Library.all.length >= 6 %>
