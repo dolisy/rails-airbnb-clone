@@ -7,7 +7,7 @@
   <article class="pt3 f4 pb1 dt w-100 bb b--black-70">
     <% if @library.user == current_user %>
       <div class="left black">
-        <%= @library.name %> (<%= link_to "edit", edit_library_path(@library)%>)
+        <%= @library.name %> <a class="edit-button" data-target="#editModal" data-toggle="modal">(edit)</a>
       </div>
       <div class="right">
         <%= link_to "Add Book +", new_book_path %>
@@ -49,3 +49,28 @@
     </div>
   </div>
 </article>
+
+<!-- ####################################################################################################################################### -->
+<!-- Modal goes below -->
+<div class="modal" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Library</h4>
+      </div>
+      <div class="modal-body">
+          <%= simple_form_for @library do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :name, placeholder: 'Name', label:false %>
+            <%= f.input :address, placeholder: 'Address', :input_html => { :id => 'geo-edit-library' }, label:false %>
+
+            <%= f.submit 'Edit Library', class: "btn-outline mt2" %>
+          <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
