@@ -54,7 +54,7 @@
                   <% if book.rating == 0 %>
                     Rating — <%= 'None' %>
                   <% else %>
-                    Rating — <strong><%= book.rating %></strong>/5
+                    Rating — <%= book.rating %>/5
                   <% end %>
                 </dd>
                 <% if book.library %>
@@ -154,11 +154,11 @@
               <!-- end carousel -->
             </div>
             <% if library.city.to_s == "" %>
-              <h2 class="align f7 fw4 mt1 mb0 white-90">Located in:</h2>
+              <h2 class="align f7 fw3 mt1 mb0 white-90">Located in:</h2>
             <% else %>
-              <h2 class="align f7 fw4 mt1 mb0 black-90">Located in:  <%= library.city %></h2>
+              <h2 class="align f7 fw3 mt1 mb0 black-90">Located in:  <%= library.city %></h2>
             <% end %>
-            <h2 class="align f7 fw4 mt1 mb0 black-90">Curated by: <%= link_to library.user.username, profile_path(user_id: library.user_id) %></h2>
+            <h2 class="align f7 fw3 mt1 mb0 black-90">Curated by: <%= link_to library.user.username, profile_path(user_id: library.user_id) %></h2>
           </div>
         </article>
       </div>
