@@ -1,4 +1,4 @@
-<div class="cf ph2 ph4-ns">
+<div class="cf ph4-ns">
   <div class="msg-block fl b--black-20 w-100 w-30-ns">
     <% @unread_messages = 0 %>
     <% Conversation.all.each do |conversation| %>
@@ -41,10 +41,11 @@
         </div>
       <% end %>
     <% end %>
-  </div>
-  <div class="fl w-100 w-70-ns">
+      </div>
+  <div class="fl w-70-ns" id="stick-form ">
     <%= render 'private_messages/index' %>
   </div>
+</div>
 </div>
 
 <%# content_for(:after_js) do %>
