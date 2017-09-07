@@ -4,9 +4,9 @@
     <label for="password">
       <% if @conversation.private_messages.count == 0 %>
         <% if @conversation.sender_id == current_user.id %>
-          Say somethingh nice to persuade <%= @conversation.recipient.username %> to lend the book to you.
+          Say something nice to persuade <%= @conversation.recipient.username %> to lend the book to you.
         <% else %>
-          Say somethingh nice to persuade <%= @conversation.sender.username %> to lend the book to you.
+          Say something nice to persuade <%= @conversation.sender.username %> to lend the book to you.
         <% end %>
       <% else %>
         <% if @conversation.sender_id == current_user.id %>
