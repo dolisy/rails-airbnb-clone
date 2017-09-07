@@ -12,7 +12,7 @@
         <% end %>
       <% end %>
     <% end %>
-    <h3 class="book-title f3 black lh-title fw9 mt3 pb2">Messages(<%= @unread_messages %>)</h3>
+    <h3 class="book-title f3 black lh-title fw9 pb2">Messages(<%= @unread_messages %>)</h3>
     <% my_conversations = [] %>
     <% @conversations.each do |conversation| %>
       <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
@@ -48,15 +48,26 @@
 </div>
 </div>
 
-<%# content_for(:after_js) do %>
-<!--   <script>
+<html>
+
+
+<body onLoad="JavaScript:checkRefresh();">
+
+<form name="refreshForm">
+<input type="hidden" name="visited" value="" />
+</form>
+
+</body>
+</html>
+
+<% content_for(:after_js) do %>
+  <script>
     $(document).ready( function() {
-      <%# my_conversations.each do |conversation| %>
-        $(".block<%#= conversation.id %>").on('click', function(event) {
-          event.preventDefault();
-          $(".conversation<%#= conversation.id %>").click();
-        });
-      <%# end %>
+      $('html, body').animate({
+        scrollTop: $('footer').offset().top
+        //scrollTop: $('#your-id').offset().top
+        //scrollTop: $('.your-class').offset().top
+      }, 'slow');
     });
-  </script> -->
-<%# end %>
+  </script>
+<% end %>
