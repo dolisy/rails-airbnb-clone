@@ -2,13 +2,13 @@
   <%= simple_form_for [@conversation, @private_message], html: {class: "black-80"} do |f| %>
     <label for="password">
       <% if @conversation.private_messages.count == 0 %>
-        Say somethingh nice to <%= @book.library.user.first_name %> so he lends you his book
+        Say somethingh nice to @book.library.user.first_name so he lends you his book
       <% else %>
-        Write a message to <%= @book.library.user.first_name %>
+        Write a message to @book.library.user.first_name
       <% end %>
     </label>
 
-    <%= f.input :body, as: :text, label: false, placeholder: "Hey #{@book.library.user.first_name}, I really want to read this book..." %>
+    <%= f.input :body, as: :text, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book..." %>
     <%= f.input :user_id, input_html: {value: current_user.id}, as: "hidden"%>
     <% if @booking %>
       <%= f.input :booking_id, input_html: {value: @booking.id}, as: "hidden"%>

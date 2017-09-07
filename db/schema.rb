@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905133517) do
+ActiveRecord::Schema.define(version: 20170907115353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +49,11 @@ ActiveRecord::Schema.define(version: 20170905133517) do
     t.date     "return_date"
     t.integer  "user_id"
     t.integer  "book_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.date     "checkin_date"
     t.date     "checkout_date"
+    t.integer  "number_of_pick_days"
     t.string   "status"
     t.integer  "conversation_id"
     t.index ["book_id"], name: "index_bookings_on_book_id", using: :btree
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 20170905133517) do
     t.datetime "token_expiry"
     t.boolean  "admin",                  default: false, null: false
     t.string   "google_picture_url"
+    t.string   "name"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

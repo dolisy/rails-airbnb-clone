@@ -31,10 +31,20 @@
 
     <div class="bookings-tab-content" id="books-bookings">
       <h2>People who want to borrow your books</h2>
+      <% @user.libraries.each do |libarry| %>
+        <% libarry.books.each do |book| %>
+          <% book.bookings.each do |booking| %>
+            <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="bookings-tab-content hidden" id="reservations-bookings">
-     <h2>Your book request</h2>
+      <h2>Your reservations</h2>
+      <% @user.bookings.each do |booking| %>
+        <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
+      <% end %>
     </div>
   </div>
 
