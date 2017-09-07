@@ -36,6 +36,9 @@
 }
 .status.accepted {
   color: #04A366;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 8px;
 }
 .status.declined {
   color: red;
@@ -63,7 +66,6 @@
     background-color: white;
     // position: fixed;
     bottom: 0;
-    width: 61%;
 }
 
 textarea.form-control {
