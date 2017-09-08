@@ -18,7 +18,7 @@
   <div class="fl-ns w-50-ns">
     <p class="mt2 f7 copy"> <%= @book.description %> </p>
       <% if @book.library.user != current_user %>
-        <div class="left ba b--black-100 mt2 p1 fl pa2-ns md-col md-col-12">
+        <div class="left ba b--black-100 mt2 p2 fl pa2-ns md-col md-col-12">
           <div class="w-100-ns left calendar pt0">
           <%= simple_form_for [@book, @booking], remote: true do |f| %>
             <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>

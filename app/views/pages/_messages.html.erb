@@ -2,13 +2,14 @@
 <% rescue %>
   <% conversation = Conversation.find_by!(sender_id: booking.book.library.user.id) %>
 <% end %>
+
 <% if conversation %>
   <div class="pt2 message">
     <% book_url = booking.book.photo || "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF" %>
-    <%= cl_image_tag book_url.path, height: 150, width: 103, crop: :fill %>
+    <%= cl_image_tag book_url.path, height: 200, width: 130, crop: :fill %>
     <div class="message-body">
       <% if booking.user == current_user %>
-        <p><strong>Your reservation for <%= booking.book.title %> from <%= booking.checkin_date %> to <%= booking.checkout_date %></strong></p>
+        <p><strong>Your reservation for <%= booking.book.title.truncate(35) %> from <%= booking.checkin_date %> to <%= booking.checkout_date %></strong></p>
 
         <% last_message = booking.private_messages.where(user: booking.book.library.user).last %>
         <% if last_message %>
@@ -19,17 +20,27 @@
 
       <% elsif booking.book.library.user == current_user %>
         <% if booking.user.avatar.present? %>
-          <p class="mute"><%= cl_image_tag(booking.user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib" }) %> <%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(40)} from #{booking.checkin_date} to #{booking.checkout_date}" %></p>
+          <%= cl_image_tag(booking.user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib absolute" }) %>
+          <p class="mute shift">
+            <strong><%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(30)} from #{booking.checkin_date} to #{booking.checkout_date}" %></strong>
+          </p>
         <% else %>
           <% avatar_url = booking.user.facebook_picture_url || booking.user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
-          <p class="mute"><%= image_tag avatar_url, class: "br-100 w2 dib" %> <%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(55)} from #{booking.checkin_date} to #{booking.checkout_date}" %></p>
+          <%= image_tag avatar_url, class: "br-100 w2 dib absolute" %>
+          <p class="mute shift">
+            <strong><%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(30)} from #{booking.checkin_date} to #{booking.checkout_date}" %></strong>
+          </p>
         <% end %>
-        <% last_message = booking.private_messages.where(user: booking.user).last %>
+        <p class="mute shift">
+          <% last_message = booking.private_messages.where(user: booking.user).last %>
+        </p>
         <% if last_message %>
-          <p><%= last_message.body %></p>
+          <p class="shift"><%= last_message.body %></p>
         <% end %>
 
-        <p class="mute"><%= link_to "See the full conversation with #{booking.user.username}", conversation_path(conversation) %></p>
+        <p class="mute muted-title shift pt1">
+          <%= link_to "See the full conversation with #{booking.user.username}", conversation_path(conversation) %>
+        </p>
       <% end %>
     </div>
     <div class="message-status mb1">
@@ -83,17 +94,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

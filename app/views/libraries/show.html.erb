@@ -25,7 +25,7 @@
       <article class="p2 fl w-100 w-50-m w-25-ns pa2-ns tc">
         <div class="center">
           <% if book.photo? %>
-            <%= cl_image_tag book.photo.path, height: 300, crop: :fill, class: "mb1" %>
+            <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :fill, class: "mb1" %>
           <% end %>
         </div>
           <%= link_to book.title.truncate(53), book_path(book), class: "lib-title db link black hover-grey" %>

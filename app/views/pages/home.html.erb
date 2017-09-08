@@ -33,7 +33,7 @@
           <%= link_to book_path(book), class: "link mt1 dim black" do %>
             <div class="featured-card dtc w3">
               <% if book.photo? %>
-                <%= cl_image_tag book.photo.path, height: 190, crop: :fill %>
+                <%= cl_image_tag book.photo.path, height: 200, crop: :fill %>
               <% else %>
                 <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", height: 200, crop: :fill %>
               <% end %>
