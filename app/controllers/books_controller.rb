@@ -52,7 +52,7 @@ class BooksController < ApplicationController
     elsif params[:sort_by] == 'published language'
       @books = @books.sort_by { |b| - b.published_language }
     elsif params[:sort_by] == 'rating'
-      @books = @books.sort_by { |b| b.rating }
+      @books = @books.sort_by { |b| - b.rating }
     elsif params[:sort_by] == 'reviews'
       @books = @books.sort_by { |b| - b.reviews_count }
     elsif params[:sort_by] == 'curated in'
