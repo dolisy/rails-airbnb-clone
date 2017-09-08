@@ -75,3 +75,7 @@ a:active{
 body {
   line-height: 1.3em;
 }
+
+.form-control:focus {
+  outline: none;
+}

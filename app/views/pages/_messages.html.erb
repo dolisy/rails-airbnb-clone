@@ -9,7 +9,7 @@
     <%= cl_image_tag book_url.path, height: 200, width: 130, crop: :fill %>
     <div class="message-body">
       <% if booking.user == current_user %>
-        <p><strong>Your reservation for <%= booking.book.title.truncate(35) %> from <%= booking.checkin_date %> to <%= booking.checkout_date %></strong></p>
+        <p><strong>Your reservation for <%= booking.book.title.truncate(30) %> from <%= booking.checkin_date %> to <%= booking.checkout_date %></strong></p>
 
         <% last_message = booking.private_messages.where(user: booking.book.library.user).last %>
         <% if last_message %>
@@ -22,13 +22,19 @@
         <% if booking.user.avatar.present? %>
           <%= cl_image_tag(booking.user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib absolute" }) %>
           <p class="mute shift">
-            <strong><%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(30)} from #{booking.checkin_date} to #{booking.checkout_date}" %></strong>
+            <strong><%= booking.user.username %></strong> wants to borrow <strong><%= booking.book.title.truncate(30) %></strong>
+          </p>
+          <p class="mute shift">
+            From: <strong><%= booking.checkin_date %></strong> to: <strong><%= booking.checkout_date %></strong>
           </p>
         <% else %>
           <% avatar_url = booking.user.facebook_picture_url || booking.user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
           <%= image_tag avatar_url, class: "br-100 w2 dib absolute" %>
           <p class="mute shift">
-            <strong><%= "#{booking.user.username} wants to borrow #{booking.book.title.truncate(30)} from #{booking.checkin_date} to #{booking.checkout_date}" %></strong>
+            <strong><%= booking.user.username %></strong> wants to borrow <strong><%= booking.book.title.truncate(30) %></strong>
+          </p>
+          <p class="mute shift">
+            From: <strong><%= booking.checkin_date %></strong> to: <strong><%= booking.checkout_date %></strong>
           </p>
         <% end %>
         <p class="mute shift">

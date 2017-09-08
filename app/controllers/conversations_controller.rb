@@ -13,6 +13,8 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @showfooter = true
+
     @conversations = []
     Conversation.all.each do |conversation|
       if conversation.sender_id == current_user.id
