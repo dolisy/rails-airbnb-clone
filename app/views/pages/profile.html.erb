@@ -3,7 +3,7 @@
 <!-- ################################################# -->
 
   <% if @user == current_user %>
-    <h2 style="font-size: 28px;">
+    <h2 style="font-size: 32px;">
       Welcome to your dashboard,
       <% if @user.first_name? %>
         <span class="book-title black lh-title mt0 pt1"><%=@user.first_name.capitalize%>
@@ -13,7 +13,7 @@
       <a class="edit-button" data-target="#editModal" data-toggle="modal">(edit profile)</a>
     </h2>
   <% else %>
-    <h2 style="font-size: 28px;">
+    <h2 style="font-size: 32px;">
       <% if @user.first_name? %>
         <span class="book-title black lh-title mt0 pt1"><%=@user.username%>
       <% else %>
