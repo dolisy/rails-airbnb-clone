@@ -321,8 +321,22 @@ textarea.form-control {
 }
 
 
+.btn-default {
+  border-color: black;
+  opacity: 1;
+  border-radius: 0;
+  margin-top: 10px;
+}
 
+.btn-default:hover {
+  border-color: black;
+  background-color: white;
+  opacity: .6;
+  border-radius: 0;
+}
 
-
+.datepicker {
+  border-radius: 0px!important;
+}
 
 
