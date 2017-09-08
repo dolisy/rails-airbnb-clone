@@ -1,6 +1,6 @@
 
 <% if @conversation %>
-  <%= simple_form_for [@conversation, @private_message], html: {class: "black-80 submit-on-enter"} do |f| %>
+  <%= simple_form_for [@conversation, @private_message], html: {class: "black-70 submit-on-enter pl1"} do |f| %>
     <label for="password">
       <% if @conversation.private_messages.count == 0 %>
         <% if @conversation.sender_id == current_user.id %>
