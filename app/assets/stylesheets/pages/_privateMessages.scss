@@ -19,6 +19,7 @@
   font-size: 12px;
   font-weight: lighter;
   opacity: 0.6;
+  width: 129px;
 }
 .message-body {
   padding-left: 25px;
@@ -42,7 +43,11 @@
 }
 .status.declined {
   color: red;
+  font-size: 16px;
+  text-align: right;
+  margin-bottom:10px;
 }
+
 .status.pending {
   color: #999999;
   font-size: 16px;

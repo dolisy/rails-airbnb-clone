@@ -23,11 +23,11 @@
               <p class="timestamp"><%= private_message.private_message_time %></p>
             </div>
             <div class="w-100 message-body">
-              <p><%= private_message.body %></p>
+              <p class="w-100"><%= private_message.body %></p>
             </div>
             <% if private_message.booking %>
               <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
-                <p>
+                <p class="w-100 right">
                   <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
                   <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
                 </p>
@@ -37,7 +37,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="pt2 pb2">
+    <div class="pt2 pb3">
       <%= render "private_messages/index_message_form" %>
     </div>
   <% end %>

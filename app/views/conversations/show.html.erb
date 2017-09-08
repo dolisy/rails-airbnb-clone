@@ -33,7 +33,7 @@
               <% @unread_conversation += 1 %>
             <% end %>
           <% end %>
-          <blockquote class="tl f7 pl2 b--black-20">
+          <blockquote class="tl f7 pl1 b--black-20">
             <% if @recipient.avatar.present? %>
               <%= cl_image_tag(@recipient.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib" }) %>
             <% else %>
