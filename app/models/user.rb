@@ -64,12 +64,7 @@ class User < ApplicationRecord
   end
 
   def username
-    if first_name && last_name
-      username = "#{first_name} #{last_name}"
-    else
-      username = /.*\@/.match(email)
-    end
-
+    username = /.*\@/.match(email).to_s.chomp("@").prepend("@")
   end
 end
 

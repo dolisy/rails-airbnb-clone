@@ -23,7 +23,7 @@
       <%= f.input :booking_id, input_html: {value: @booking.id}, as: "hidden"%>
     <% end %>
     <%= f.input :body, as: :text, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book..." %>
-    <%= f.button :submit, "Send Message", input_html: { class: "new-message-button btn-outline" } %>
+    <%= f.button :submit, "Send Message", input_html: { class: "new-message-button" } %>
   <% end %>
 <% end %>
 

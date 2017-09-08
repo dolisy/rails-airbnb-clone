@@ -1,16 +1,14 @@
 <% content_for :meta_title, "Check out #{@library.name} on #{DEFAULT_META["meta_product_name"]}"  %>
 <% content_for :meta_description, "Browse through over 1200+ collections of libraries and find the book that reads to you the most right in your area" %>
 
-
-
 <div class="wrapper">
   <article class="pt3 f4 pb1 dt w-100 bb b--black-70">
     <% if @library.user == current_user %>
       <div class="left black">
-        <%= @library.name %> (<%= link_to "edit", edit_library_path(@library)%>)
+        <%= @library.name %> <a class="edit-button" data-target="#editModal" data-toggle="modal">(edit)</a>
       </div>
       <div class="right">
-        <%= link_to "Add Book +", new_book_path %>
+        <%= link_to "Add a Book (+)", new_book_path %>
       </div>
       <% else %>
       <div class="left black">
@@ -27,10 +25,10 @@
       <article class="p2 fl w-100 w-50-m w-25-ns pa2-ns tc">
         <div class="center">
           <% if book.photo? %>
-            <%= cl_image_tag book.photo.path, height: 300, crop: :fill, class: "mb1" %>
+            <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :fill, class: "mb1" %>
           <% end %>
         </div>
-          <%= link_to book.title.truncate(53), book_path(book), class: "db link black hover-grey" %>
+          <%= link_to book.title.truncate(53), book_path(book), class: "lib-title db link black hover-grey" %>
       </article>
     <% end %>
   </section>
@@ -38,7 +36,7 @@
 <article class="cf ph1 ph5-ns pv1">
   <div class="dt w-100 bt b--black-100 pt1 mt1 dt dt--fixed">
     <div class="fw6 dtc tl">Curated by:
-      <p class="f7 copy mid-gray"><%= link_to @library.user.email, profile_path(@profile), class:"f7 copy mid-gray"%></p>
+      <p class="f7 copy mid-gray"><%= link_to @library.user.username, profile_path(@profile), class:"f7 copy mid-gray"%></p>
     </div>
     <div class="fw6 dtc tl">Located in:
       <p class="f7 copy mid-gray">
@@ -49,3 +47,28 @@
     </div>
   </div>
 </article>
+
+<!-- ####################################################################################################################################### -->
+<!-- Modal goes below -->
+<div class="modal" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Library</h4>
+      </div>
+      <div class="modal-body">
+          <%= simple_form_for @library do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :name, placeholder: 'Name', label:false %>
+            <%= f.input :address, placeholder: 'Address', :input_html => { :id => 'geo-edit-library' }, label:false %>
+
+            <%= f.submit 'Edit Library', class: "btn-outline mt2" %>
+          <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

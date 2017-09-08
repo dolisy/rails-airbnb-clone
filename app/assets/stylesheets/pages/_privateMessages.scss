@@ -22,7 +22,7 @@
 }
 .message-body {
   padding-left: 10px;
-  font-size: 13px;
+  font-size: 12px;
 }
 .message-body {
   padding-left: 20px;
@@ -36,12 +36,16 @@
 }
 .status.accepted {
   color: #04A366;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 33px;
 }
 .status.declined {
   color: red;
 }
 .status.pending {
-  color: lightgrey;
+  color: #999999;
+  font-size: 16px;
 }
 
 // #new_private_message {
@@ -56,3 +60,20 @@
     outline-style: auto;
     outline-width: 5px;
   }
+
+#new_private_message {
+    margin: 0 auto;
+    background-color: white;
+    // position: fixed;
+    bottom: 0;
+}
+
+textarea.form-control {
+    height: 70px;
+}
+
+#new-message-button {
+  margin-bottom: 30px;
+  height: 400px;
+}
+

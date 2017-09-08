@@ -27,7 +27,7 @@
               <% formatted_description = "" %>
             <% end %>
             <tr>
-              <td class="lg-col-2">
+              <td class="lg-col-3 pa1">
                 <% image = if result[1][:image_link] %>
                   <% result[1][:image_link] %>
                 <% elsif result[1][:large_image] %>
@@ -78,12 +78,12 @@
                       <% end %>
                     </p>
                 </td>
-                <td class="lg-col-2">
+                <td class="lg-col-3 pa1">
                   <p class="title">
                     <% if @library.present? %>
-                      <%= link_to "Select(+)", new_library_book_path(@library, title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: formatted_description, number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %>
+                      <%= link_to "Select (+)", new_library_book_path(@library, title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: formatted_description, number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %>
                     <% else %>
-                      <%= link_to "Select(+)", new_book_path(library_id: params[:library_id], title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: formatted_description, number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %>
+                      <%= link_to "Select (+)", new_book_path(library_id: params[:library_id], title: result[1][:title], author: result[1][:author], publisher: result[1][:publisher], publication_date: result[1][:publication_date], creator: result[1][:creator], edition: result[1][:edition], release_date: result[1][:release_date], description: formatted_description, number_of_pages: result[1][:number_of_pages], published_language: result[1][:published_language], original_language: result[1][:original_language], isbn: result[1][:isbn], ean: result[1][:ean], asin: result[1][:asin], detail_page_url: result[1][:detail_page_url], image_link: result[1][:image_link], large_image: result[1][:large_image]) %>
                     <% end %>
                   </p>
                 </td>

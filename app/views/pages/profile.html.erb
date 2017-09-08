@@ -1,62 +1,85 @@
-<div class="wrapper cf" id="dashboard">
+<div class="wrapper cf">
 
-  <h2 style="font-size: 22px;">
-    Welcome to your dashboard
-    <% if @user.first_name? %>
-      <span class="book-title black lh-title fw3 mt0 pt1"><%=@user.first_name%>
-    <% else %>
-      <span class="book-title black lh-title fw3 mt0 pt1"><%= @user.email %>
-    <% end %>
-    <% if @user == current_user %>
-      <a class="edit-button" data-target="#editModal" data-toggle="modal">
-      (edit profile)
-      </a>
-    <% end %>
-  </h2>
+<!-- ################################################# -->
 
+  <% if @user == current_user %>
+    <h2 style="font-size: 32px;">
+      Welcome to your dashboard,
+      <% if @user.first_name? %>
+        <span class="book-title black lh-title mt0 pt1"><%=@user.first_name.capitalize%>
+      <% else %>
+        <span class="book-title black lh-title mt0 pt1"><%= @user.username %>
+      <% end %>
+      <a class="edit-button" data-target="#editModal" data-toggle="modal">(edit profile)</a>
+    </h2>
+  <% else %>
+    <h2 style="font-size: 32px;">
+      <% if @user.first_name? %>
+        <span class="book-title black lh-title mt0 pt1"><%=@user.username%>
+      <% else %>
+        <span class="book-title black lh-title mt0 pt1"><%= @user.username s profile %>
+      <% end %> has <%= @user.libraries.count %> libraries:</span>
+    </h2>
+  <% end %>
 
-  <div class="dashboard-nav">
-    <a class="tab" href="#" data-target="#libraries">Your Libraries (<%= @user.libraries.count %>)</a>
-    /
-    <a class="tab" href="#" data-target="#bookings">Conversations</a>
-  </div>
+<!-- ################################################# -->
 
-  <!-- Bookings -->
-  <div class="tab-content" id="bookings">
-    <div class="bookings-nav">
-      <a class="bookings-tab" href="#" data-target="#books-bookings">Your books</a>
-      /
-      <a class="bookings-tab" href="#" data-target="#reservations-bookings">Your reservations</a>
+<!-- tabs -->
+  <!-- my libraries tab -->
+  <% if @user == current_user %>
+    <div class="dib mr3 mt2 meta black-40 w-15">
+      <div class="meta-title bb b--black-40 pb.5">Info</div>
+      <ul class="views list pl0 dashboard-nav">
+        <li class="dib info">
+          <a class="tab active" href="#" data-target="#libraries">Your Libraries (<%= @user.libraries.count %>)</a>
+        </li>
+      </ul>
     </div>
+  <% end %>
+  <!-- my books + my reservations tabs -->
+  <% if @user == current_user %>
+    <div class="dib mt2 meta black-40 w-15">
+      <div class="meta-title bb b--black-40 pb.5">Messages</div>
+      <ul class="views list pl0 dashboard-nav">
+        <li class="dib info">
+          <a class="tab" href="#" data-target="#books-bookings">Your Books</a>
+        </li>
+        <span>/</span>
+        <li class="dib info">
+          <a class="tab" href="#" data-target="#reservations-bookings">Your Reservations</a>
+        </li>
+      </ul>
+    </div>
+  <% end %>
 
-    <div class="bookings-tab-content" id="books-bookings">
-      <h2>People who want to borrow your books</h2>
-      <% @user.libraries.each do |libarry| %>
-        <% libarry.books.each do |book| %>
-          <% book.bookings.each do |booking| %>
-            <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
-          <% end %>
+<!-- data -->
+  <!-- my books data -->
+  <div class="tab-content hidden" id="books-bookings">
+    <% @user.libraries.each do |libarry| %>
+      <% libarry.books.each do |book| %>
+        <% book.bookings.each do |booking| %>
+          <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
         <% end %>
       <% end %>
-    </div>
-
-    <div class="bookings-tab-content hidden" id="reservations-bookings">
-      <h2>Your reservations</h2>
-      <% @user.bookings.each do |booking| %>
-        <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 
+  <!-- my reservations data -->
+  <div class="tab-content hidden" id="reservations-bookings">
+    <% @user.bookings.each do |booking| %>
+      <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
+    <% end %>
+  </div>
 
-  <!-- My Libraries -->
-
-  <div class="tab-content hidden bookings clearfix" id="libraries">
-    <div class="ml1 w-100 fl">
-      <%= link_to "New Library (+)", new_library_path%>
-    </div>
+  <!-- my Libraries data -->
+  <div class="tab-content bookings clearfix mb3" id="libraries">
+    <% if @user == current_user %>
+      <div class="ml2 mt2 w-100 fl">
+        <%= link_to "Create a Library (+)", new_library_path%>
+      </div>
+    <% end %>
     <% @user.libraries.each do |library| %>
-      <div class="lib-card mt2 mb1 mr1 ml1 card sm-col sm-col-4">
+      <div class="lib-card mt1 mb1 mr1 ml1 card sm-col sm-col-4">
         <article class="box fl mw5 mw6-ns ba mv1">
           <h2 class="f4 bg-white black mv0 pv2 ph3"><%= link_to library.name.truncate(20), library_path(library) %></h2>
           <div class="pa3 bt">
@@ -107,7 +130,10 @@
               </a>
               <!-- end carousel -->
             </div>
-            <p class="mt2 f6 b f5-ns lh-copy measure mv0">Books in this library: <%=library.books.count.to_s%></p>
+            <p class="mt2 f6 b f5-ns measure mv0">Books in this library: <%=library.books.count.to_s%>
+            </p>
+            <p class="f6 b f5-ns measure mv0">Located in: <%=library.city%>
+            </p>
           </div>
         </article>
       </div>
@@ -115,134 +141,35 @@
   </div>
 </div>
 
-<% if false %>
-  <article class="mt2 w-100 mw-100 left bg-white pa2 mv2 mb1 b--black-100">
-    <div class="tl">
-      <p class="f4">
-        <span class="book-title f3 black lh-title fw9 mt0 pt1 mid-gray">Book Collective / </span>
-        <% if @user.first_name? %>
-          <span class="book-title f3 black lh-title fw3 mt0 pt1"><%=@user.first_name%>
-        <% else %>
-          <span class="book-title f3 black lh-title fw3 mt0 pt1"><%= @user.email %>
-        <% end %>
-        <% if @user == current_user %>
-          <a class="edit-button" data-target="#editModal" data-toggle="modal">
-          (edit)
-          </a>
-        <% end %>
-      </p>
-    </div>
-    <div class="dib mt2 meta black-40 w-15">
-      <div class="meta-title bb b--black-40 pb.5">Info</div>
-        <ul class="views list pl0">
-          <li class="dib info">
-            <%= @user.libraries.count %> Libraries
-            <span> / </span>
-          </li>
-          <li class="dib info">
-            <%= @books.count %> Books
-          </li>
-        </ul>
-    </div>
-    <div class="ml3 dib mt2 meta black-40 w-20">
-      <div class="meta-title bb b--black-40 pb.5">View</div>
-        <ul class="views list pl0">
-          <% if @user == current_user %>
-            <li class="dib tab active" data-target="#bookings" id="bookings-btn">Bookings</li>
-            <span> / </span>
-            <li class="dib tab" data-target="#requests" id="requests-btn">Requests</li>
-            <span> / </span>
+<!-- ################################################# -->
+
+<!-- Modal goes below -->
+<div class="modal" id="editModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Profile</h4>
+      </div>
+      <div class="modal-body">
+          <%= simple_form_for @user do |f| %>
+            <%= f.error_notification %>
+
+            <%= f.input :first_name, placeholder: 'First Name', label:false %>
+            <%= f.input :last_name, placeholder: 'Last Name', label:false %>
+
+            <%= f.input :avatar, as: :attachinary, label: "Profile Picture", label_html: { class: 'measure f6 b db mb1 mt1' }%>
+
+            <%= f.submit 'Edit Profile', class: "btn-outline mt2" %>
           <% end %>
-            <li class="dib tab" data-target="#libraries" id="libarries-btn">Libraries</li>
-        </ul>
+      </div>
+      <div class="modal-footer">
+      </div>
     </div>
-  </article>
-<% end %>
-<% if false %>
-  <div class="tab-content bookings clearfix" id="libraries">
-    <% @user.bookings.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns md-col md-col-2">
-        <div class="aspect-ratio aspect-ratio--3x4">
-         <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
-          <% end %>
-        </div>
-        <div class="pa1 mt1 bt b--black-100">
-          <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(14), book_booking_path(booking.book, booking) %>
-          </a>
-
-          <p class="date red mb1">Return: <%= booking.checkout_date %></p>
-            <!-- Button trigger modal -->
-
-          <a class="add tc ph1 pv1 db bg-animate ba" data-toggle="modal" data-target="#<%= booking.id %>">
-            Add Review
-          </a>
-
-          <!-- Modal -->
-          <div class="modal" id="<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="f3 f3-ns fw6 lh-title black mv0" id="exampleModalLabel"><%= booking.book.title %></h1>
-                  <button type="btn-outline" class="top close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <%= simple_form_for @review do |f| %>
-                  <div class="modal-body">
-                    <%= f.error_notification %>
-                    <%= f.hidden_field :booking_id, value: booking.id %>
-                    <%= f.input :content %>
-                    <%= f.input :stars, input_html: { class: "rating" } %>
-                  </div>
-                  <div class="modal-footer">
-                    <%= f.button :submit, class: "left btn-outline" %>
-                  </div>
-                <% end %>
-                <%= content_for(:after_js) do %>
-                  <script>
-                    $('#review_stars').rating({'size':'xs'});
-                  </script>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-    <% end %>
   </div>
+</div>
 
-  <!-- My Requests -->
-  <div class="tab-content hidden bookings clearfix" id="requests">
-    <% @requests.each do |booking| %>
-      <article class="ba b--black-100 mt2 mb2 mr3 ml3 p1 fl w-100 w-50-m w-25-ns pa2-ns sm-col sm-col-2">
-        <div class="aspect-ratio aspect-ratio--3x4">
-         <% if booking.book.photo? %>
-            <%= cl_image_tag booking.book.photo.path, crop: :scale, class: "aspect-ratio--object cover fit" %>
-          <% end %>
-        </div>
-        <div class="pa1 mt1 bt b--black-100">
-          <a class="author db link black hover-grey" href="#">
-            <%= link_to booking.book.title.truncate(18), book_booking_path(booking.book, booking) %>
-          </a>
-
-          <p class="date red mb1">Return: <%= booking.checkout_date %></p>
-            <!-- Button trigger modal -->
-
-          <div class="add tc ph1 pv1 db bg-animate ba">
-            <% if booking.status == "pending" %>
-              <%= link_to "Confirm", confirm_booking_path(booking), method: :patch, class: "btn btn-outline" %>
-              <%= link_to "Decline", decline_booking_path(booking), method: :patch, class: "btn btn-outline" %>
-            <% else %>
-              <%= booking.status %>
-            <% end %>
-          </div>
-        </div>
-      </article>
-    <% end %>
-  </div>
-<% end %>
+<!-- ####################################################################################################################################### -->
 <% content_for(:after_js) do %>
   <script>
     $(document).ready(function(){

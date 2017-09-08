@@ -1,6 +1,6 @@
 <div class="fl h-100 bl b--black-20 mr3">
   <% if @private_messages %>
-    <div class="message-wrap mt3">
+    <div class="message-wrap mt2">
 <!--       <div class="message">
         <p class="ui blue labeled submit icon button btn-outline">Show previous messages</p>
       </div> -->
@@ -8,31 +8,37 @@
         <% if private_message.body %>
           <% user = User.find(private_message.user_id) %>
           <div class="message">
-            <% avatar_url = user.facebook_picture_url || user.google_picture_url || "http://i.pravatar.cc/150?img=17" %>
-            <%= image_tag avatar_url, class: "br-100 w2 dib mr1 ml1" %>
+            <% if user.avatar.present? %>
+              <%= cl_image_tag(user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib mr1 ml1" }) %>
+            <% else %>
+              <% avatar_url = user.facebook_picture_url || user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
+              <%= image_tag avatar_url, class: "br-100 w2 dib mr1 ml1" %>
+            <% end %>
             <div class="w-25 mr3">
-              <% if user.first_name? %>
-                <p class="message-name"><%= user.first_name %></p>
+              <% if user.username %>
+                <p class="message-name"><%= user.username %></p>
               <% else %>
-                <p class="message-name"><%=user.email%></p>
+                <p class="message-name"><%=user.username %></p>
               <% end %>
               <p class="timestamp"><%= private_message.private_message_time %></p>
             </div>
             <div class="w-100 message-body">
-              <p><%= private_message.body %><%= private_message.read %></p>
+              <p><%= private_message.body %></p>
             </div>
             <% if private_message.booking %>
               <% if private_message.booking.status == "pending" && private_message.booking.book.library.user == current_user %>
-                <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
-                <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
+                <p>
+                  <%= link_to "Confirm", confirm_booking_path(private_message.booking), method: :patch, class: "mr1 btn btn-outline" %>
+                  <%= link_to "Decline", decline_booking_path(private_message.booking), method: :patch, class: "btn btn-outline" %>
+                </p>
               <% end %>
             <% end %>
           </div>
         <% end %>
       <% end %>
     </div>
-    <div class="message-wrap mt3">
-      <%= render "private_messages/message_form" %>
+    <div class="pt2 pb3">
+      <%= render "private_messages/index_message_form" %>
     </div>
   <% end %>
 </div>

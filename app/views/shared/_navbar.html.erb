@@ -36,7 +36,7 @@
       <div class="navbar-wagon-item ">
         <div class="dropdown">
           <% if current_user.avatar.present? %>
-            <%= cl_image_tag(current_user.avatar.path, { size: '50x50', crop: :thumb, gravity: :face, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" }) %>
+            <%= cl_image_tag(current_user.avatar.path, { size: '50x50', crop: :thumb, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" }) %>
           <% else %>
             <% avatar_url = current_user.facebook_picture_url || current_user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
             <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
@@ -49,16 +49,18 @@
                 <% end %>
               <% end %>
             </li>
-            <!-- <li> -->
-            <%# Conversation.all.each do |conversation| %>
-              <%# if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-                <%# @conversation_last = conversation %>
-              <%# end %>
-            <%# end %>
-            <%#= link_to conversation_path(@conversation_last), method: :get do  %>
-              <%#= t(".sign_in", default: "Messages(#{@unread_messages})") %>
-            <%# end %>
-           <!-- </li> -->
+            <li>
+            <% Conversation.all.each do |conversation| %>
+              <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                <% @conversation_last = conversation %>
+              <% end %>
+            <% end %>
+            <% if @conversation_last %>
+              <%= link_to conversation_path(@conversation_last), method: :get do  %>
+                <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+              <% end %>
+            <% end %>
+           </li>
            <li class="log-out-break"></li>
            <li>
              <%= link_to destroy_user_session_path, method: :delete do %>
@@ -90,11 +92,18 @@
           <% end %>
         <% end %>
         </li>
-<!--         <li>
-          <%#= link_to conversation_path(, method: :get do  %>
-            <%#= t(".sign_in", default: "Messages(#{@unread_messages})") %>
-          <%# end %>
-        </li> -->
+        <li>
+          <% Conversation.all.each do |conversation| %>
+            <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+              <% @conversation_last = conversation %>
+            <% end %>
+          <% end %>
+          <% if @conversation_last %>
+            <%= link_to conversation_path(@conversation_last), method: :get do  %>
+              <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+            <% end %>
+          <% end %>
+        </li>
         <li>
           <%= link_to destroy_user_session_path, method: :delete do %>
             <%= t(".sign_out", default: "Log Out") %>
