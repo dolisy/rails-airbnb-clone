@@ -21,11 +21,11 @@
   opacity: 0.6;
 }
 .message-body {
-  padding-left: 10px;
+  padding-left: 25px;
   font-size: 12px;
 }
 .message-body {
-  padding-left: 20px;
+  padding-left: 25px;
 }
 .message-body p {
   margin: 10px 0;
@@ -37,8 +37,8 @@
 .status.accepted {
   color: #04A366;
   font-size: 16px;
-  text-align: center;
-  margin-bottom: 33px;
+  text-align: right;
+  margin-bottom:10px;
 }
 .status.declined {
   color: red;
@@ -46,6 +46,7 @@
 .status.pending {
   color: #999999;
   font-size: 16px;
+  text-align: right;
 }
 
 // #new_private_message {

@@ -57,7 +57,7 @@
   <div class="tab-content hidden" id="books-bookings">
     <% @user.libraries.each do |libarry| %>
       <% libarry.books.each do |book| %>
-        <% book.bookings.each do |booking| %>
+        <% book.bookings.sort_by { |b| -b.created_at.to_i }.each do |booking| %>
           <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
         <% end %>
       <% end %>
@@ -66,7 +66,7 @@
 
   <!-- my reservations data -->
   <div class="tab-content hidden" id="reservations-bookings">
-    <% @user.bookings.each do |booking| %>
+    <% @user.bookings.sort_by { |b| -b.created_at.to_i }.each do |booking| %>
       <%= render :partial => 'pages/messages', :locals => {:booking => booking} %>
     <% end %>
   </div>

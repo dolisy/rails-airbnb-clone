@@ -45,7 +45,7 @@
             <li>
               <% if current_user %>
                 <%= link_to profile_path(user_id: current_user.id), method: :get do %>
-                  <%= t(".sign_in", default: "Profile") %>
+                  <%= t(".sign_in", default: "Dashboard") %>
                 <% end %>
               <% end %>
             </li>
@@ -57,7 +57,7 @@
             <% end %>
             <% if @conversation_last %>
               <%= link_to conversation_path(@conversation_last), method: :get do  %>
-                <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+                <%= t(".sign_in", default: "Messages (#{@unread_messages})") %>
               <% end %>
             <% end %>
            </li>
@@ -88,7 +88,7 @@
         <li>
         <% if current_user %>
           <%= link_to profile_path(user_id: current_user.id), method: :get do %>
-            <%= t(".sign_in", default: "Profile") %>
+            <%= t(".sign_in", default: "Dashboard") %>
           <% end %>
         <% end %>
         </li>
@@ -100,7 +100,7 @@
           <% end %>
           <% if @conversation_last %>
             <%= link_to conversation_path(@conversation_last), method: :get do  %>
-              <%= t(".sign_in", default: "Messages(#{@unread_messages})") %>
+              <%= t(".sign_in", default: "Messages (#{@unread_messages})") %>
             <% end %>
           <% end %>
         </li>
