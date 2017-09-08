@@ -117,6 +117,7 @@ class BookingsController < ApplicationController
       format.js
     end
 
+    @pending_private_message = PrivateMessage.new(conversation: @booking.conversation, user: @booking.book.library.user, body: "I received your request and will get back to you shortly!")
   end
 
   private
