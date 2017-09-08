@@ -7,9 +7,9 @@
   <div class="pt2 message">
     <% book_url = booking.book.photo || "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF" %>
     <%= cl_image_tag book_url.path, height: 200, width: 130, crop: :fill %>
-    <div class="message-body">
+    <div class="message-body pl2">
       <% if booking.user == current_user %>
-        <p><strong>Your reservation for <%= booking.book.title.truncate(30) %> from <%= booking.checkin_date %> to <%= booking.checkout_date %></strong></p>
+        <p><strong>Your reservation for <%= booking.book.title.truncate(50) %> from <%= booking.checkin_date %> to <%= booking.checkout_date %></strong></p>
 
         <% last_message = booking.private_messages.where(user: booking.book.library.user).last %>
         <% if last_message %>
@@ -22,16 +22,16 @@
         <% if booking.user.avatar.present? %>
           <%= cl_image_tag(booking.user.avatar.path, { size: '50x50', crop: :thumb, class: "br-100 w2 dib absolute" }) %>
           <p class="mute shift">
-            <strong><%= booking.user.username %></strong> wants to borrow <strong><%= booking.book.title.truncate(30) %></strong>
+            <strong><%= booking.user.username %></strong> wants to borrow <strong><%= booking.book.title.truncate(50) %></strong>
           </p>
-          <p class="mute shift">
+          <p class="mute shift pb1">
             From: <strong><%= booking.checkin_date %></strong> to: <strong><%= booking.checkout_date %></strong>
           </p>
         <% else %>
           <% avatar_url = booking.user.facebook_picture_url || booking.user.google_picture_url || "https://api.adorable.io/avatars/129/pussy.png" %>
           <%= image_tag avatar_url, class: "br-100 w2 dib absolute" %>
           <p class="mute shift">
-            <strong><%= booking.user.username %></strong> wants to borrow <strong><%= booking.book.title.truncate(30) %></strong>
+            <strong><%= booking.user.username %></strong> wants to borrow <strong><%= booking.book.title.truncate(50) %></strong>
           </p>
           <p class="mute shift">
             From: <strong><%= booking.checkin_date %></strong> to: <strong><%= booking.checkout_date %></strong>
@@ -44,12 +44,12 @@
           <p class="shift"><%= last_message.body %></p>
         <% end %>
 
-        <p class="mute muted-title shift pt1">
+        <p class="mute muted-title shift pt0">
           <%= link_to "See the full conversation with #{booking.user.username}", conversation_path(conversation) %>
         </p>
       <% end %>
     </div>
-    <div class="message-status mb1">
+    <div class="message-status mb0">
       <p class="status <%= booking.status %>"><%= booking.status.capitalize %></p>
       <% if booking.status == "pending" && booking.book.library.user == current_user %>
         <p class="white">

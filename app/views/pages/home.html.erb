@@ -7,7 +7,7 @@
       <% if user_signed_in? %>
         <h2 class="pr2 banner-copy green">Join.</h2>
       <% else %>
-        <h2 class="pr4 banner-copy green" id="join" data-toggle="modal", data-target="#signupModal">
+        <h2 class="pr2 banner-copy green" id="join" data-toggle="modal", data-target="#signupModal">
           <%= link_to 'Join.', '#', :style => 'color: green; font-weight: 500;'%>
         </h2>
       <% end %>
@@ -115,12 +115,12 @@
                 <div class="item active">
                   <% if library.books.count > 0 %>
                     <% if library.books.first.photo? %>
-                      <%= cl_image_tag library.books.first.photo.path, width: 200, height: 300, crop: :scale, class: "pr2 pl2"%>
+                      <%= cl_image_tag library.books.first.photo.path, width: 200, height: 300, crop: :scale, class: "pr2 pl2 mb1"%>
                     <% else %>
-                      <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2" %>
+                      <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2 mb1" %>
                     <% end %>
                   <% else %>
-                    <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2" %>
+                    <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2 mb1" %>
                   <% end %>
                 </div>
 
@@ -134,9 +134,9 @@
                 <% library.books.each do |book| %>
                   <div class="item">
                     <% if book.photo? %>
-                      <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :scale, class: "pr2 pl2" %>
+                      <%= cl_image_tag book.photo.path, width: 200, height: 300, crop: :scale, class: "pr2 pl2 mb1" %>
                     <% else %>
-                      <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2" %>
+                      <%= cl_image_tag "https://upload.wikimedia.org/wikipedia/commons/9/90/Also_sprach_Zarathustra.GIF", width: 200, height: 300, crop: :scale, class: "pr2 pl2 mb1" %>
                     <% end %>
                   </div>
                 <% end %>
@@ -154,11 +154,11 @@
               <!-- end carousel -->
             </div>
             <% if library.city.to_s == "" %>
-              <h2 class="align f7 fw3 mt1 mb0 white-90">Located in:</h2>
+              <p class="b bookings align f7 fw5 mt1 mb0 white-90">Located in:</p>
             <% else %>
-              <h2 class="align f7 fw3 mt1 mb0 black-90">Located in:  <%= library.city %></h2>
+              <p class="b bookings align f7 fw5 mt1 mb0 black-90">Located in:  <%= library.city %></p>
             <% end %>
-            <h2 class="align f7 fw3 mt1 mb0 black-90">Curated by: <%= link_to library.user.username, profile_path(user_id: library.user_id) %></h2>
+            <p class="b bookings align f7 fw5 mt1 mb0 black-90">Curated by: <%= link_to library.user.username, profile_path(user_id: library.user_id) %></p>
           </div>
         </article>
       </div>

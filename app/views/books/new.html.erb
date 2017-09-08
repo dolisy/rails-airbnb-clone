@@ -1,16 +1,16 @@
-<article class="cf ph2 ph5-ns pt3 mb2 mt2">
-  <div class="fl w-100 w-50-ns">
-    <div class="measure-narrow">
+<article class="cf ph2 ph5-ns pt2 mb2 mt2">
+  <div class="fl w-100 w-50-ns br pl1 vertical-line">
+    <div class="measure-narrow ml2">
       <% if @library.present? %>
         <%= form_tag(new_library_book_path(@library), method: :get) do %>
           <label for="password" class="f6 b db mb1">Search by ISBN number</label>
-          <%= text_field_tag :isbn, params[:isbn], placeholder: 'Ex: 9781472244444', class: "input-reset ba b--black-20 pa2 mb1 db w-100" %>
+          <%= text_field_tag :isbn, params[:isbn], placeholder: 'Ex: 9781472244444', class: "input-reset ba b--black-100 pa2 mb1 db w-100" %>
           <%= hidden_field_tag :library_id, params[:library_id] = @library.id %>
         <% end %>
       <% else %>
         <%= form_tag(new_book_path, method: :get) do %>
           <label for="password" class="f6 b db mb1">Search by ISBN number</label>
-          <%= text_field_tag :isbn, params[:isbn], placeholder: 'Ex: 9781472244444', class: "input-reset ba b--black-20 pa2 mb1 db w-100" %>
+          <%= text_field_tag :isbn, params[:isbn], placeholder: 'Ex: 9781472244444', class: "input-reset ba b--black-100 pa2 mb1 db w-100" %>
         <% end %>
       <% end %>
       <small id="password-desc" class="f8 lh-copy black-60 db">
