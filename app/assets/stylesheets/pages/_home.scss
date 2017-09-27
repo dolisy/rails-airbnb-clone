@@ -106,6 +106,7 @@ a {
   font-weight: 200;
   padding-top: 2.5em;
   width: 78%;
+  line-height: 0.99em;
 }
 
 h5 {
@@ -119,8 +120,9 @@ h5 {
 
 .banner-copy {
   margin: 0 auto;
+  line-height: .85;
   color: black;
-  font-size: 70px;
+  font-size: 75px;
    &.green {
     color: green;
    }
