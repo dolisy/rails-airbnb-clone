@@ -10,9 +10,9 @@
         <% end %>
       <% else %>
         <% if @conversation.sender_id == current_user.id %>
-          Write a message to  <%= @conversation.recipient.username %>.
+          Write a message to  <%= @conversation.recipient.username %>:
         <% else %>
-          Write a message to <%= @conversation.sender.username %>.
+          Write a message to <%= @conversation.sender.username %>:
         <% end %>
       <% end %>
     </label>
@@ -22,7 +22,7 @@
     <% if @booking %>
       <%= f.input :booking_id, input_html: {value: @booking.id}, as: "hidden"%>
     <% end %>
-    <%= f.input :body, as: :text, label: false, placeholder: "Hey @book.library.user.first_name, I really want to read this book..." %>
+    <%= f.input :body, as: :text, label: false, placeholder: "Tell them why you want to borrow this book!" %>
     <%= f.button :submit, "Send Message", input_html: { class: "new-message-button btn-outline" } %>
   <% end %>
 <% end %>
